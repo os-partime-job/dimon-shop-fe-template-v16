@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SocketService } from 'src/app/core/shared/socket.service';
 import {AuthService} from '../services/auth.service'
 import { navItems } from 'src/app/core/default-layout/_nav';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,9 @@ export class LoginComponent {
     password: new FormControl(null, [Validators.required]),
   });
   isError: boolean = false;
-  constructor(private authService:AuthService, private router: Router, private socket: SocketService) { }
+  constructor(private authService:AuthService, private router: Router,
+              private socket: SocketService,
+              private toastrService: ToastrService) { }
 
 
   onSingIn(){

@@ -6,6 +6,9 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
+import {HomeComponent} from "./modules/home/home.component";
+import {LoginV3Component} from "./modules/login-v3/login-v3.component";
+import {IntroductionComponent} from "./modules/introduction/introduction.component";
 
 const routes: Routes = [
   // {
@@ -89,12 +92,33 @@ const routes: Routes = [
       title: 'Login Page'
     }
    },
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: {
+      title: 'home Page'
+    }
+  },
+  {
+    path: 'login-v3',
+    component: LoginV3Component,
+    data: {
+      title: 'Login Page'
+    }
+  },
 
   {
     path: 'register',
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+  {
+    path: 'gioi-thieu',
+    component: IntroductionComponent,
+    data: {
+      title: 'Introduction Page'
     }
   },
   {

@@ -15,6 +15,10 @@ import { AuthInterceptor } from './core/shared/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './modules/home/home.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { LoginV3Component } from './modules/login-v3/login-v3.component';
+import { IntroductionComponent } from './modules/introduction/introduction.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { HomeComponent } from './modules/home/home.component';
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    LoginV3Component,
+    IntroductionComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,13 @@ import { HomeComponent } from './modules/home/home.component';
     DashboardModule,
     SharedAppModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    OAuthModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 150000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
 
   ],
   providers: [
@@ -41,11 +53,12 @@ import { HomeComponent } from './modules/home/home.component';
     //   provide: LocationStrategy,
     //   useClass: HashLocationStrategy
     // },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },],
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true,
+    // },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
