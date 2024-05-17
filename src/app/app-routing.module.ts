@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './modules/auth/reset-password/reset-pass
 import {HomeComponent} from "./modules/home/home.component";
 import {LoginV3Component} from "./modules/login-v3/login-v3.component";
 import {IntroductionComponent} from "./modules/introduction/introduction.component";
+import {PriceDimondTableComponent} from "./modules/price-dimond-table/price-dimond-table.component";
 
 const routes: Routes = [
   // {
@@ -117,6 +118,13 @@ const routes: Routes = [
   {
     path: 'gioi-thieu',
     component: IntroductionComponent,
+    data: {
+      title: 'Introduction Page'
+    }
+  },
+  {
+    path: 'bang-gia-kim-cuong',
+    component: PriceDimondTableComponent,
     data: {
       title: 'Introduction Page'
     }

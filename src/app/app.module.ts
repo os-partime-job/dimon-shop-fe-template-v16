@@ -19,6 +19,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginV3Component } from './modules/login-v3/login-v3.component';
 import { IntroductionComponent } from './modules/introduction/introduction.component';
 import {ToastrModule} from "ngx-toastr";
+import { PriceDimondTableComponent } from './modules/price-dimond-table/price-dimond-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {ToastrModule} from "ngx-toastr";
     ResetPasswordComponent,
     HomeComponent,
     LoginV3Component,
-    IntroductionComponent
+    IntroductionComponent,
+    PriceDimondTableComponent
   ],
   imports: [
     BrowserModule,
