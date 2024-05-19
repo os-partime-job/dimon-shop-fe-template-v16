@@ -17,9 +17,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './modules/home/home.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginV3Component } from './modules/login-v3/login-v3.component';
-import { IntroductionComponent } from './modules/introduction/introduction.component';
+import { IntroductionComponent } from './modules/default-page/introduction/introduction.component';
 import {ToastrModule} from "ngx-toastr";
-import { PriceDimondTableComponent } from './modules/price-dimond-table/price-dimond-table.component';
+import { PriceDimondTableComponent } from './modules/default-page/price-dimond-table/price-dimond-table.component';
+import { MeasureJewelrySizeComponent } from './modules/default-page/measure-jewelry-size/measure-jewelry-size.component';
+import { AddProductComponent } from './modules/add-product/add-product.component';
+import { CartComponent } from './modules/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { PriceDimondTableComponent } from './modules/price-dimond-table/price-di
     HomeComponent,
     LoginV3Component,
     IntroductionComponent,
-    PriceDimondTableComponent
+    PriceDimondTableComponent,
+    MeasureJewelrySizeComponent,
+    AddProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

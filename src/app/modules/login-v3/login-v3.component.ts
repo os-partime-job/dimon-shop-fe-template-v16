@@ -65,15 +65,12 @@ export class LoginV3Component {
       .pipe(first())
       .subscribe({
         next: () => {
-          // this.showNotification2(2,"Login thành công",'top','right');
-          // get return url from query parameters or default to home page
-          console.log("login sucescss");
           this.toastrService.success("login sucescss");
           const returnUrl = this.route.snapshot.queryParams['/'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {
-          // this.showNotification2(4,"Login thất bại",'top','right');
+          this.toastrService.error("login error");
           console.log("login error");
           this.loading = false;
         }
