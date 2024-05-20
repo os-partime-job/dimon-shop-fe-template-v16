@@ -21,15 +21,23 @@
     </a>
 
     <div class="header-actions">
+      <button *ngIf="isLoginUser" class="header-action-btn" (click)="redirectProfile()">
+        <!--        <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>-->
 
-      <button class="header-action-btn" (click)="redirectLogin()">
-<!--        <ion-icon name="person-outline" aria-hidden="true"></ion-icon>-->
-        <i class="fas fa-person-booth"></i>
+        <p class="header-action-label">Profile</p>
 
-        <p class="header-action-label">Sign in</p>
-                <a [routerLink]="['login-v3']" routerLinkActive="active" ></a>
-
+        <!--        <div class="btn-badge green" aria-hidden="true">3</div>-->
       </button>
+      <div *ngIf="!isLoginUser">
+        <button  class="header-action-btn" (click)="redirectLogin()">
+          <!--        <ion-icon name="person-outline" aria-hidden="true"></ion-icon>-->
+          <i class="fas fa-person-booth"></i>
+
+          <p class="header-action-label">Sign in</p>
+          <!--                <a [routerLink]="['login-v3']" routerLinkActive="active" ></a>-->
+
+        </button>
+      </div>
 
       <button class="header-action-btn">
 <!--        <ion-icon name="search-outline" aria-hidden="true"></ion-icon>-->
@@ -37,20 +45,13 @@
         <p class="header-action-label">Search</p>
       </button>
 
-      <button class="header-action-btn">
-<!--        <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>-->
-
-        <p class="header-action-label">Cart</p>
-
-        <div class="btn-badge green" aria-hidden="true">3</div>
-      </button>
 
       <button class="header-action-btn">
 <!--        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>-->
 
         <p class="header-action-label">Wishlisht</p>
 
-        <div class="btn-badge" aria-hidden="true">2</div>
+<!--        <div class="btn-badge" aria-hidden="true">2</div>-->
       </button>
 
     </div>

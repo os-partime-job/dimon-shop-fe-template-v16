@@ -24,10 +24,11 @@ export class AccountService {
         this.httpOptions = {
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
+              "Authorization": `Bearer ${JSON.parse(localStorage.getItem('user')!)?.accessToken}`,
             }),
             "Access-Control-Allow-Origin": `${environment.apiUrl}`,
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-            "Authorization": `Bearer `+localStorage.getItem("user"),
+
         };
     }
 
@@ -49,14 +50,14 @@ export class AccountService {
           // new HttpParams()
           //   .set(`email`, username)
           //   .set(`password`, password);
-        let httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
-            "Access-Control-Allow-Origin": `*`,
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        };
-        return this.http.post<User>(`${environment.apiUrl}/shop/auth/login`,jsonString,httpOptions)
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        "Access-Control-Allow-Origin": `*`,
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      };
+      return this.http.post<any>(`${environment.apiUrl}/shop/auth/login`,jsonString,httpOptions)
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -102,8 +103,12 @@ export class AccountService {
                 return x;
             }));
     }
-    updateUser(user:User) :Observable<any> {
-        return this.http.post<any>(`${environment.apiUrl}/api/user/update`,user,this.httpOptions);
+    updateUser(user:any) :Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/shop/user/change-profile`,user,this.httpOptions);
+    }
+    getUser():Observable<any> {
+      console.log(this.httpOptions);
+      return  this.http.get<any>(`${environment.apiUrl}/shop/user`,this.httpOptions);
     }
 
     delete(id: string) {

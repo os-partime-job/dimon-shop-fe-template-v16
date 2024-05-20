@@ -13,6 +13,7 @@ export class ProductService {
 
   httpOptions: any;
   token : any;
+  BASIC_DIAMOND_URL = "diamond/";
 
   constructor(private http: HttpClient, private storageService : StorageService) {
     this.token = storageService.getUser().access_token;
@@ -40,5 +41,8 @@ export class ProductService {
   }
   public getTest(): Observable<any>{
     return this.http.get<Object>(`${this.apiUrl}/api/product/test`, this.httpOptions);
+  }
+  public getProductDetail(ProductId : number): Observable<any>{
+    return  this.http.get<Object>(`${this.apiUrl}/${this.BASIC_DIAMOND_URL}detail/${ProductId}`, this.httpOptions);
   }
 }

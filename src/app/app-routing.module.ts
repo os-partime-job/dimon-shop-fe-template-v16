@@ -12,6 +12,7 @@ import {IntroductionComponent} from "./modules/default-page/introduction/introdu
 import {PriceDimondTableComponent} from "./modules/default-page/price-dimond-table/price-dimond-table.component";
 import {MeasureJewelrySizeComponent} from "./modules/default-page/measure-jewelry-size/measure-jewelry-size.component";
 import {AddProductComponent} from "./modules/add-product/add-product.component";
+import {UserProfileComponent} from "./modules/user-profile/user-profile.component";
 
 const routes: Routes = [
   // {
@@ -243,11 +244,18 @@ const routes: Routes = [
       title: 'Measure Jewelry Size Page'
     }
   },
-  {
+    {
     path: 'add-product',
     component: AddProductComponent,
     data: {
-      title: 'Introduction Page'
+      title: 'Add Product Page'
+    }
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+    data: {
+      title: 'User Profile Page'
     }
   },
   {

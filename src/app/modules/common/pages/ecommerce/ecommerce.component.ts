@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NumberService} from "../../../service/number.service";
+import {ProductService} from "../../../service/product.service";
 
 @Component({
   selector: 'app-ecommerce',
@@ -7,12 +8,15 @@ import {NumberService} from "../../../service/number.service";
   styleUrls: ['./ecommerce.component.css']
 })
 export class EcommerceComponent implements OnInit {
+  @Input() productId = 1;
   product:any;
 
-  constructor(private numberFormat: NumberService) { }
+  constructor(private numberFormat: NumberService,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.product = {  "id_jewelry": 3,
+    this.product = {
+      "id_jewelry": 3,
       "jewelry_title": "Nhẫn nữ đính kim cương sang trọng 18K",
       "jewelry_code": "NNKC03",
       "jewelry_type": "Nhẫn Kim Cương Nữ",
@@ -26,7 +30,14 @@ export class EcommerceComponent implements OnInit {
       "description": "Nhẫn kim cương nữ vàng trắng 18K CH 0163 cũng là một thiết kế đột phá của thương hiệu Cao Hùng. Dù không sử dụng viên kim cương chủ có kích thước lớn nhưng chiếc nhẫn vẫn tỏa sáng theo một cách rất riêng.",
       "image_id": null,
       "type_enum": null,
-      "diamond_id": "36000000-0000-0000-0000-000000000000"};
+      "diamond_id": "36000000-0000-0000-0000-000000000000"
+    };
+    this.productService.getProductDetail(this.productId).subscribe((data) => {
+        this.product = data?.data;
+      },
+      (error) => {
+        console.log(error)
+      });
   }
   convertNumber(number){
     return this.numberFormat.convertNumber(number);

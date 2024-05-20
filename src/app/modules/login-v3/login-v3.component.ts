@@ -70,7 +70,8 @@ export class LoginV3Component {
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {
-          this.toastrService.error("login error");
+          console.log(error);
+          this.toastrService.error(error.error?.error);
           console.log("login error");
           this.loading = false;
         }

@@ -9,9 +9,9 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { SharedAppModule } from './core/shared/shared.module';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
-import { FeatureGuard } from './core/permission/guards/feature.guard';
+// import { FeatureGuard } from './core/permission/guards/feature.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './core/shared/interceptors/auth.interceptor';
+// import { AuthInterceptor } from './core/shared/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './modules/home/home.component';
@@ -23,6 +23,8 @@ import { PriceDimondTableComponent } from './modules/default-page/price-dimond-t
 import { MeasureJewelrySizeComponent } from './modules/default-page/measure-jewelry-size/measure-jewelry-size.component';
 import { AddProductComponent } from './modules/add-product/add-product.component';
 import { CartComponent } from './modules/cart/cart.component';
+import { UserProfileComponent } from './modules/user-profile/user-profile.component';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { CartComponent } from './modules/cart/cart.component';
     PriceDimondTableComponent,
     MeasureJewelrySizeComponent,
     AddProductComponent,
-    CartComponent
+    CartComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { CartComponent } from './modules/cart/cart.component';
     SharedAppModule,
     BrowserAnimationsModule,
     NgbModule,
+    CommonModule,
     OAuthModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 150000, // 15 seconds
@@ -56,7 +60,7 @@ import { CartComponent } from './modules/cart/cart.component';
 
   ],
   providers: [
-    FeatureGuard,
+    // FeatureGuard,
     // {
     //   provide: LocationStrategy,
     //   useClass: HashLocationStrategy
