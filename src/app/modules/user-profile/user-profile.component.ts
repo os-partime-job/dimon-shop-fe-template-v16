@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class UserProfileComponent implements OnInit {
   form!: FormGroup;
+  urlImg : string = '';
 
   constructor(private accountService: AccountService,
               private toastrService: ToastrService,
@@ -84,6 +85,7 @@ export class UserProfileComponent implements OnInit {
         this.form.controls['city'].setValue(data?.address?.city);
         this.form.controls['ward'].setValue(data?.address?.ward);
         this.form.controls['extra'].setValue(data?.address?.extra);
+        this.urlImg = (data?.avatar != null?data?.avatar :'');
       },
       error => {
         this.toastrService.error("lỗi lấy thông tin user");

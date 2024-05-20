@@ -25,6 +25,7 @@ import { AddProductComponent } from './modules/add-product/add-product.component
 import { CartComponent } from './modules/cart/cart.component';
 import { UserProfileComponent } from './modules/user-profile/user-profile.component';
 import {CommonModule} from "@angular/common";
+import { HeaderComponent } from './modules/header/header.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {CommonModule} from "@angular/common";
     MeasureJewelrySizeComponent,
     AddProductComponent,
     CartComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
