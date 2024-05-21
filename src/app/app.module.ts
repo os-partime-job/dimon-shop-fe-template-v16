@@ -26,6 +26,7 @@ import { CartComponent } from './modules/cart/cart.component';
 import { UserProfileComponent } from './modules/user-profile/user-profile.component';
 import {CommonModule} from "@angular/common";
 import { HeaderComponent } from './modules/header/header.component';
+import { FileUploadComponent } from './modules/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HeaderComponent } from './modules/header/header.component';
     AddProductComponent,
     CartComponent,
     UserProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

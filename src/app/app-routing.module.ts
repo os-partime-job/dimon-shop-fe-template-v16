@@ -13,6 +13,7 @@ import {PriceDimondTableComponent} from "./modules/default-page/price-dimond-tab
 import {MeasureJewelrySizeComponent} from "./modules/default-page/measure-jewelry-size/measure-jewelry-size.component";
 import {AddProductComponent} from "./modules/add-product/add-product.component";
 import {UserProfileComponent} from "./modules/user-profile/user-profile.component";
+import {FileUploadComponent} from "./modules/file-upload/file-upload.component";
 
 const routes: Routes = [
   // {
@@ -256,6 +257,13 @@ const routes: Routes = [
     component: UserProfileComponent,
     data: {
       title: 'User Profile Page'
+    }
+  },
+  {
+    path: 'upload-avatar',
+    component: FileUploadComponent,
+    data: {
+      title: 'Upload File Page'
     }
   },
   {

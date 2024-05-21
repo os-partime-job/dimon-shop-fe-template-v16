@@ -1,8 +1,8 @@
 <header class="header" data-header>
-  <div class="container">
+  <div class="container align-content-center">
       <div class="overlay" data-overlay></div>
 
-      <div class="header-search">
+      <div *ngIf="enableSearch" class="header-search">
         <input type="search" name="search" placeholder="Search Product..." class="input-field">
 
         <button class="search-btn" aria-label="Search">

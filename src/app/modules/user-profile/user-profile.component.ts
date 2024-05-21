@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../auth/services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
+import {FileUploadService} from "../service/file-upload.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -10,13 +14,22 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  @ViewChild('closeButton') closeButton:ElementRef;
   form!: FormGroup;
   urlImg : string = '';
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+  preview = '';
+
+  imageInfos?: Observable<any>;
 
   constructor(private accountService: AccountService,
               private toastrService: ToastrService,
               private route: ActivatedRoute,
               private router: Router,
+              private uploadService: FileUploadService,
               ) {
     this.form = new FormGroup(
       {
@@ -93,5 +106,103 @@ export class UserProfileComponent implements OnInit {
       });
 
   }
+  moveToUploadFile(){
+    // this.router.navigate(['upload-avatar']);
+    this.onOpenModal("upload");
+  }
+  public onOpenModal(mode: string): void{
+    const container = document.getElementById('main-container')!;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'upload') {
+      // this.deleteProduct = Product;
+      button.setAttribute('data-target', '#upLoadModal');
+    }
+    container.appendChild(button);
+    button.click();
+  }
+  selectFile(event: any): void {
+    this.message = '';
+    this.preview = '';
+    this.progress = 0;
+    this.selectedFiles = event.target.files;
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.preview = '';
+        this.currentFile = file;
+
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+          this.preview = e.target.result;
+        };
+
+        reader.readAsDataURL(this.currentFile);
+      }
+    }
+  }
+  upload(): void {
+    this.progress = 0;
+    let flagMessage = true;
+    let count = 0;
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.currentFile = file;
+        this.uploadService.upload(this.currentFile).subscribe({
+          next: (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round((100 * event.loaded) / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+              this.imageInfos = this.uploadService.getFiles();
+            }
+            this.callUserDetail();
+            if(flagMessage) {
+              this.toastrService.success("Upload avatar thành công")
+              flagMessage = false;
+            }
+            // const returnUrl = this.route.snapshot.queryParams['/user-profile'] || '/user-profile';
+            // this.router.navigateByUrl(returnUrl);
+            // window.location.reload()
+            // window.location.href=`${environment.pageApi}/user-profile`
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Upload file thất bại!';
+            }
+            this.toastrService.error(this.message);
+
+            this.currentFile = undefined;
+          },
+          complete(){
+            this.toastrService.success("Upload avatar thành công");
+            this.closeButton.nativeElement.click();
+          }
+        });
+
+      }
+
+      this.selectedFiles = undefined;
+    }
+  }
+  // async sleep(ms: number): Promise<void> {
+  //   return new Promise(
+  //     (resolve)
+  //       => setTimeout(resolve, ms));
+  // }
 
 }
