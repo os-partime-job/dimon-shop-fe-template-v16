@@ -107,8 +107,10 @@ export class AccountService {
         return this.http.post<any>(`${environment.apiUrl}/shop/user/change-profile`,user,this.httpOptions);
     }
     getUser():Observable<any> {
-      console.log(this.httpOptions);
       return  this.http.get<any>(`${environment.apiUrl}/shop/user`,this.httpOptions);
+    }
+    getAllUser(): Observable<any> {
+      return this.http.get<any>(`${environment.apiUrl}/shop/admin/account`, this.httpOptions);
     }
 
     delete(id: string) {

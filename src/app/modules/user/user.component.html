@@ -47,7 +47,7 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>User Name</th>
+                  <th>Full Name</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Staus</th>
@@ -57,28 +57,28 @@
               </thead>
               <tbody>
                 <tr *ngFor="let user of allUsers">
-                  <td>{{ user.user_id }}</td>
-                  <td>{{ user.userName }}</td>
+                  <td>{{ user.account_id }}</td>
+                  <td>{{ user.full_name }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.phone }}</td>
                   <td>
                     <div class="custom-control custom-switch">
                       <input
                         type="checkbox"
-                        [checked]="user.userStatus == 1"
+                        [checked]="user.active == true"
                         class="custom-control-input"
                         (change)="updateStatus(user)"
                         [id]="user.username"
                       />
                       <label
                         class="custom-control-label"
-                        *ngIf="user.userStatus == 1"
+                        *ngIf="user.active == true"
                         [for]="user.username"
                         >User is active</label
                       >
                       <label
                         class="custom-control-label"
-                        *ngIf="user.userStatus == 0"
+                        *ngIf="user.active == false"
                         [for]="user.username"
                         >User is in active</label
                       >
@@ -151,21 +151,21 @@
         <form [formGroup]="userForm">
           <div class="card-body">
             <div class="form-group">
-              <label for="username">User Name</label>
+              <label for="full_name">Full Name</label>
               <input
                 type="text"
-                formControlName="username"
+                formControlName="full_name"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': errors.includes('username') }"
-                id="username"
-                placeholder="User Name"
+                [ngClass]="{ 'is-invalid': errors.includes('full_name') }"
+                id="full_name"
+                placeholder="Full Name"
               />
               <span
                 id="userName-error"
-                *ngIf="errors.includes('userName')"
+                *ngIf="errors.includes('full_name')"
                 class="error invalid-feedback"
               >
-                {{ formError.userName }}</span
+                {{ formError.full_name }}</span
               >
             </div>
             <div class="form-group">
