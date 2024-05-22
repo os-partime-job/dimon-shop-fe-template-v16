@@ -569,7 +569,7 @@ h3 > a { color: inherit; }
 .product-card .cart-btn {
   flex-grow: 1;
   background: var(--eerie-black);
-  color: var(--white);
+  color: var(--black);
   border-color: var(--eerie-black);
 }
 
