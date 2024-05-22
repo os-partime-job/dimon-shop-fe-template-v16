@@ -383,7 +383,7 @@ h3 > a { color: inherit; }
 
 .hero-subtitle {
   color: var(--eerie-black);
-  font-size: var(--fs-4);
+  font-size: var(--fs-3);
   font-weight: var(--fw-600);
   margin-bottom: 20px;
   justify-content: center;
@@ -400,8 +400,10 @@ h3 > a { color: inherit; }
 .hero-content{
   float:right;
   justify-content: right;
-  font-size: medium;
+  font-size: xx-large;
   margin-bottom: 25%;
+  margin-right: 20%;
+  margin-top: 15%;
 }
 
 .btn-showNow{

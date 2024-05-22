@@ -15,7 +15,7 @@
       </div>
       <div class="hero-content">
 
-        <p class="hero-subtitle">NATURAL DIAMOND</p>
+        <h2 class="hero-subtitle">NATURAL DIAMOND</h2>
 
         <h2 class="h1 hero-title">GIA Certified Natural Diamonds</h2>
 
@@ -197,7 +197,7 @@
 
         <ul class="product-list">
 
-          <li>
+          <li *ngFor="let product of listProduct">
             <div class="product-card">
 
               <figure class="card-banner">
@@ -211,7 +211,7 @@
 
                 <div class="card-actions">
 
-                  <button class="card-action-btn" aria-label="Quick view">
+                  <button class="card-action-btn" aria-label="Quick view" (click)="goToProductDetail(product.id)">
                     <i class="fas fa-eye"></i>
                   </button>
 
@@ -231,13 +231,13 @@
 
               <div class="card-content">
                 <h3 class="h4 card-title">
-                  <a href="#">Varsi Leather Bag</a>
+                  <a href="#">{{product.name}}</a>
                 </h3>
 
                 <div class="card-price">
-                  <data value="48.75">&pound;4800.75</data>
+                  <data value="48.75">{{convertNumber(product.materialPrices)}} VNĐ</data>
 
-                  <data value="65.00">&pound;6500.00</data>
+                  <data value="65.00">{{convertNumber(product.materialPrices)}} VNĐ</data>
                 </div>
               </div>
 
@@ -289,269 +289,269 @@
             </div>
           </li>
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/round_2.jpg" alt="Grand Atlantic Chukka Boots" loading="lazy"
-                       width="800" height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/round_2.jpg" alt="Grand Atlantic Chukka Boots" loading="lazy"-->
+<!--                       width="800" height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Grand Atlantic Chukka Boots</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Grand Atlantic Chukka Boots</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="32.00">&pound;3200.00</data>
-                </div>
-              </div>
+<!--                <div class="card-price">-->
+<!--                  <data value="32.00">&pound;3200.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/round_3.jpg" alt="Women's Faux-Trim Shirt" loading="lazy" width="800"
-                       height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/round_3.jpg" alt="Women's Faux-Trim Shirt" loading="lazy" width="800"-->
+<!--                       height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Women's Faux-Trim Shirt</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Women's Faux-Trim Shirt</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="84.00">&pound;8400.00</data>
-                </div>
-              </div>
+<!--                <div class="card-price">-->
+<!--                  <data value="84.00">&pound;8400.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/round_4.jpg" alt="Soft Touch Interlock Polo" loading="lazy" width="800"
-                       height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/round_4.jpg" alt="Soft Touch Interlock Polo" loading="lazy" width="800"-->
+<!--                       height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Soft Touch Interlock Polo</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Soft Touch Interlock Polo</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="45.00">&pound;4500.00</data>
-                </div>
-              </div>
+<!--                <div class="card-price">-->
+<!--                  <data value="45.00">&pound;4500.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/oval_1.jpg" alt="Casmart Smart Watch" loading="lazy" width="800"
-                       height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/oval_1.jpg" alt="Casmart Smart Watch" loading="lazy" width="800"-->
+<!--                       height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Casmart Smart Watch</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Casmart Smart Watch</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="30.00">&pound;3000.00</data>
+<!--                <div class="card-price">-->
+<!--                  <data value="30.00">&pound;3000.00</data>-->
 
-                  <data value="38.00">&pound;3800.00</data>
-                </div>
-              </div>
+<!--                  <data value="38.00">&pound;3800.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/pear_1.jpg" alt="Casmart Smart Glass" loading="lazy" width="800"
-                       height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/pear_1.jpg" alt="Casmart Smart Glass" loading="lazy" width="800"-->
+<!--                       height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Casmart Smart Glass</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Casmart Smart Glass</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="25.00">&pound;2500.00</data>
+<!--                <div class="card-price">-->
+<!--                  <data value="25.00">&pound;2500.00</data>-->
 
-                  <data value="39.00">&pound;3900.00</data>
-                </div>
-              </div>
+<!--                  <data value="39.00">&pound;3900.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
-          <li>
-            <div class="product-card">
+<!--          <li>-->
+<!--            <div class="product-card">-->
 
-              <figure class="card-banner">
+<!--              <figure class="card-banner">-->
 
-                <a href="#">
-                  <img src="./assets/images/princess_1.jpg" alt="Cotton Shirt for Men" loading="lazy" width="800"
-                       height="1034" class="w-100">
-                </a>
+<!--                <a href="#">-->
+<!--                  <img src="./assets/images/princess_1.jpg" alt="Cotton Shirt for Men" loading="lazy" width="800"-->
+<!--                       height="1034" class="w-100">-->
+<!--                </a>-->
 
-                <div class="card-actions">
+<!--                <div class="card-actions">-->
 
-                  <button class="card-action-btn" aria-label="Quick view">
-                    <i class="fas fa-eye"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Quick view">-->
+<!--                    <i class="fas fa-eye"></i>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn cart-btn">
-                    <i class="ion ion-bag"></i>
+<!--                  <button class="card-action-btn cart-btn">-->
+<!--                    <i class="ion ion-bag"></i>-->
 
-                    <p>Add to Cart</p>
-                  </button>
+<!--                    <p>Add to Cart</p>-->
+<!--                  </button>-->
 
-                  <button class="card-action-btn" aria-label="Add to Whishlist">
-                    <i class="fas fa-heart"></i>
-                  </button>
+<!--                  <button class="card-action-btn" aria-label="Add to Whishlist">-->
+<!--                    <i class="fas fa-heart"></i>-->
+<!--                  </button>-->
 
-                </div>
+<!--                </div>-->
 
-              </figure>
+<!--              </figure>-->
 
-              <div class="card-content">
-                <h3 class="h4 card-title">
-                  <a href="#">Cotton Shirt for Men</a>
-                </h3>
+<!--              <div class="card-content">-->
+<!--                <h3 class="h4 card-title">-->
+<!--                  <a href="#">Cotton Shirt for Men</a>-->
+<!--                </h3>-->
 
-                <div class="card-price">
-                  <data value="85.00">&pound;8500.00</data>
+<!--                <div class="card-price">-->
+<!--                  <data value="85.00">&pound;8500.00</data>-->
 
-                  <data value="99.00">&pound;9900.00</data>
-                </div>
-              </div>
+<!--                  <data value="99.00">&pound;9900.00</data>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </li>
+<!--            </div>-->
+<!--          </li>-->
 
           <!--          <li>-->
           <!--            <div class="product-card">-->

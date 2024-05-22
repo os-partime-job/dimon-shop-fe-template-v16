@@ -25,7 +25,13 @@ export class AddProductComponent {
     throw new Error('Method not implemented.');
   }
   public getProducts(): void{
-    this.ProductService.getProducts().subscribe(
+    let request = {
+      jewelry_type_id:1,
+      limit:10,
+      offset:0,
+      requestId:''
+    }
+    this.ProductService.getProducts(request).subscribe(
       (response:ProductDTO[]) =>{
         this.Products = response;
       },

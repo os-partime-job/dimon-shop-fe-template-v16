@@ -14,6 +14,8 @@ export class ProductService {
   httpOptions: any;
   token : any;
   BASIC_DIAMOND_URL = "diamond/";
+  BASIC_JEWELRY_URL = "jewelry/";
+
 
   constructor(private http: HttpClient, private storageService : StorageService) {
     this.token = storageService.getUser().access_token;
@@ -27,8 +29,8 @@ export class ProductService {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
 }; }
 
-  public getProducts(): Observable<any>{
-    return this.http.get<ProductDTO[]>(`${this.apiUrl}/api/product/all`, this.httpOptions);
+  public getProducts(request: any): Observable<any>{
+    return this.http.post<any[]>(`${this.apiUrl}/jewelry/list`,request, this.httpOptions);
   }
   public addProduct(Product : any): Observable<any>{
     return this.http.post<ProductDTO>(`${this.apiUrl}/api/product/addProduct`,Product,this.httpOptions);
@@ -43,6 +45,7 @@ export class ProductService {
     return this.http.get<Object>(`${this.apiUrl}/api/product/test`, this.httpOptions);
   }
   public getProductDetail(ProductId : number): Observable<any>{
-    return  this.http.get<Object>(`${this.apiUrl}/${this.BASIC_DIAMOND_URL}detail/${ProductId}`, this.httpOptions);
+    const body = {id_jewelry:ProductId};
+    return  this.http.post<Object>(`${this.apiUrl}/${this.BASIC_JEWELRY_URL}detail`,body, this.httpOptions);
   }
 }
