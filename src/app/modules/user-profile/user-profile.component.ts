@@ -205,4 +205,7 @@ export class UserProfileComponent implements OnInit {
   //       => setTimeout(resolve, ms));
   // }
 
+  logOut() {
+    this.accountService.logout();
+  }
 }
