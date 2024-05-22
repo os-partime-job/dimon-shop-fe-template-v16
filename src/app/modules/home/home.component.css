@@ -385,26 +385,31 @@ h3 > a { color: inherit; }
   color: var(--eerie-black);
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   justify-content: center;
   text-align: center;
 }
 
 .hero-title {
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   max-width: 12ch;
   justify-content: center;
   text-align: center;
+  margin-left: 20%;
 }
 .hero-content{
   float:right;
   justify-content: right;
+  font-size: medium;
+  margin-bottom: 25%;
 }
 
 .btn-showNow{
-  justify-content: right;
-  text-align: right;
-  margin-left: 40%;
+  justify-content: center;
+  text-align: center;
+  margin-left: 10%;
+  color: whitesmoke;
+  background-color: black;
 }
 
 
