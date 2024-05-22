@@ -29,7 +29,6 @@ const routes: Routes = [
       title: 'Home'
     },
     children: [
-      {path: 'users', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)},
       {
         path: 'widgets',
         loadChildren: () =>
@@ -182,6 +181,7 @@ const routes: Routes = [
 
     ]
   },
+  {path: 'users', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)},
   {
     path: 'ecommerce',
     loadChildren: () => import('./modules/common/pages/ecommerce/ecommerce.module').then(m => m.EcommerceModule)

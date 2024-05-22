@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit{
     return this.numberFormat.convertNumber(number);
   }
   goToProductDetail(id:number) {
+    console.log(id);
     const returnUrl = this.route.snapshot.queryParams[`/ecommerce?id=${id}`] || `/ecommerce?id=${id}`;
     this.router.navigateByUrl(returnUrl);
   }

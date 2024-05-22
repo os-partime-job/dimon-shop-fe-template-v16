@@ -211,7 +211,7 @@
 
                 <div class="card-actions">
 
-                  <button class="card-action-btn" aria-label="Quick view" (click)="goToProductDetail(product.id)">
+                  <button class="card-action-btn" aria-label="Quick view" (click)="goToProductDetail(product.id_jewelry)">
                     <i class="fas fa-eye"></i>
                   </button>
 
@@ -235,9 +235,9 @@
                 </h3>
 
                 <div class="card-price">
-                  <data value="48.75">{{convertNumber(product.materialPrices)}} VNĐ</data>
+                  <data value="48.75">{{convertNumber(product.price)}} VNĐ</data>
 
-                  <data value="65.00">{{convertNumber(product.materialPrices)}} VNĐ</data>
+                  <data value="65.00">{{convertNumber(product.price)}} VNĐ</data>
                 </div>
               </div>
 
