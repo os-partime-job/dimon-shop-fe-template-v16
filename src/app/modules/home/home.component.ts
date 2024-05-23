@@ -4,6 +4,8 @@ import {NgIf} from "@angular/common";
 import {ProductService} from "../service/product.service";
 import {ToastrService} from "ngx-toastr";
 import {NumberService} from "../service/number.service";
+import {AccountService} from "../auth/services/account.service";
+import {AuthGoogleService} from "../../core/shared/auth-google.service";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,19 @@ export class HomeComponent implements OnInit{
               private router: Router,
               private productService: ProductService,
               private toastrService: ToastrService,
-              private numberFormat: NumberService,) { }
+              private numberFormat: NumberService,
+              private accountServie: AccountService,
+              private googleService :AuthGoogleService) {
+    if(googleService.getIdToken()){
+      const body = {token:googleService.getIdToken()}
+      accountServie.loginWithGoogle(body).subscribe((res) =>{
+        console.log(res);
+        localStorage.setItem("user",JSON.stringify(res))
+      },error => {
+
+      });
+    }
+  }
 
   ngOnInit(): void {
         this.isLoginUser = localStorage.getItem("user") != null;

@@ -40,6 +40,9 @@ export class AuthGoogleService {
   getToken() {
     return this.oauthService.getAccessToken();
   }
+  getIdToken() {
+    return this.oauthService.getIdToken();
+  }
   revokeTokenAndLogout(){
     this.oauthService.revokeTokenAndLogout();
   }

@@ -76,6 +76,9 @@ export class AccountService {
     register(user: User) {
         return this.http.post(`${environment.apiUrl}/api/user/save`, user,this.httpOptions);
     }
+  loginWithGoogle(user: any) {
+    return this.http.post<any>(`${environment.apiUrl}/social/google`, user,this.httpOptions);
+  }
 
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
