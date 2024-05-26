@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { environment } from "../../../../environments/environment";
 
 import { User } from "../../_models";
+import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -17,7 +18,8 @@ export class AccountService {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private http: HttpClient
+        private http: HttpClient,
+        private authGoogleService: AuthGoogleService,
     ) {
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
@@ -70,11 +72,12 @@ export class AccountService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         this.userSubject.next(null);
+        this.authGoogleService.logout();
         this.router.navigate(['/home'], { relativeTo: this.route });
     }
 
-    register(user: User) {
-        return this.http.post(`${environment.apiUrl}/api/user/save`, user,this.httpOptions);
+    register(user: any) {
+        return this.http.post(`${environment.apiUrl}/shop/auth/signup`, user,this.httpOptions);
     }
   loginWithGoogle(user: any) {
     return this.http.post<any>(`${environment.apiUrl}/social/google`, user,this.httpOptions);

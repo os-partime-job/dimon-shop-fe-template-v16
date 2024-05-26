@@ -42,6 +42,9 @@ import { ProductListComponent } from './modules/pages/product-list/product-list.
 import { ProductComponent } from './modules/pages/product/product.component';
 import { RegisterPageComponent } from './modules/pages/register-page/register-page.component';
 import { WishListComponent } from './modules/pages/wish-list/wish-list.component';
+import { MyHeaderComponent } from './modules/pages/layout/my-header/my-header.component';
+import { MyFooterComponent } from './modules/pages/layout/my-footer/my-footer.component';
+import { MyMiniCartComponent } from './modules/pages/layout/my-mini-cart/my-mini-cart.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { WishListComponent } from './modules/pages/wish-list/wish-list.component
     ProductListComponent,
     ProductComponent,
     RegisterPageComponent,
-    WishListComponent
+    WishListComponent,
+    MyHeaderComponent,
+    MyFooterComponent,
+    MyMiniCartComponent
   ],
   imports: [
     BrowserModule,
