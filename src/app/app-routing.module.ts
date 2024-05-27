@@ -32,13 +32,13 @@ import {RegisterPageComponent} from "./modules/pages/register-page/register-page
 import {WishListComponent} from "./modules/pages/wish-list/wish-list.component";
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
+    redirectTo: '/home-page',
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin',
     component: DefaultLayoutComponent,
     // canActivate: [authGuard],
     data: {

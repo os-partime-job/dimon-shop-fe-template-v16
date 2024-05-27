@@ -56,6 +56,7 @@ export class MyLoginComponent {
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      console.log("loois klklkjlk");
       return;
     }
     this.loading = true;
