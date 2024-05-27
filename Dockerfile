@@ -6,7 +6,9 @@ COPY . /usr/src/app
 
 RUN npm install -g @angular/cli
 
-RUN npm install
+RUN npm install --force
+
+RUN npm run build
 
 EXPOSE 3000
 
