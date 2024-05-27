@@ -25,5 +25,5 @@ FROM nginx:latest
 COPY --from=build /usr/local/app/dist/sample-angular-app /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 3000
 #https://levioconsulting.com/insights/how-to-dockerize-an-angular-application-with-nginx/
