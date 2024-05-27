@@ -1,5 +1,4 @@
 name: CI/CD
-
 env:
   COMMIT-ID: ${{ github.sha }}
   CONTAINER-IMAGE-NAME: diamond-shop-fe
@@ -57,4 +56,4 @@ jobs:
             docker rm $(docker ps -a | grep diamond-shop-fe | awk {'print $1'}) || true
             docker image rm $(docker images | grep diamond-shop-fe | awk {'print $3'}) || true
             docker pull registry.digitalocean.com/diamondshop/diamond-shop-fe:${{ env.COMMIT-ID }}
-            docker run -d -p 3000:3000 --name diamond-shop-fe registry.digitalocean.com/diamondshop/diamond-shop-fe:${{ env.COMMIT-ID }}
+            docker run -d -p 3000:4200 --name diamond-shop-fe registry.digitalocean.com/diamondshop/diamond-shop-fe:${{ env.COMMIT-ID }}
