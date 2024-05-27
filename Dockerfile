@@ -9,4 +9,5 @@ RUN npm install -g @angular/cli
 RUN npm install --force
 
 RUN npm run build
-ENTRYPOINT ["ng", "serve", "--port 3000"]
+
+ENTRYPOINT ["ng", "serve"]
