@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -97,6 +98,8 @@ import { MyMiniCartComponent } from './modules/pages/layout/my-mini-cart/my-mini
       closeButton: true,
       progressBar: true,
     }),
+    NgOtpInputModule
+
 
   ],
   providers: [
