@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../auth/services/account.service";
@@ -6,12 +6,15 @@ import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  selector: 'app-forget-password',
+  templateUrl: './forget-password.component.html',
+  styleUrls: ['./forget-password.component.css']
 })
-export class RegisterPageComponent implements OnInit{
+export class ForgetPasswordComponent {
   form!: FormGroup;
+  formForget!: FormGroup;
+
+  user : any;
   otpConfig = {
     length: 6,
     inputStyles: {
@@ -25,6 +28,8 @@ export class RegisterPageComponent implements OnInit{
     }
   };
   isDisableButton:boolean = false;
+  isDisableForgetButton:boolean = false;
+  isShowFormReset: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -36,26 +41,36 @@ export class RegisterPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
       password: ['', Validators.required],
       rePassword: ['', Validators.required],
-      province: [''],
-      district: [''],
-      city: [''],
-      ward: [''],
-      extra: [''],
-      phoneNumber: [''],
       otp:[''],
-
+    });
+    this.formForget = this.formBuilder.group({
+      email: ['', Validators.required]
     });
   }
 
   get f() {
     return this.form.controls;
   }
+  onForgetPassWord() {
+    if (this.formForget.invalid) {
+      this.toastrService.error("Xem lại thông tin vừa nhập");
+      return;
+    }
+    this.isDisableForgetButton = true;
+    this.onOpenModal("otp");
+    // this.accountService.getOtp(this.user?.email).subscribe((res) => {
+    //   this.toastrService.success(`Gửi mã Otp đến ${this.formForget.controls['email'].value} thành công`)
+    //   this.onOpenModal("otp");
+    // }, error => {
+    //   this.toastrService.error("Không gửi được mã OTP")
+    //   this.isDisableForgetButton = false;
+    // });
 
-  onRegister() {
+  }
+
+  onResetPassWord() {
     if (this.form.invalid) {
       this.toastrService.error("Xem lại thông tin vừa nhập");
       return;
@@ -65,7 +80,7 @@ export class RegisterPageComponent implements OnInit{
       return;
     }
     this.isDisableButton = true;
-    this.accountService.getOtp(this.form.controls['email'].value).subscribe((res) => {
+    this.accountService.getOtp(this.user?.email).subscribe((res) => {
       this.toastrService.success(`Gửi mã Otp đến ${this.form.controls['email'].value} thành công`)
       this.onOpenModal("otp");
     }, error => {
@@ -74,23 +89,17 @@ export class RegisterPageComponent implements OnInit{
     });
 
   }
+  callReset() {
+    this.isShowFormReset = true;
+  }
 
   callRegister() {
     const user = {
-      name: this.form.controls['name'].value,
-      email: this.form.controls['email'].value,
       password: this.form.controls['password'].value, //this.form['']
-      province: this.form.controls['province'].value,
-      district: this.form.controls['district'].value,
-      city: this.form.controls['city'].value,
-      ward: this.form.controls['ward'].value,
-      extra: this.form.controls['extra'].value,
-      phoneNumber: this.form.controls['phoneNumber'].value,
       otp: this.form.controls['otp'].value,
-
     };
     this.accountService.register(user).subscribe((res) => {
-        this.toastrService.success("Đăng ký user thành công");
+        this.toastrService.success("Reset mật khẩu thành công");
         this.isDisableButton = false;
         const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
         this.router.navigateByUrl(returnUrl);
@@ -99,7 +108,7 @@ export class RegisterPageComponent implements OnInit{
         if (error.data) {
           this.toastrService.error(error.data);
         } else {
-          this.toastrService.error("Đăng ký user thất bại");
+          this.toastrService.error("Reset mật khẩu thất bại");
         }
 
         this.isDisableButton = false;
@@ -117,5 +126,4 @@ export class RegisterPageComponent implements OnInit{
     container.appendChild(button);
     button.click();
   }
-
 }

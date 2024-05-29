@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../auth/services/account.service";
@@ -6,12 +6,13 @@ import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css']
 })
-export class RegisterPageComponent implements OnInit{
+export class ResetPasswordComponent {
   form!: FormGroup;
+  user : any;
   otpConfig = {
     length: 6,
     inputStyles: {
@@ -32,20 +33,13 @@ export class RegisterPageComponent implements OnInit{
               private accountService: AccountService,
               private authGoogleService: AuthGoogleService,
               private toastrService: ToastrService) {
+    this.callUserDetail();
   }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
       password: ['', Validators.required],
       rePassword: ['', Validators.required],
-      province: [''],
-      district: [''],
-      city: [''],
-      ward: [''],
-      extra: [''],
-      phoneNumber: [''],
       otp:[''],
 
     });
@@ -55,7 +49,7 @@ export class RegisterPageComponent implements OnInit{
     return this.form.controls;
   }
 
-  onRegister() {
+  onResetPassWord() {
     if (this.form.invalid) {
       this.toastrService.error("Xem lại thông tin vừa nhập");
       return;
@@ -65,7 +59,7 @@ export class RegisterPageComponent implements OnInit{
       return;
     }
     this.isDisableButton = true;
-    this.accountService.getOtp(this.form.controls['email'].value).subscribe((res) => {
+    this.accountService.getOtp(this.user?.email).subscribe((res) => {
       this.toastrService.success(`Gửi mã Otp đến ${this.form.controls['email'].value} thành công`)
       this.onOpenModal("otp");
     }, error => {
@@ -77,20 +71,12 @@ export class RegisterPageComponent implements OnInit{
 
   callRegister() {
     const user = {
-      name: this.form.controls['name'].value,
-      email: this.form.controls['email'].value,
       password: this.form.controls['password'].value, //this.form['']
-      province: this.form.controls['province'].value,
-      district: this.form.controls['district'].value,
-      city: this.form.controls['city'].value,
-      ward: this.form.controls['ward'].value,
-      extra: this.form.controls['extra'].value,
-      phoneNumber: this.form.controls['phoneNumber'].value,
       otp: this.form.controls['otp'].value,
 
     };
     this.accountService.register(user).subscribe((res) => {
-        this.toastrService.success("Đăng ký user thành công");
+        this.toastrService.success("Reset mật khẩu thành công");
         this.isDisableButton = false;
         const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
         this.router.navigateByUrl(returnUrl);
@@ -99,7 +85,7 @@ export class RegisterPageComponent implements OnInit{
         if (error.data) {
           this.toastrService.error(error.data);
         } else {
-          this.toastrService.error("Đăng ký user thất bại");
+          this.toastrService.error("Reset mật khẩu thất bại");
         }
 
         this.isDisableButton = false;
@@ -116,6 +102,16 @@ export class RegisterPageComponent implements OnInit{
     }
     container.appendChild(button);
     button.click();
+  }
+  callUserDetail() {
+    this.accountService.getUser().subscribe((res) => {
+         this.user = res?.data;
+      },
+      error => {
+        this.toastrService.error("lỗi lấy thông tin user");
+        console.log(error);
+      });
+
   }
 
 }

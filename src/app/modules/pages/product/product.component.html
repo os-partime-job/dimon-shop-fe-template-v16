@@ -1,6 +1,6 @@
 <!--header start here-->
 <app-my-header></app-my-header>
-<div class="wrapper">
+<div class="wrapper" style="margin-top: 8%;margin-bottom: 8%;">
   <section class="product-sec">
     <div class="container">
       <div class="row">
@@ -10,7 +10,7 @@
               <div class="product-main-slider">
                 <div class="product-main-item">
                   <div class="product-item-img">
-                    <img src="assets/images/blog-card2.png" alt="product-img" />
+                    <img src="{{product.url}}" alt="product-img" />
                   </div>
                 </div>
                 <div class="product-main-item">
@@ -100,14 +100,10 @@
               </a>
             </div>
             <div class="right-side-content">
-              <span class="sub-title">RINGS</span>
-              <h2>Goldern Ring</h2>
+              <span class="sub-title">{{product?.jewelry_type}}</span>
+              <h2>{{product?.jewelry_title}}</h2>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy.Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy.
+                {{product?.description}}
               </p>
               <div class="product-size-div">
                 <label> Size: </label>
@@ -148,7 +144,7 @@
                 </a>
                 <div class="code">
                   <div>SKU: <span>1120550231151</span></div>
-                  <div>Category: <span>Rings</span></div>
+                  <div>Category: <span>{{product?.jewelry_title}}</span></div>
                 </div>
               </div>
             </div>

@@ -115,6 +115,9 @@ export class AccountService {
     getUser():Observable<any> {
       return  this.http.get<any>(`${environment.apiUrl}/shop/user`,this.httpOptions);
     }
+    getOtp(email:string):Observable<any> {
+      return  this.http.get<any>(`${environment.apiUrl}/shop/otp?email=${email}`,this.httpOptions);
+    }
     getAllUser(): Observable<any> {
       return this.http.get<any>(`${environment.apiUrl}/shop/admin/account`, this.httpOptions);
     }
