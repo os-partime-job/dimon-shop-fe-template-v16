@@ -5,7 +5,7 @@ import {DefaultLayoutComponent} from './core/default-layout/default-layout.compo
 import {DashboardComponent} from './modules/dashboard/dashboard.component';
 import {LoginComponent} from './modules/auth/login/login.component';
 import {RegisterComponent} from './modules/auth/register/register.component';
-import {ResetPasswordComponent} from './modules/auth/reset-password/reset-password.component';
+// import {ResetPasswordComponent} from './modules/auth/reset-password/reset-password.component';
 import {HomeComponent} from "./modules/home/home.component";
 import {LoginV3Component} from "./modules/login-v3/login-v3.component";
 import {IntroductionComponent} from "./modules/default-page/introduction/introduction.component";
@@ -30,15 +30,17 @@ import {ProductListComponent} from "./modules/pages/product-list/product-list.co
 import {ProductComponent} from "./modules/pages/product/product.component";
 import {RegisterPageComponent} from "./modules/pages/register-page/register-page.component";
 import {WishListComponent} from "./modules/pages/wish-list/wish-list.component";
+import {ResetPasswordComponent} from "./modules/pages/reset-password/reset-password.component";
+import {ForgetPasswordComponent} from "./modules/pages/forget-password/forget-password.component";
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
+    redirectTo: '/home-page',
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin',
     component: DefaultLayoutComponent,
     // canActivate: [authGuard],
     data: {
@@ -399,6 +401,13 @@ const routes: Routes = [
     component: ResetPasswordComponent,
     data: {
       title: 'Reset Password Page'
+    }
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forget Password Page'
     }
   },
   {path: '**', redirectTo: 'dashboard'}

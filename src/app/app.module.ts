@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +9,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { SharedAppModule } from './core/shared/shared.module';
 import { RegisterComponent } from './modules/auth/register/register.component';
-import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
+// import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
 // import { FeatureGuard } from './core/permission/guards/feature.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // import { AuthInterceptor } from './core/shared/interceptors/auth.interceptor';
@@ -42,6 +43,11 @@ import { ProductListComponent } from './modules/pages/product-list/product-list.
 import { ProductComponent } from './modules/pages/product/product.component';
 import { RegisterPageComponent } from './modules/pages/register-page/register-page.component';
 import { WishListComponent } from './modules/pages/wish-list/wish-list.component';
+import { MyHeaderComponent } from './modules/pages/layout/my-header/my-header.component';
+import { MyFooterComponent } from './modules/pages/layout/my-footer/my-footer.component';
+import { MyMiniCartComponent } from './modules/pages/layout/my-mini-cart/my-mini-cart.component';
+import {ResetPasswordComponent} from "./modules/pages/reset-password/reset-password.component";
+import { ForgetPasswordComponent } from './modules/pages/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +79,11 @@ import { WishListComponent } from './modules/pages/wish-list/wish-list.component
     ProductListComponent,
     ProductComponent,
     RegisterPageComponent,
-    WishListComponent
+    WishListComponent,
+    MyHeaderComponent,
+    MyFooterComponent,
+    MyMiniCartComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +101,8 @@ import { WishListComponent } from './modules/pages/wish-list/wish-list.component
       closeButton: true,
       progressBar: true,
     }),
+    NgOtpInputModule
+
 
   ],
   providers: [
