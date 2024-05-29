@@ -73,7 +73,7 @@ export class AccountService {
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.authGoogleService.logout();
-        this.router.navigate(['/home'], { relativeTo: this.route });
+        this.router.navigate(['/my-login'], { relativeTo: this.route });
     }
 
     register(user: any) {
@@ -116,8 +116,14 @@ export class AccountService {
       return  this.http.get<any>(`${environment.apiUrl}/shop/user`,this.httpOptions);
     }
     getOtp(email:string):Observable<any> {
-      return  this.http.get<any>(`${environment.apiUrl}/shop/otp?email=${email}`,this.httpOptions);
+      return  this.http.get<any>(`${environment.apiUrl}/shop/otp/register?email=${email}`,this.httpOptions);
     }
+  getOtpFogetPassWord(email:string):Observable<any> {
+    return  this.http.get<any>(`${environment.apiUrl}/shop/otp/forget?email=${email}`,this.httpOptions);
+  }
+  changePassWord(request:any):Observable<any> {
+      return this.http.put<any>(`${environment.apiUrl}/shop/user/change-pass`,request,this.httpOptions);
+}
     getAllUser(): Observable<any> {
       return this.http.get<any>(`${environment.apiUrl}/shop/admin/account`, this.httpOptions);
     }

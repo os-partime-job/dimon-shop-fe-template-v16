@@ -59,8 +59,9 @@ export class ResetPasswordComponent {
       return;
     }
     this.isDisableButton = true;
-    this.accountService.getOtp(this.user?.email).subscribe((res) => {
-      this.toastrService.success(`Gửi mã Otp đến ${this.form.controls['email'].value} thành công`)
+    this.accountService.getOtpFogetPassWord(this.user?.email).subscribe((res) => {
+      console.log("checkkkk");
+      this.toastrService.success(`Gửi mã Otp đến ${this.user?.email} thành công`)
       this.onOpenModal("otp");
     }, error => {
       this.toastrService.error("Không gửi được mã OTP")
@@ -69,16 +70,17 @@ export class ResetPasswordComponent {
 
   }
 
-  callRegister() {
+  callReset() {
     const user = {
+      email : this.user?.email,
       password: this.form.controls['password'].value, //this.form['']
       otp: this.form.controls['otp'].value,
 
     };
-    this.accountService.register(user).subscribe((res) => {
+    this.accountService.changePassWord(user).subscribe((res) => {
         this.toastrService.success("Reset mật khẩu thành công");
         this.isDisableButton = false;
-        const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
+        const returnUrl = this.route.snapshot.queryParams['/my-login'] || '/my-login';
         this.router.navigateByUrl(returnUrl);
       },
       error => {
@@ -98,7 +100,7 @@ export class ResetPasswordComponent {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'otp') {
-      button.setAttribute('data-target', '#otpModal');
+      button.setAttribute('data-target', '#otpModal2');
     }
     container.appendChild(button);
     button.click();

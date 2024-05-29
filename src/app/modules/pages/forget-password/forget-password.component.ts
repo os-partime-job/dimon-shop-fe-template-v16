@@ -59,49 +59,28 @@ export class ForgetPasswordComponent {
       return;
     }
     this.isDisableForgetButton = true;
-    this.onOpenModal("otp");
-    // this.accountService.getOtp(this.user?.email).subscribe((res) => {
-    //   this.toastrService.success(`Gửi mã Otp đến ${this.formForget.controls['email'].value} thành công`)
-    //   this.onOpenModal("otp");
-    // }, error => {
-    //   this.toastrService.error("Không gửi được mã OTP")
-    //   this.isDisableForgetButton = false;
-    // });
-
-  }
-
-  onResetPassWord() {
-    if (this.form.invalid) {
-      this.toastrService.error("Xem lại thông tin vừa nhập");
-      return;
-    }
-    if (this.form.controls['password'].value !== this.form.controls['rePassword'].value) {
-      this.toastrService.error("Mật khẩu nhập không khớp");
-      return;
-    }
-    this.isDisableButton = true;
-    this.accountService.getOtp(this.user?.email).subscribe((res) => {
-      this.toastrService.success(`Gửi mã Otp đến ${this.form.controls['email'].value} thành công`)
+    this.accountService.getOtpFogetPassWord(this.formForget.controls['email'].value).subscribe((res) => {
+      this.toastrService.success(`Gửi mã Otp đến ${this.formForget.controls['email'].value} thành công`)
       this.onOpenModal("otp");
     }, error => {
       this.toastrService.error("Không gửi được mã OTP")
       this.isDisableButton = false;
     });
-
   }
   callReset() {
     this.isShowFormReset = true;
   }
 
-  callRegister() {
+  callForgetPassWord() {
     const user = {
-      password: this.form.controls['password'].value, //this.form['']
+      email:this.formForget.controls['email'].value,
+      password: this.form.controls['password'].value,
       otp: this.form.controls['otp'].value,
     };
-    this.accountService.register(user).subscribe((res) => {
+    this.accountService.changePassWord(user).subscribe((res) => {
         this.toastrService.success("Reset mật khẩu thành công");
         this.isDisableButton = false;
-        const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
+        const returnUrl = this.route.snapshot.queryParams['/my-login'] || '/my-login';
         this.router.navigateByUrl(returnUrl);
       },
       error => {

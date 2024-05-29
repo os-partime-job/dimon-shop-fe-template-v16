@@ -92,7 +92,7 @@ export class RegisterPageComponent implements OnInit{
     this.accountService.register(user).subscribe((res) => {
         this.toastrService.success("Đăng ký user thành công");
         this.isDisableButton = false;
-        const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
+        const returnUrl = this.route.snapshot.queryParams['/my-login'] || '/my-login';
         this.router.navigateByUrl(returnUrl);
       },
       error => {
