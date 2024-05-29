@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.DIGITALOCEAN_DROPLET_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
-            docker stop $(docker ps -a | grep ${{ env.CONTAINER-IMAGE-NAME }} | awk '{print $1}')
+            docker stop $(docker ps -a | grep diamond-shop-fe | awk '{print $1}')
             docker rm $(docker ps -a | grep diamond-shop-fe | awk {'print $1'}) || true
             docker image rm $(docker images | grep diamond-shop-fe | awk {'print $3'}) || true
             docker pull registry.digitalocean.com/diamondshop/diamond-shop-fe:${{ env.COMMIT-ID }}
