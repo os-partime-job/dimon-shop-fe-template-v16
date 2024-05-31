@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {NumberService} from "../../service/number.service";
 import {AccountService} from "../../auth/services/account.service";
 import {AuthGoogleService} from "../../../core/shared/auth-google.service";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-home-page',
@@ -21,7 +22,8 @@ export class HomePageComponent {
               private toastrService: ToastrService,
               private numberFormat: NumberService,
               private accountServie: AccountService,
-              private googleService :AuthGoogleService) {
+              private googleService :AuthGoogleService,
+              private cartService: CartService) {
     if(googleService.getIdToken()){
       const body = {token:googleService.getIdToken()}
       accountServie.loginWithGoogle(body).subscribe((res) =>{
@@ -67,10 +69,37 @@ export class HomePageComponent {
     }
     this.productService.getProducts(request).subscribe((res) => {
       this.listProduct = res.data;
-
     }, error => {
 
 
+    });
+  }
+  getProductCart() {
+    const request = {
+      customer_id : localStorage.getItem("user")
+    }
+    this.cartService.getProductInCart(request).subscribe((res) =>{
+      this.cartService.cartItems.next(res?.data);
+      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+    }, error => {
+
+    })
+  }
+  addProductCart(product:any){
+    if(!this.isLoginUser) {
+      this.toastrService.error("Bạn phải đăng nhập trước");
+      return;
+    }
+    const request = {
+      jewelry_id : product?.id_jewelry,
+      quantity : 1
+    }
+    this.cartService.addProductToCard(request).subscribe((res) =>{
+      this.toastrService.success("Add sản phầm thành công");
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Add sản phầm thất bại");
     });
   }
 

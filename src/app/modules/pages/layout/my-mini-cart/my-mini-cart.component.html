@@ -1,7 +1,7 @@
 <div class="cartDrawer">
   <div class="mini-cart-header">
     <h4>My Cart</h4>
-    <div class="cart-tottl-itm">04 Items</div>
+    <div *ngIf="totalProduct" class="cart-tottl-itm">{{totalProduct}} sản phẩm</div>
     <a href="#" class="closecart">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
@@ -11,8 +11,8 @@
     </a>
   </div>
   <div id="cart-body" class="mini-cart-has-item">
-    <div class="mini-cart-body">
-      <div class="mini-cart-item">
+    <div class="mini-cart-body" *ngIf="lisProductsCart != null">
+      <div class="mini-cart-item" *ngFor = "let item of lisProductsCart">
         <div class="mini-cart-image">
           <a href="#" title="SPACE BAG">
             <img src="assets/images/cart1.png" alt="img" />
@@ -70,12 +70,12 @@
       </div>
     </div>
     <div class="mini-cart-footer">
-      <div class="mini-cart-footer-total-row d-flex align-items-center justify-content-between">
+      <div *ngIf="lisProductsCart != null" class="mini-cart-footer-total-row d-flex align-items-center justify-content-between">
         <div class="mini-total-lbl">Subtotal :</div>
-        <div class="mini-total-price">$207.00</div>
+        <div class="mini-total-price">{{convertNumber(totalPriceProduct)}} VNĐ</div>
       </div>
-      <div class="u-save d-flex justify-end">You Save: $60.00</div>
-      <button class="btn checkout-btn">
+      <div *ngIf="lisProductsCart != null" class="u-save d-flex justify-end">You Save: $60.00</div>
+      <button *ngIf="lisProductsCart != null" class="btn checkout-btn">
         Proceed to checkout
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path
@@ -95,7 +95,7 @@
           <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>
         </svg>
       </a>
-      <p class="emptyCart text-center" style="display: none">
+      <p class="emptyCart text-center" *ngIf="lisProductsCart == null">
         You have no items in your shopping cart.
       </p>
     </div>

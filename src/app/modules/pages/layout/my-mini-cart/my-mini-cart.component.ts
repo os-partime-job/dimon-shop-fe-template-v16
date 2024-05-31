@@ -6,6 +6,7 @@ import {NumberService} from "../../../service/number.service";
 import {AccountService} from "../../../auth/services/account.service";
 import {AuthGoogleService} from "../../../../core/shared/auth-google.service";
 import {CartService} from "../../../service/cart.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-my-mini-cart',
@@ -14,6 +15,11 @@ import {CartService} from "../../../service/cart.service";
 })
 export class MyMiniCartComponent implements OnInit{
   lisProductsCart : any[];
+  subscription: Subscription;
+  subscription2: Subscription;
+  subscription1: Subscription;
+  totalProduct: any;
+  totalPriceProduct: any;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -24,17 +30,36 @@ export class MyMiniCartComponent implements OnInit{
               ) {
   }
   ngOnInit(): void {
-
+    this.getProductCart();
   }
   getProductCart() {
     const request = {
       customer_id : localStorage.getItem("user")
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
-      this.lisProductsCart = res?.data;
+      // this.lisProductsCart = res?.data;
+      this.cartService.cartItems.next(res?.data);
+      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+      this.subscription = this.cartService.totalProductInCart$.subscribe(data=>this.totalProduct = data);
+      this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
+      this.subscription1 = this.cartService.cartItems$.subscribe(data => this.lisProductsCart = data);
     }, error => {
 
     })
+  }
+  addProductCart(){
+    const request = {
+
+    }
+    this.cartService.addProductToCard(request).subscribe((res) =>{
+
+    }, error => {
+
+    });
+  }
+  convertNumber(number){
+    return this.numberFormat.convertNumber(number);
   }
 
 }

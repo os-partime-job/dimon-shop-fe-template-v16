@@ -9,9 +9,16 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class CartService {
 
-  public cartItemList : any =[]
+  public cartItemList : any =[];
   public productList = new BehaviorSubject<any>([]);
   public search = new BehaviorSubject<string>("");
+
+  public cartItems = new BehaviorSubject<any[]>(null);
+  cartItems$ = this.cartItems.asObservable();
+  public totalProductInCart = new BehaviorSubject<number>(null);
+  totalProductInCart$ = this.totalProductInCart.asObservable();
+  public totalPrice = new BehaviorSubject<number>(null);
+  totalPrice$ = this.totalPrice.asObservable();
   httpOptions: any;
 
   constructor(private router: Router,
@@ -57,6 +64,20 @@ export class CartService {
     })
     return grandTotal;
   }
+  getTotalPriceV2(products: any[]) : number{
+    let grandTotal = 0;
+    products.map((a:any)=>{
+      grandTotal += a.quantity_number*a.price_items;
+    })
+    return grandTotal;
+  }
+  getTotalProduct(products: any[]): number {
+    let grandTotal = 0;
+    products.map((a:any)=>{
+      grandTotal += a.quantity_number;
+    })
+    return grandTotal;
+  }
   removeCartItem(product: any){
     this.cartItemList.map((a:any, index:any)=>{
       if(product.id=== a.id){
@@ -69,7 +90,7 @@ export class CartService {
     this.cartItemList = []
     this.productList.next(this.cartItemList);
   }
-  addToCard(request:any): Observable<any>{
+  addProductToCard(request:any): Observable<any>{
     return this.http.post(`${environment.apiUrl}/cart/add_card`,request,this.httpOptions);
   }
   getProductInCart(request:any): Observable<any>{
