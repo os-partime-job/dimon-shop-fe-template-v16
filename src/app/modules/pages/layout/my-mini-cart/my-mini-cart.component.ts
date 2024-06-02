@@ -20,6 +20,7 @@ export class MyMiniCartComponent implements OnInit{
   subscription1: Subscription;
   totalProduct: any;
   totalPriceProduct: any;
+  isLoginUser:boolean = false;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -30,6 +31,7 @@ export class MyMiniCartComponent implements OnInit{
               ) {
   }
   ngOnInit(): void {
+    this.isLoginUser = localStorage.getItem("user") != null;
     this.getProductCart();
   }
   getProductCart() {
@@ -48,16 +50,22 @@ export class MyMiniCartComponent implements OnInit{
 
     })
   }
-  addProductCart(){
-    const request = {
-
+  addProductCart(product:any, quantity:number){
+    if(!this.isLoginUser) {
+      this.toastrService.error("Bạn phải đăng nhập trước");
+      return;
     }
-    this.cartService.addProductToCard(request).subscribe((res) =>{
-
+    const request = {
+      jewelry_id : product?.id_jewelry,
+      quantity : quantity
+    }
+    this.cartService.updateProductToCard(request).subscribe((res) =>{
+      this.getProductCart();
     }, error => {
-
+      this.toastrService.error("Update sản phầm thất bại");
     });
   }
+
   convertNumber(number){
     return this.numberFormat.convertNumber(number);
   }

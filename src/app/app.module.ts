@@ -23,7 +23,7 @@ import {ToastrModule} from "ngx-toastr";
 import { PriceDimondTableComponent } from './modules/default-page/price-dimond-table/price-dimond-table.component';
 import { MeasureJewelrySizeComponent } from './modules/default-page/measure-jewelry-size/measure-jewelry-size.component';
 import { AddProductComponent } from './modules/add-product/add-product.component';
-import { CartComponent } from './modules/cart/cart.component';
+// import { CartComponent } from './modules/cart/cart.component';
 import { UserProfileComponent } from './modules/user-profile/user-profile.component';
 import {CommonModule} from "@angular/common";
 import { HeaderComponent } from './modules/header/header.component';
@@ -48,6 +48,8 @@ import { MyFooterComponent } from './modules/pages/layout/my-footer/my-footer.co
 import { MyMiniCartComponent } from './modules/pages/layout/my-mini-cart/my-mini-cart.component';
 import {ResetPasswordComponent} from "./modules/pages/reset-password/reset-password.component";
 import { ForgetPasswordComponent } from './modules/pages/forget-password/forget-password.component';
+import {CartComponent} from "./modules/pages/cart/cart.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -83,7 +85,7 @@ import { ForgetPasswordComponent } from './modules/pages/forget-password/forget-
     MyHeaderComponent,
     MyFooterComponent,
     MyMiniCartComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,7 @@ import { ForgetPasswordComponent } from './modules/pages/forget-password/forget-
     BrowserAnimationsModule,
     NgbModule,
     CommonModule,
+    FormsModule,
     OAuthModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 150000, // 15 seconds

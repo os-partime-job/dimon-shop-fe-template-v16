@@ -96,4 +96,7 @@ export class CartService {
   getProductInCart(request:any): Observable<any>{
     return this.http.post<any[]>(`${environment.apiUrl}/cart/list`,request,this.httpOptions);
   }
+  updateProductToCard(request:any): Observable<any>{
+    return this.http.post(`${environment.apiUrl}/cart/update`,request,this.httpOptions);
+  }
 }
