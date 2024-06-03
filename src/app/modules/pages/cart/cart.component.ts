@@ -66,5 +66,23 @@ export class CartComponent implements OnInit{
     this.lisProductsCart = [...listCopy];
     console.log(this.lisProductsCart);
   }
+  addProductCart(product:any, quantity:number){
+    if(!this.isLoginUser) {
+      this.toastrService.error("Bạn phải đăng nhập trước");
+      return;
+    }
+    const request = {
+      jewelry_id : product?.id_jewelry,
+      quantity : quantity
+    }
+    this.cartService.updateProductToCard(request).subscribe((res) =>{
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Update sản phầm thất bại");
+    });
+  }
+  convertNumber(number){
+    return this.numberFormat.convertNumber(number);
+  }
 
 }

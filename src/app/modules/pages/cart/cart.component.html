@@ -28,7 +28,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">date</th>
                 <th scope="col">quantity</th>
-                <th scope="col">Price</th>
+                <th scope="col" style="text-align:left;">Price</th>
                 <th scope="col">Total</th>
                 <th scope="col"><div class="custom-control custom-checkbox">
                   <input class="custom-control-input" type="checkbox" id="customCheckbox1" (click)="clickSelectAll()" [(ngModel)] = "isSelectAll">
@@ -37,14 +37,14 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
+              <tr *ngFor = "let item of lisProductsCart">
                 <td data-label="Product">
-                  <a href="product.html">
+                  <a href="/product?id={{item.id_jewelry}}">
                     <img src="assets/images/cart1.png" />
                   </a>
                 </td>
                 <td data-label="Name">
-                  <a href="product.html">best jewellery collections</a>
+                  <a href="/product?id={{item.id_jewelry}}">best jewellery collections</a>
                   <div class="product-option">
                     <dt>Size:</dt>
                     <dd>S</dd>
@@ -53,17 +53,15 @@
                 <td data-label="date">11/08/22</td>
                 <td data-label="quantity">
                   <div class="qty-spinner">
-                    <button type="button" class="quantity-decrement">
-                      <svg width="12" height="2" viewBox="0 0 12 2" fill="none"
-                           xmlns="http://www.w3.org/2000/svg">
+                    <button type="button" class="quantity-decrement" (click)="addProductCart(item,-1)">
+                      <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0.251343V1.74871H12V0.251343H0Z" fill="#61AFB3"></path>
                       </svg>
                     </button>
-                    <input type="text" class="quantity" data-cke-saved-name="quantity" name="quantity"
-                           value="01" min="01" max="100" />
-                    <button type="button" class="quantity-increment">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                           xmlns="http://www.w3.org/2000/svg">
+                    <input type="text" class="quantity" data-cke-saved-name="quantity" value="{{item.quantity_number}}"
+                           min="01" max="100" />
+                    <button type="button" class="quantity-increment" (click)="addProductCart(item,1)">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M6.74868 5.25132V0H5.25132V5.25132H0V6.74868H5.25132V12H6.74868V6.74868H12V5.25132H6.74868Z"
                           fill="#61AFB3"></path>
@@ -71,63 +69,13 @@
                     </button>
                   </div>
                 </td>
-                <td data-label="Price">$2,100.00</td>
+                <td data-label="Price">{{convertNumber(item.price_items)}} VNĐ</td>
                 <td data-label="Total">
-                  $2,107.00
-                  <a href="javascript:;" class="remove-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"
-                         focusable="false" role="presentation" class="icon icon-remove">
-                      <path
-                        d="M14 3h-3.53a3.07 3.07 0 00-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 005.53 3H2a.5.5 0 000 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 00.5-.5V4H14a.5.5 0 000-1zM6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02zm4.84 11.52h-7.5V4h7.5v9.5z"
-                        fill="currentColor"></path>
-                      <path
-                        d="M6.55 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5zM9.45 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5z"
-                        fill="currentColor"></path>
-                    </svg>
-                  </a>
+                  {{convertNumber(item.price_items*item.quantity_number)}} VNĐ
                 </td>
                 <td><div class="custom-control custom-checkbox" style="text-align: center;">
-                  <input class="custom-control-input" type="checkbox" id="2" value="option1">
-                  <label for="2" class="custom-control-label">select</label>
-                </div></td>
-              </tr>
-              <tr>
-                <td data-label="Product">
-                  <a href="product.html">
-                    <img src="assets/images/cart1.png" />
-                  </a>
-                </td>
-                <td data-label="Name">
-                  <a href="product.html">best jewellery collections</a>
-                  <div class="product-option">
-                    <dt>Color:</dt>
-                    <dd>Blue</dd>
-                  </div>
-                </td>
-                <td data-label="date">11/08/22</td>
-                <td data-label="quantity">
-                  <div class="qty-spinner">
-                    <button type="button" class="quantity-decrement">
-                      <svg width="12" height="2" viewBox="0 0 12 2" fill="none"
-                           xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0.251343V1.74871H12V0.251343H0Z" fill="#61AFB3"></path>
-                      </svg>
-                    </button>
-                    <input type="text" class="quantity" data-cke-saved-name="quantity" name="quantity"
-                           value="01" min="01" max="100" />
-                    <button type="button" class="quantity-increment">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                           xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M6.74868 5.25132V0H5.25132V5.25132H0V6.74868H5.25132V12H6.74868V6.74868H12V5.25132H6.74868Z"
-                          fill="#61AFB3"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td data-label="Price">$2,100.00</td>
-                <td data-label="Total">
-                  $2,107.00
+                  <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">
+                  <label for="{{item.id}}" class="custom-control-label">select</label>
                   <a href="javascript:;" class="remove-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"
                          focusable="false" role="presentation" class="icon icon-remove">
@@ -139,10 +87,6 @@
                         fill="currentColor"></path>
                     </svg>
                   </a>
-                </td>
-                <td><div class="custom-control custom-checkbox" >
-                  <input class="custom-control-input" type="checkbox" id="1" value="option1">
-                  <label for="1" class="custom-control-label">select</label>
                 </div></td>
               </tr>
               </tbody>

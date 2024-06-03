@@ -75,7 +75,7 @@
         <div class="mini-total-price">{{convertNumber(totalPriceProduct)}} VNĐ</div>
       </div>
       <div *ngIf="lisProductsCart != null" class="u-save d-flex justify-end">You Save: $60.00</div>
-      <button *ngIf="lisProductsCart != null" class="btn checkout-btn">
+      <button *ngIf="lisProductsCart != null" class="btn checkout-btn" (click)="goToCart()">
         Proceed to checkout
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path

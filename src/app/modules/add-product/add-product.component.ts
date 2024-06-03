@@ -6,7 +6,12 @@ import { HelperService } from "../service/helper.service";
 import { ProductService } from "../service/product.service";
 import { StorageService } from "../service/storage.service";
 import { Router } from '@angular/router';
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
 
+  constructor(public src: string, public file: File) {}
+}
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -16,6 +21,7 @@ export class AddProductComponent {
   public Products: any[] = [];
   public editProduct!: any;
   public deleteProduct!: any;
+  selectedFile: ImageSnippet;
 
   constructor(private helperService: HelperService,private ProductService: ProductService,private storageService: StorageService,
               private router: Router) { }
@@ -27,13 +33,14 @@ export class AddProductComponent {
   public getProducts(): void{
     let request = {
       jewelry_type_id:1,
-      limit:10,
+      limit:1000,
       offset:0,
       requestId:''
     }
     this.ProductService.getProducts(request).subscribe(
-      (response:ProductDTO[]) =>{
-        this.Products = response;
+      (response:any) =>{
+        console.log(response);
+        this.Products = response.data;
       },
       (error: HttpErrorResponse)=>{alert(error.message);}
     );
@@ -127,4 +134,23 @@ export class AddProductComponent {
     button.click();
   }
 
-}
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      // this.imageService.uploadImage(this.selectedFile.file).subscribe(
+      //   (res) => {
+      //
+      //   },
+      //   (err) => {
+      //
+      //   })
+    });
+
+    reader.readAsDataURL(file);
+  }
+  }

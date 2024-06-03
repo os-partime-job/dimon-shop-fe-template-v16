@@ -70,4 +70,8 @@ export class MyMiniCartComponent implements OnInit{
     return this.numberFormat.convertNumber(number);
   }
 
+  goToCart() {
+    const returnUrl = this.route.snapshot.queryParams['/cart'] || '/cart';
+    this.router.navigateByUrl(returnUrl).then(r => {});
+  }
 }

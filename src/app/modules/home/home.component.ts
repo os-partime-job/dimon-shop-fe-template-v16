@@ -42,12 +42,12 @@ export class HomeComponent implements OnInit{
 
   redirectLogin() {
     const returnUrl = this.route.snapshot.queryParams['/login-v3'] || '/login-v3';
-    this.router.navigateByUrl(returnUrl);
+    this.router.navigateByUrl(returnUrl).then(r =>{});
 
   }
   redirectProfile() {
     const returnUrl = this.route.snapshot.queryParams['/user-profile'] || '/user-profile';
-    this.router.navigateByUrl(returnUrl);
+    this.router.navigateByUrl(returnUrl).then(r =>{});
 
   }
   convertNumber(number){
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit{
   goToProductDetail(id:number) {
     console.log(id);
     const returnUrl = this.route.snapshot.queryParams[`/ecommerce?id=${id}`] || `/ecommerce?id=${id}`;
-    this.router.navigateByUrl(returnUrl);
+    this.router.navigateByUrl(returnUrl).then(r =>{});
   }
 
   getProducts() {
