@@ -6,6 +6,7 @@ import { HelperService } from "../service/helper.service";
 import { ProductService } from "../service/product.service";
 import { StorageService } from "../service/storage.service";
 import { Router } from '@angular/router';
+import {ToastrService} from "ngx-toastr";
 class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
@@ -22,12 +23,18 @@ export class AddProductComponent {
   public editProduct!: any;
   public deleteProduct!: any;
   selectedFile: ImageSnippet;
+  public jewelryTypes : any[] = [];
 
-  constructor(private helperService: HelperService,private ProductService: ProductService,private storageService: StorageService,
-              private router: Router) { }
+  constructor(private helperService: HelperService,
+              private ProductService: ProductService,
+              private storageService: StorageService,
+              private router: Router,
+              private toastrService: ToastrService) {
+  }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getProducts();
+    this.getJewelryTypes();
     throw new Error('Method not implemented.');
   }
   public getProducts(): void{
@@ -46,18 +53,28 @@ export class AddProductComponent {
     );
   }
   public onAddProduct(addForm: NgForm): void {
-    document.getElementById('add-Product-form')!.click();
-    this.ProductService.addProduct(addForm.value).subscribe(
-      (response: ProductDTO) => {
-        console.log(response);
-        this.getProducts();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
-    );
+    const formData: FormData = new FormData();
+    if(this.selectedFile) {
+      formData.append('image',this.selectedFile.file);
+      formData.append('request',new Blob([JSON.stringify(addForm.value)], {
+        type: 'application/json',
+      }));
+      document.getElementById('add-Product-form')!.click();
+      this.ProductService.addProduct(formData).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.getProducts();
+          addForm.reset();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+          addForm.reset();
+          this.selectedFile.file = null;
+        }
+      );
+    } else {
+      this.toastrService.error(" Không được để trống ảnh");
+    }
   }
   public logoutPage():void{
     this.storageService.clean();
@@ -65,19 +82,29 @@ export class AddProductComponent {
 
   }
 
-  public onUpdateProduct(Product: ProductDTO): void {
-    this.ProductService.updateProduct(Product).subscribe(
-      (response: ProductDTO) => {
-        console.log(response);
-        this.getProducts();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  public onUpdateProduct(product: any): void {
+    const formData: FormData = new FormData();
+    if(this.selectedFile != undefined) {
+      formData.append('image',this.selectedFile?.file!=undefined ?this.selectedFile.file:null);
+    }
+    console.log(product);
+    console.log(new Blob([JSON.stringify(product.value)]));
+      formData.append('request',new Blob([JSON.stringify(product)], {
+        type: 'application/json',
+      }));
+      this.ProductService.updateProduct(formData).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.getProducts();
+          this.selectedFile.file = null;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
   }
 
-  public onDeleteEmloyee(ProductId: any): void {
+  public onDeleteProduct(ProductId: any): void {
     if(ProductId !== undefined){
       ProductId = Number(ProductId);
       this.ProductService.deleteProduct(ProductId).subscribe(
@@ -153,4 +180,14 @@ export class AddProductComponent {
 
     reader.readAsDataURL(file);
   }
+
+  private getJewelryTypes() {
+    this.ProductService.getJewelryType().subscribe((res) =>{
+      this.jewelryTypes = [...res.data];
+      console.log(this.jewelryTypes);
+    },error => {
+      this.toastrService.error("Error get Type")
+    })
+
   }
+}
