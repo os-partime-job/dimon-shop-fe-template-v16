@@ -36,7 +36,7 @@ export class MyMiniCartComponent implements OnInit{
   }
   getProductCart() {
     const request = {
-      customer_id : localStorage.getItem("user")
+      customer_id : 1
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
       // this.lisProductsCart = res?.data;
@@ -56,7 +56,7 @@ export class MyMiniCartComponent implements OnInit{
       return;
     }
     const request = {
-      jewelry_id : product?.id_jewelry,
+      jewelry_id : product?.jewelry_id,
       quantity : quantity
     }
     this.cartService.updateProductToCard(request).subscribe((res) =>{

@@ -76,7 +76,7 @@ export class HomePageComponent {
   }
   getProductCart() {
     const request = {
-      customer_id : localStorage.getItem("user")
+      customer_id : 1
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
