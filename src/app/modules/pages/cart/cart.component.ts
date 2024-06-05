@@ -85,4 +85,20 @@ export class CartComponent implements OnInit{
     return this.numberFormat.convertNumber(number);
   }
 
+  deleteProductCart(product:any) {
+    if(!this.isLoginUser) {
+      this.toastrService.error("Bạn phải đăng nhập trước");
+      return;
+    }
+    const request = {
+      cart_id : product?.id,
+    }
+    this.cartService.removeCartItem(request).subscribe((res) =>{
+      this.toastrService.success("Delete product success");
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Update sản phầm thất bại");
+    });
+  }
+
 }

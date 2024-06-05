@@ -78,13 +78,8 @@ export class CartService {
     })
     return grandTotal;
   }
-  removeCartItem(product: any){
-    this.cartItemList.map((a:any, index:any)=>{
-      if(product.id=== a.id){
-        this.cartItemList.splice(index,1);
-      }
-    })
-    this.productList.next(this.cartItemList);
+  removeCartItem(request: any) :Observable<any>{
+    return this.http.post<any[]>(`${environment.apiUrl}/cart/delete`,request,this.httpOptions);
   }
   removeAllCart(){
     this.cartItemList = []

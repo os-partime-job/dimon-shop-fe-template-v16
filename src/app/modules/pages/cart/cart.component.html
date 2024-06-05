@@ -76,7 +76,7 @@
                 <td><div class="custom-control custom-checkbox" style="text-align: center;">
                   <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">
                   <label for="{{item.id}}" class="custom-control-label">select</label>
-                  <a href="javascript:;" class="remove-btn">
+                  <a (click)="deleteProductCart(item)" class="remove-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"
                          focusable="false" role="presentation" class="icon icon-remove">
                       <path

@@ -65,6 +65,21 @@ export class MyMiniCartComponent implements OnInit{
       this.toastrService.error("Update sản phầm thất bại");
     });
   }
+  deleteProductCart(product:any) {
+    if(!this.isLoginUser) {
+      this.toastrService.error("Bạn phải đăng nhập trước");
+      return;
+    }
+    const request = {
+      cart_id : product?.id,
+    }
+    this.cartService.removeCartItem(request).subscribe((res) =>{
+      this.toastrService.success("Delete product success");
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Update sản phầm thất bại");
+    });
+  }
 
   convertNumber(number){
     return this.numberFormat.convertNumber(number);
