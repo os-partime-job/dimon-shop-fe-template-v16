@@ -162,6 +162,7 @@
                   <li><a *ngIf="!isLoginUser" href="/my-login">log In</a></li>
                   <li><a href="/register-page">Create Account</a></li>
                   <li><a href="/wish-list">wishlist</a></li>
+                  <li><a *ngIf="isLoginUser" href="/my-account">Profile</a></li>
                   <li><a *ngIf="isLoginUser" (click)="logOut()">logOut</a></li>
                 </ul>
               </div>
