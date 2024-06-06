@@ -95,7 +95,29 @@
         </div>
         <div class="col-lg-3 col-12">
           <div class="cart-summery">
-            <button class="btn checkout-btn" (click)="addProductToOrder()">Add to Order</button>
+            <ul>
+              <li>
+                <span class="cart-sum-left">1 item</span>
+                <span class="cart-sum-right">$48.00</span>
+              </li>
+              <li>
+                <span class="cart-sum-left">Shipping</span>
+                <span class="cart-sum-right">$7.00</span>
+              </li>
+              <li>
+                <span class="cart-sum-left">Total (tax excl.)</span>
+                <span class="cart-sum-right"> $55.00</span>
+              </li>
+              <li>
+                <span class="cart-sum-left">Total (tax incl.)</span>
+                <span class="cart-sum-right"> $55.00</span>
+              </li>
+              <li>
+                <span class="cart-sum-left">Taxes: </span>
+                <span class="cart-sum-right"> $0.00</span>
+              </li>
+            </ul>
+            <button class="btn checkout-btn">Proceed to checkout</button>
           </div>
         </div>
       </div>
@@ -111,3 +133,4 @@
 <app-my-mini-cart></app-my-mini-cart>
 <!--cart popup ends here-->
 <!--scripts start here-->
+

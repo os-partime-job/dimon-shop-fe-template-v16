@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
+import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {ToastrService} from "ngx-toastr";
 import {NumberService} from "../../service/number.service";
 import {AccountService} from "../../auth/services/account.service";
 import {CartService} from "../../service/cart.service";
-import {Subscription} from "rxjs";
 import {OrderService} from "../../service/order.service";
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css']
 })
-export class CartComponent implements OnInit{
+export class OrderListComponent {
   isSelectAll:boolean = false;
   lisProductsCart : any[];
   subscription: Subscription;
@@ -113,8 +113,6 @@ export class CartComponent implements OnInit{
     const request = {
       cart_ids : idsCart
     }
-    console.log(listSelectCart);
-    console.log(idsCart);
     this.orderService.addOrder(request).subscribe((res) =>{
       this.toastrService.success("Create Order success");
     }, error => {

@@ -32,6 +32,7 @@ import {RegisterPageComponent} from "./modules/pages/register-page/register-page
 import {WishListComponent} from "./modules/pages/wish-list/wish-list.component";
 import {ResetPasswordComponent} from "./modules/pages/reset-password/reset-password.component";
 import {ForgetPasswordComponent} from "./modules/pages/forget-password/forget-password.component";
+import {OrderListComponent} from "./modules/pages/order-list/order-list.component";
 
 const routes: Routes = [
   {
@@ -408,6 +409,13 @@ const routes: Routes = [
     component: ForgetPasswordComponent,
     data: {
       title: 'Forget Password Page'
+    }
+  },
+  {
+    path: 'order-list',
+    component: OrderListComponent,
+    data: {
+      title: 'List Order Page'
     }
   },
   {path: '**', redirectTo: 'dashboard'}
