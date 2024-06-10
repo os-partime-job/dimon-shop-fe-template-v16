@@ -13,6 +13,7 @@ export class ProductComponent {
   @Input() productId = 1;
   product:any;
   totalProduct =1;
+  listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
 
   constructor(private numberFormat: NumberService,
               private productService: ProductService,

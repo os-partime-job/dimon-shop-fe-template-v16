@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 })
 export class OrderService{
   httpOptions: any;
+  httpOptions2: any;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private http: HttpClient,) {
@@ -21,11 +22,23 @@ export class OrderService{
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
 
     };
+    this.httpOptions2 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('user')!)?.accessToken}`,
+      }),
+      "Access-Control-Allow-Origin": `${environment.apiPayment}`,
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+
+    };
   }
   addOrder(request: any):Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/order/add_order`,request,this.httpOptions);
   }
   getAllOrder(request: any):Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/order/list`,request,this.httpOptions);
+    return this.http.post<any[]>(`${environment.apiUrl}/order/list`,request,this.httpOptions);
+  }
+  getCallPayment(request: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiPayment}/v1/payment/create`,request,this.httpOptions2);
   }
 }

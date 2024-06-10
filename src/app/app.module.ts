@@ -52,6 +52,7 @@ import {CartComponent} from "./modules/pages/cart/cart.component";
 import {FormsModule} from "@angular/forms";
 import { OrderInfoComponent } from './modules/pages/order-info/order-info.component';
 import { OrderListComponent } from './modules/pages/order-list/order-list.component';
+import { BillResultComponent } from './modules/pages/bill-result/bill-result.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { OrderListComponent } from './modules/pages/order-list/order-list.compon
     ForgetPasswordComponent,
     OrderInfoComponent,
     OrderListComponent,
+    BillResultComponent,
   ],
   imports: [
     BrowserModule,

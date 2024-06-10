@@ -46,7 +46,6 @@ export class AddProductComponent {
     }
     this.ProductService.getProducts(request).subscribe(
       (response:any) =>{
-        console.log(response);
         this.Products = response.data;
       },
       (error: HttpErrorResponse)=>{alert(error.message);}
@@ -62,7 +61,7 @@ export class AddProductComponent {
       document.getElementById('add-Product-form')!.click();
       this.ProductService.addProduct(formData).subscribe(
         (response: any) => {
-          console.log(response);
+          this.toastrService.success("Add product success")
           this.getProducts();
           addForm.reset();
         },
@@ -87,14 +86,12 @@ export class AddProductComponent {
     if(this.selectedFile != undefined) {
       formData.append('image',this.selectedFile?.file!=undefined ?this.selectedFile.file:null);
     }
-    console.log(product);
-    console.log(new Blob([JSON.stringify(product.value)]));
       formData.append('request',new Blob([JSON.stringify(product)], {
         type: 'application/json',
       }));
       this.ProductService.updateProduct(formData).subscribe(
         (response: any) => {
-          console.log(response);
+          this.toastrService.success("Update product success")
           this.getProducts();
           this.selectedFile.file = null;
         },

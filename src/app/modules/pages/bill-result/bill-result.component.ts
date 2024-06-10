@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,11 +8,11 @@ import {CartService} from "../../service/cart.service";
 import {OrderService} from "../../service/order.service";
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-bill-result',
+  templateUrl: './bill-result.component.html',
+  styleUrls: ['./bill-result.component.css']
 })
-export class OrderListComponent {
+export class BillResultComponent {
   isSelectAll:boolean = false;
   orders : any[];
   totalProduct: any;
@@ -45,18 +44,17 @@ export class OrderListComponent {
   }
   callPayment(order: any) {
     const request = {
-      orderId:'aklsdkjkjkljlkjlk1',//order.uniqueOrderId
-      requestId:'aklsdkjkjkljlkjlk', //order.id
+      orderId:order.uniqueOrderId,
+      requestId:order.id,
       amount:order.totalPrice,
       orderInfo:order.createdAt,
       metaData:'',
       payType:'BANK'
     }
     this.orderService.getCallPayment(request).subscribe((res) =>{
-      window.open(res.data.paymentUrl,'_self');
+      window.open(res.data.paymentUrl);
 
     }, error => {
-      window.open('https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=2946288700&vnp_BankCode=VNBANK&vnp_Command=pay&vnp_CreateDate=20240610102656&vnp_CurrCode=VND&vnp_ExpireDate=20240610104156&vnp_IpAddr=172.17.0.4&vnp_Locale=vn&vnp_OrderInfo=2024-06-08&vnp_OrderType=other&vnp_ReturnUrl=http%3A%2F%2F178.128.111.191%3A8091%2Fcallback%3ForderId%3D00QZ7GtvzLmBEHuTkCsWsD&vnp_TmnCode=09P8ICVA&vnp_TxnRef=89111463929724280794464514758273983962725989032362&vnp_Version=2.1.0&vnp_SecureHash=0078ef8faf6d9598322c00e80309ac8f5d19f70c13c2d690776d58d51b11a1274c15d63a684422ae71e5b5e7fc171261e1c1bebe6efe877ff9efb3d11450c4d8','_self');
       this.toastrService.error("Error call to Check out VNPay");
 
     });
@@ -64,4 +62,5 @@ export class OrderListComponent {
   convertNumber(number){
     return this.numberFormat.convertNumber(number);
   }
+
 }
