@@ -39,7 +39,7 @@ export class AddProductComponent {
   }
   public getProducts(): void{
     let request = {
-      jewelry_type_id:1,
+      jewelry_type_id:'',
       limit:1000,
       offset:0,
       requestId:''
@@ -84,6 +84,7 @@ export class AddProductComponent {
 
   public onUpdateProduct(product: any): void {
     const formData: FormData = new FormData();
+    console.log(this.selectedFile);
     if(this.selectedFile != undefined) {
       formData.append('image',this.selectedFile?.file!=undefined ?this.selectedFile.file:null);
     }
@@ -160,6 +161,7 @@ export class AddProductComponent {
   }
 
   processFile(imageInput: any) {
+    console.log(imageInput.files[0]);
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 

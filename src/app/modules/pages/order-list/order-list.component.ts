@@ -45,8 +45,8 @@ export class OrderListComponent {
   }
   callPayment(order: any) {
     const request = {
-      orderId:'aklsdkjkjkljlkjlk11111',//order.uniqueOrderId
-      requestId:'aklsdkjkjkljlkjlk11111', //order.id
+      orderId:'aklsdkjkjkljlkjlk1111111111',//order.uniqueOrderId
+      requestId:'aklsdkjkjkljlkjlk11111111', //order.id
       amount:order.totalPrice,
       orderInfo:order.createdAt,
       metaData:'',
