@@ -15,6 +15,8 @@ import {CartService} from "../../service/cart.service";
 export class HomePageComponent {
   isLoginUser:boolean = false;
   listProduct:any[]
+  rings: any[]
+  famousRing : any
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -67,13 +69,29 @@ export class HomePageComponent {
       offset:0,
       requestId:''
     }
+    let requestOfRings = {
+      jewelry_type_id:6,
+      limit:2,
+      offset:0,
+      requestId:''
+    }
     this.productService.getProducts(request).subscribe((res) => {
       this.listProduct = res.data;
     }, error => {
-
-
+      this.toastrService.error("Error get famous products");
     });
-  }
+    this.productService.getProducts(requestOfRings).subscribe((res) => {
+      this.rings = res.data;
+    }, error => {
+      this.toastrService.error("Error get famous rings");
+    });
+    this.productService.getProductDetail(62).subscribe((res) => {
+      this.famousRing = res.data;
+    }, error => {
+      this.toastrService.error("Error get famous ring");
+    })
+
+      }
   getProductCart() {
     const request = {
       customer_id : 1

@@ -61,6 +61,7 @@ export class AddProductComponent {
       document.getElementById('add-Product-form')!.click();
       this.ProductService.addProduct(formData).subscribe(
         (response: any) => {
+          console.log(response);
           this.toastrService.success("Add product success")
           this.getProducts();
           addForm.reset();

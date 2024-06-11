@@ -18,7 +18,7 @@ export class ProductService {
 
 
   constructor(private http: HttpClient, private storageService : StorageService) {
-    this.token = storageService.getUser().access_token;
+    this.token = JSON.parse(localStorage.getItem('user')!)?.accessToken;
     console.log(this.token)
     this.httpOptions = {
     headers: new HttpHeaders({
@@ -39,26 +39,13 @@ export class ProductService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')!)?.accessToken}`,
     });
-    const req = new HttpRequest('POST', `${this.apiUrl}/jewelry/create`, request,{
-      headers: headers,
-      reportProgress: true,
-      responseType: 'json'
-    });
-
-    return this.http.request(req);
-    // return this.http.post<any>(`${this.apiUrl}/jewelry/create`,Product,this.httpOptions);
+    return this.http.post(`${this.apiUrl}/jewelry/create`,request,{headers})
   }
   public updateProduct(request : any): Observable<any>{
     const headers = new HttpHeaders({
       Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')!)?.accessToken}`,
     });
-    const req = new HttpRequest('POST', `${this.apiUrl}/jewelry/update`, request,{
-      headers: headers,
-      reportProgress: true,
-      responseType: 'json'
-    });
-
-    return this.http.request(req);
+    return this.http.post<any>(`${this.apiUrl}/jewelry/update`, request,{headers});
   }
   public deleteProduct(ProductId : number): Observable<any>{
     return this.http.delete<void>(`${this.apiUrl}/jewelry/delete/${ProductId}`,this.httpOptions);

@@ -19,7 +19,7 @@
                   Ipsum has been the industry's standard dummy.Lorem Ipsum is simply dummy text of
                   the printing and typesetting industry.
                 </p>
-                <a href="product-list.html" class="home-btn btn">
+                <a href="/product-list" class="home-btn btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -68,7 +68,7 @@
                   Ipsum has been the industry's standard dummy.Lorem Ipsum is simply dummy text of
                   the printing and typesetting industry.
                 </p>
-                <a href="product-list.html" class="home-btn btn">
+                <a href="/product-list" class="home-btn btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -117,7 +117,7 @@
                   Ipsum has been the industry's standard dummy.Lorem Ipsum is simply dummy text of
                   the printing and typesetting industry.
                 </p>
-                <a href="product-list.html" class="home-btn btn">
+                <a href="/product-list" class="home-btn btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -173,7 +173,7 @@
                     </a>
                   </h3>
                 </div>
-                <a href="product-list.html" class="btn">
+                <a href="/product-list" class="btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -200,7 +200,7 @@
                     </a>
                   </h3>
                 </div>
-                <a href="product-list.html" class=" btn">
+                <a href="/product-list" class=" btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -227,7 +227,7 @@
                     </a>
                   </h3>
                 </div>
-                <a href="product-list.html" class="btn">
+                <a href="/product-list" class="btn">
                   Check more products
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -328,7 +328,7 @@
                 printing
                 and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
               </p>
-              <a href="product-list.html" class="btn">
+              <a href="/product-list" class="btn">
                 Check more products
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"
                      fill="none">
@@ -342,14 +342,14 @@
               </a>
             </div>
           </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div *ngFor="let ring of rings" class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="product-card">
               <div class="card-top">
                 <div class="card-title">
-                  <span>RINGS</span>
+                  <span>{{ring.jewelry_type}}</span>
                   <h3>
-                    <a href="product.html">
-                      Goldern Ring
+                    <a href="/product?id={{ring.id_jewelry}}">
+                      {{ring.jewelry_title}}
                     </a>
                   </h3>
                 </div>
@@ -363,107 +363,16 @@
                 </a>
               </div>
               <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/product-card1.png" class="default-img">
+                <a href="/product?id={{ring.id_jewelry}}" tabindex="0">
+                  <img src="{{ring.url}}" class="default-img">
                   <img src="assets/images/placholder.png" class="hover-img">
                 </a>
               </div>
               <div class="card-bottom">
                 <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
+                  <ins>{{convertNumber(ring.price)}} <span class="currency-type">VNĐ</span></ins>
                 </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size1" id="s1" checked>
-                      <label for="s1">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size1" id="m1">
-                      <label for="m1">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size1" id="x1">
-                      <label for="x1">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size1" id="xl1">
-                      <label for="xl1">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
-                  Add to cart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="product-card">
-              <div class="card-top">
-                <div class="card-title">
-                  <span>RINGS</span>
-                  <h3>
-                    <a href="product.html">
-                      Goldern Ring
-                    </a>
-                  </h3>
-                </div>
-                <a href="#" class="heart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                       viewBox="0 0 18 18" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M15.1335 2.95108C16.73 4.16664 16.9557 6.44579 15.6274 7.93897L8.99983 15.3894L2.37233 7.93977C1.04381 6.44646 1.26946 4.167 2.86616 2.95128C4.50032 1.70704 6.87275 2.10393 7.99225 3.80885L8.36782 4.38082C8.59267 4.72325 9.05847 4.82238 9.40821 4.60224C9.51777 4.53328 9.60294 4.44117 9.66134 4.33666L10.0076 3.80914C11.1268 2.10394 13.4993 1.70679 15.1335 2.95108ZM8.99998 2.653C7.31724 0.526225 4.15516 0.102335 1.94184 1.78754C-0.33726 3.52284 -0.659353 6.77651 1.23696 8.90805L8.4334 16.9972C8.7065 17.3041 9.18204 17.3362 9.49557 17.0688C9.53631 17.0341 9.57231 16.996 9.60351 16.9553L16.7628 8.90721C18.6589 6.77579 18.3367 3.52246 16.0579 1.78734C13.8446 0.102142 10.6825 0.526185 8.99998 2.653Z"
-                          fill="#173334" />
-                  </svg>
-                </a>
-              </div>
-              <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/product-card2.png" class="default-img">
-                  <img src="assets/images/placholder.png" class="hover-img">
-                </a>
-              </div>
-              <div class="card-bottom">
-                <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
-                </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size2" id="s2" checked>
-                      <label for="s2">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size2" id="m2">
-                      <label for="m2">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size2" id="x2">
-                      <label for="x2">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size2" id="xl2">
-                      <label for="xl2">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
+                <a (click)="addProductCart(ring)" class="btn">
                   Add to cart
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -489,7 +398,7 @@
     <div class="container">
       <div class="card-slider-title sec-head d-flex justify-content-between align-items-end">
         <h2>Jewellery <br> & diamonds</h2>
-        <a href="product-list.html" class=" btn">
+        <a href="/product-list" class=" btn">
           Check more products
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -848,10 +757,10 @@
           <div class="product-card">
             <div class="card-top">
               <div class="card-title">
-                <span>RINGS</span>
+                <span>{{product.jewelry_type}}</span>
                 <h3>
-                  <a href="/product?id={{product.id_jewelry}}">
-                    Goldern Ring
+                  <a href="/product?id={{product.id_jewelry}}" style="font-size: 70%">
+                    {{product.jewelry_title}}
                   </a>
                 </h3>
               </div>
@@ -866,37 +775,37 @@
             </div>
             <div class="product-card-image">
               <a href="/product?id={{product.id_jewelry}}" tabindex="0">
-                <img src="assets/images/product-card1.png" class="default-img">
+                <img src="{{product.url}}" class="default-img">
                 <img src="assets/images/placholder.png" class="hover-img">
               </a>
             </div>
             <div class="card-bottom">
               <div class="price">
-                <ins>34.69 <span class="currency-type">USD</span></ins>
+                <ins>{{convertNumber(product.price)}} <span class="currency-type">VNĐ</span></ins>
               </div>
-              <div class="product-size-div">
-                <label>
-                  Size:
-                </label>
-                <ul class="product-size">
-                  <li class="size-list">
-                    <input type="radio" name="pro-size11" id="s11" checked>
-                    <label for="s11">s</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" name="pro-size11" id="m11">
-                    <label for="m11">m</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" name="pro-size11" id="x11">
-                    <label for="x11">x</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" name="pro-size11" id="xl11">
-                    <label for="xl11">xl</label>
-                  </li>
-                </ul>
-              </div>
+<!--              <div class="product-size-div">-->
+<!--                <label>-->
+<!--                  Size:-->
+<!--                </label>-->
+<!--                <ul class="product-size">-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" name="pro-size11" id="s11" checked>-->
+<!--                    <label for="s11">s</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" name="pro-size11" id="m11">-->
+<!--                    <label for="m11">m</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" name="pro-size11" id="x11">-->
+<!--                    <label for="x11">x</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" name="pro-size11" id="xl11">-->
+<!--                    <label for="xl11">xl</label>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </div>-->
               <a (click)="addProductCart(product)" class="btn">
                 Add to cart
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
@@ -924,7 +833,7 @@
                 printing and typesetting industry. Lorem Ipsum has been the industry's standard
                 dummy.
               </p>
-              <a href="product-list.html" class=" btn">
+              <a href="/product-list" class=" btn">
                 Check more products
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"
                      fill="none">
@@ -951,7 +860,7 @@
     <div class=" container">
       <div class=" sec-head d-flex justify-content-between align-items-end">
         <h2>Jewellery <br> & diamonds</h2>
-        <a href="product-list.html" class=" btn">
+        <a href="/product-list" class=" btn">
           Check more products
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -966,7 +875,7 @@
       <div class="pro-ring-main">
         <div class="pro-ring-div">
           <div class="product-card-image">
-            <a href="product.html">
+            <a href="/product?id={{famousRing.id_jewelry}}">
               <img src="assets/images/ring-slider.png" class="default-img">
               <img src="assets/images/placholder.png" class="hover-img">
             </a>
@@ -975,42 +884,19 @@
             <div class="product-card">
               <div class="card-top">
                 <div class="card-title">
-                  <span>RINGS</span>
+                  <span>{{famousRing.jewelry_type}}</span>
                   <h3>
-                    <a href="product.html">
-                      Goldern Ring
+                    <a href="/product?id={{famousRing.id_jewelry}}">
+                      {{famousRing.jewelry_title}}
                     </a>
                   </h3>
                 </div>
               </div>
               <div class="card-bottom">
                 <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
+                  <ins>{{convertNumber(famousRing.price)}} <span class="currency-type">VNĐ</span></ins>
                 </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size8" id="s8" checked>
-                      <label for="s8">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size8" id="m8">
-                      <label for="m8">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size8" id="x8">
-                      <label for="x8">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size8" id="xl8">
-                      <label for="xl8">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
+                <a (click)="addProductCart(famousRing)" class="btn">
                   Add to cart
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -1028,7 +914,7 @@
         </div>
         <div class="pro-ring-div">
           <div class="product-card-image">
-            <a href="product.html">
+            <a href="/product?id={{famousRing.id_jewelry}}">
               <img src="assets/images/ring-slider2.png" class="default-img">
               <img src="assets/images/placholder.png" class="hover-img">
             </a>
@@ -1037,42 +923,19 @@
             <div class="product-card">
               <div class="card-top">
                 <div class="card-title">
-                  <span>RINGS</span>
+                  <span>{{famousRing.jewelry_type}}</span>
                   <h3>
-                    <a href="product.html">
-                      Goldern Ring
+                    <a href="/product?id={{famousRing.id_jewelry}}">
+                      {{famousRing.jewelry_title}}
                     </a>
                   </h3>
                 </div>
               </div>
               <div class="card-bottom">
                 <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
+                  <ins>{{convertNumber(famousRing.price)}} <span class="currency-type">VNĐ</span></ins>
                 </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size9" id="s9" checked>
-                      <label for="s9">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size9" id="m9">
-                      <label for="m9">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size9" id="x9">
-                      <label for="x9">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size9" id="xl9">
-                      <label for="xl9">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
+                <a (click)="addProductCart(famousRing)" class="btn">
                   Add to cart
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -1090,7 +953,7 @@
         </div>
         <div class="pro-ring-div">
           <div class="product-card-image">
-            <a href="product.html" >
+            <a href="/product?id={{famousRing.id_jewelry}}">
               <img src="assets/images/ring-slider.png" class="default-img">
               <img src="assets/images/placholder.png" class="hover-img">
             </a>
@@ -1099,42 +962,19 @@
             <div class="product-card">
               <div class="card-top">
                 <div class="card-title">
-                  <span>RINGS</span>
+                  <span>{{famousRing.jewelry_type}}</span>
                   <h3>
-                    <a href="product.html">
-                      Goldern Ring
+                    <a href="/product?id={{famousRing.id_jewelry}}">
+                      {{famousRing.jewelry_title}}
                     </a>
                   </h3>
                 </div>
               </div>
               <div class="card-bottom">
                 <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
+                  <ins>{{convertNumber(famousRing.price)}} <span class="currency-type">VNĐ</span></ins>
                 </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size10" id="s10" checked>
-                      <label for="s10">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size10" id="m10">
-                      <label for="m10">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size10" id="x10">
-                      <label for="x10">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size10" id="xl10">
-                      <label for="xl10">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
+                <a (click)="addProductCart(famousRing)" class="btn">
                   Add to cart
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
                        viewBox="0 0 14 16" fill="none">
@@ -1153,468 +993,8 @@
       </div>
     </div>
   </section>
-  <div class="bg-style">
-    <section class="pro-card-sec padding-bottom">
-      <div class=" container">
-        <div class=" sec-head d-flex justify-content-between align-items-end">
-          <h2>Jewellery <br> & diamonds</h2>
-          <a href="product-list.html" class=" btn">
-            Check more products
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"
-                 fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                    fill="#F2DFCE" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                    fill="#F2DFCE" />
-            </svg>
-          </a>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="product-card">
-              <div class="card-top">
-                <div class="card-title">
-                  <span>RINGS</span>
-                  <h3>
-                    <a href="product.html">
-                      Goldern Ring
-                    </a>
-                  </h3>
-                </div>
-                <a href="#" class="heart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                       viewBox="0 0 18 18" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M15.1335 2.95108C16.73 4.16664 16.9557 6.44579 15.6274 7.93897L8.99983 15.3894L2.37233 7.93977C1.04381 6.44646 1.26946 4.167 2.86616 2.95128C4.50032 1.70704 6.87275 2.10393 7.99225 3.80885L8.36782 4.38082C8.59267 4.72325 9.05847 4.82238 9.40821 4.60224C9.51777 4.53328 9.60294 4.44117 9.66134 4.33666L10.0076 3.80914C11.1268 2.10394 13.4993 1.70679 15.1335 2.95108ZM8.99998 2.653C7.31724 0.526225 4.15516 0.102335 1.94184 1.78754C-0.33726 3.52284 -0.659353 6.77651 1.23696 8.90805L8.4334 16.9972C8.7065 17.3041 9.18204 17.3362 9.49557 17.0688C9.53631 17.0341 9.57231 16.996 9.60351 16.9553L16.7628 8.90721C18.6589 6.77579 18.3367 3.52246 16.0579 1.78734C13.8446 0.102142 10.6825 0.526185 8.99998 2.653Z"
-                          fill="#173334" />
-                  </svg>
-                </a>
-              </div>
-              <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/product-card1.png" class="default-img">
-                  <img src="assets/images/placholder.png" class="hover-img">
-                </a>
-              </div>
-              <div class="card-bottom">
-                <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
-                </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size11" id="s11" checked>
-                      <label for="s11">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size11" id="m11">
-                      <label for="m11">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size11" id="x11">
-                      <label for="x11">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size11" id="xl11">
-                      <label for="xl11">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
-                  Add to cart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="product-card">
-              <div class="card-top">
-                <div class="card-title">
-                  <span>RINGS</span>
-                  <h3>
-                    <a href="product.html">
-                      Goldern Ring
-                    </a>
-                  </h3>
-                </div>
-                <a href="#" class="heart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                       viewBox="0 0 18 18" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M15.1335 2.95108C16.73 4.16664 16.9557 6.44579 15.6274 7.93897L8.99983 15.3894L2.37233 7.93977C1.04381 6.44646 1.26946 4.167 2.86616 2.95128C4.50032 1.70704 6.87275 2.10393 7.99225 3.80885L8.36782 4.38082C8.59267 4.72325 9.05847 4.82238 9.40821 4.60224C9.51777 4.53328 9.60294 4.44117 9.66134 4.33666L10.0076 3.80914C11.1268 2.10394 13.4993 1.70679 15.1335 2.95108ZM8.99998 2.653C7.31724 0.526225 4.15516 0.102335 1.94184 1.78754C-0.33726 3.52284 -0.659353 6.77651 1.23696 8.90805L8.4334 16.9972C8.7065 17.3041 9.18204 17.3362 9.49557 17.0688C9.53631 17.0341 9.57231 16.996 9.60351 16.9553L16.7628 8.90721C18.6589 6.77579 18.3367 3.52246 16.0579 1.78734C13.8446 0.102142 10.6825 0.526185 8.99998 2.653Z"
-                          fill="#173334" />
-                  </svg>
-                </a>
-              </div>
-              <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/product-card2.png" class="default-img">
-                  <img src="assets/images/placholder.png" class="hover-img">
-                </a>
-              </div>
-              <div class="card-bottom">
-                <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
-                </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size12" id="s12" checked>
-                      <label for="s12">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size12" id="m12">
-                      <label for="m12">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size12" id="x12">
-                      <label for="x12">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size12" id="xl12">
-                      <label for="xl12">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
-                  Add to cart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="product-card">
-              <div class="card-top">
-                <div class="card-title">
-                  <span>RINGS</span>
-                  <h3>
-                    <a href="product.html">
-                      Goldern Ring
-                    </a>
-                  </h3>
-                </div>
-                <a href="#" class="heart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                       viewBox="0 0 18 18" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M15.1335 2.95108C16.73 4.16664 16.9557 6.44579 15.6274 7.93897L8.99983 15.3894L2.37233 7.93977C1.04381 6.44646 1.26946 4.167 2.86616 2.95128C4.50032 1.70704 6.87275 2.10393 7.99225 3.80885L8.36782 4.38082C8.59267 4.72325 9.05847 4.82238 9.40821 4.60224C9.51777 4.53328 9.60294 4.44117 9.66134 4.33666L10.0076 3.80914C11.1268 2.10394 13.4993 1.70679 15.1335 2.95108ZM8.99998 2.653C7.31724 0.526225 4.15516 0.102335 1.94184 1.78754C-0.33726 3.52284 -0.659353 6.77651 1.23696 8.90805L8.4334 16.9972C8.7065 17.3041 9.18204 17.3362 9.49557 17.0688C9.53631 17.0341 9.57231 16.996 9.60351 16.9553L16.7628 8.90721C18.6589 6.77579 18.3367 3.52246 16.0579 1.78734C13.8446 0.102142 10.6825 0.526185 8.99998 2.653Z"
-                          fill="#173334" />
-                  </svg>
-                </a>
-              </div>
-              <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/cart1.png" class="default-img">
-                  <img src="assets/images/placholder.png" class="hover-img">
-                </a>
-              </div>
-              <div class="card-bottom">
-                <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
-                </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size13" id="s13" checked>
-                      <label for="s13">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size13" id="m13">
-                      <label for="m13">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size13" id="x13">
-                      <label for="x13">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size13" id="xl13">
-                      <label for="xl13">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
-                  Add to cart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="product-card">
-              <div class="card-top">
-                <div class="card-title">
-                  <span>RINGS</span>
-                  <h3>
-                    <a href="product.html">
-                      Goldern Ring
-                    </a>
-                  </h3>
-                </div>
-                <a href="#" class="heart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                       viewBox="0 0 18 18" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M15.1335 2.95108C16.73 4.16664 16.9557 6.44579 15.6274 7.93897L8.99983 15.3894L2.37233 7.93977C1.04381 6.44646 1.26946 4.167 2.86616 2.95128C4.50032 1.70704 6.87275 2.10393 7.99225 3.80885L8.36782 4.38082C8.59267 4.72325 9.05847 4.82238 9.40821 4.60224C9.51777 4.53328 9.60294 4.44117 9.66134 4.33666L10.0076 3.80914C11.1268 2.10394 13.4993 1.70679 15.1335 2.95108ZM8.99998 2.653C7.31724 0.526225 4.15516 0.102335 1.94184 1.78754C-0.33726 3.52284 -0.659353 6.77651 1.23696 8.90805L8.4334 16.9972C8.7065 17.3041 9.18204 17.3362 9.49557 17.0688C9.53631 17.0341 9.57231 16.996 9.60351 16.9553L16.7628 8.90721C18.6589 6.77579 18.3367 3.52246 16.0579 1.78734C13.8446 0.102142 10.6825 0.526185 8.99998 2.653Z"
-                          fill="#173334" />
-                  </svg>
-                </a>
-              </div>
-              <div class="product-card-image">
-                <a href="product.html" tabindex="0">
-                  <img src="assets/images/cart1.png" class="default-img">
-                  <img src="assets/images/placholder.png" class="hover-img">
-                </a>
-              </div>
-              <div class="card-bottom">
-                <div class="price">
-                  <ins>34.69 <span class="currency-type">USD</span></ins>
-                </div>
-                <div class="product-size-div">
-                  <label>
-                    Size:
-                  </label>
-                  <ul class="product-size">
-                    <li class="size-list">
-                      <input type="radio" name="pro-size14" id="s14" checked>
-                      <label for="s14">s</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size14" id="m14">
-                      <label for="m14">m</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size14" id="x14">
-                      <label for="x14">x</label>
-                    </li>
-                    <li class="size-list">
-                      <input type="radio" name="pro-size14" id="xl14">
-                      <label for="xl14">xl</label>
-                    </li>
-                  </ul>
-                </div>
-                <a href="product.html" class="btn">
-                  Add to cart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="our-pro-shop-sec padding-bottom">
-      <div class=" container">
-        <div class="our-pro-shop-main">
-          <div class="section-title">
-            <h2>
-              Jewellery <br> & diamonds
-            </h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-              Ipsum has been the industry's standard dummy.Lorem Ipsum is simply dummy text of
-              the printing and typesetting industry.
-            </p>
-            <a href="product-list.html" class="home-btn btn">
-              Check more products
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"
-                   fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                      fill="#F2DFCE" />
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                      fill="#F2DFCE" />
-              </svg>
-            </a>
-          </div>
-          <div class="img-wrapper">
-            <img src="./assets/images/two-ring.png" alt="two-ring">
-            <div class="ring-label">
-              <span>RINGS</span>
-              <div>Golden Ring</div>
-              <ins>34,59 $</ins>
-              <a href="#">more</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="logo-slider">
-      <div class=" container">
-        <div class="main-title">
-          <h2>Partners</h2>
-        </div>
-        <div class="logo-slider-main">
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-          <div class="logo-slide-wrapper">
-            <a href="#">
-              <img src="./assets/images/logo-slider.png" alt="logo">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
   <div class="main-bottom">
     <img src="./assets/images/ring5.png" class="ring-img" alt="ring">
-    <section class=" card-sec padding-bottom">
-      <div class=" container">
-        <div class="row">
-          <div class="col-md-6 col-12 img-main-box">
-            <div class="section-title">
-              <h2>
-                Jewellery <br> & diamonds
-              </h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry's standard dummy.Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-              <a href="product-list.html" class="home-btn btn">
-                Check more products
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"
-                     fill="none">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                        fill="#F2DFCE" />
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                        fill="#F2DFCE" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6  col-12 img-main-box">
-            <div class="img-box">
-              <img src="./assets/images/card-img2.png" class="card-img" alt="img2">
-              <div class="inner-text">
-                <div class="top-title">
-                  <span>CATEGORIES</span>
-                  <h3>
-                    <a href="product.html">
-                      Necklace
-                    </a>
-                  </h3>
-                </div>
-                <a href="product-list.html" class=" btn">
-                  Check more products
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6  col-12 img-main-box">
-            <div class="img-box">
-              <img src="./assets/images/card-img3.png" class="card-img" alt="img2">
-              <div class="inner-text">
-                <div class="top-title">
-                  <span>CATEGORIES</span>
-                  <h3>
-                    <a href="product.html">
-                      Rings
-                    </a>
-                  </h3>
-                </div>
-                <a href="product-list.html" class="btn">
-                  Check more products
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16"
-                       viewBox="0 0 14 16" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.1258 5.12599H2.87416C2.04526 5.12599 1.38823 5.82536 1.43994 6.65265L1.79919 12.4008C1.84653 13.1581 2.47458 13.7481 3.23342 13.7481H10.7666C11.5254 13.7481 12.1535 13.1581 12.2008 12.4008L12.5601 6.65265C12.6118 5.82536 11.9547 5.12599 11.1258 5.12599ZM2.87416 3.68896C1.21635 3.68896 -0.0977 5.08771 0.00571155 6.74229L0.364968 12.4904C0.459638 14.0051 1.71574 15.1852 3.23342 15.1852H10.7666C12.2843 15.1852 13.5404 14.0051 13.635 12.4904L13.9943 6.74229C14.0977 5.08771 12.7836 3.68896 11.1258 3.68896H2.87416Z"
-                          fill="#F2DFCE" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M3.40723 4.4075C3.40723 2.42339 5.01567 0.814941 6.99979 0.814941C8.9839 0.814941 10.5923 2.42339 10.5923 4.4075V5.84453C10.5923 6.24135 10.2707 6.56304 9.87384 6.56304C9.47701 6.56304 9.15532 6.24135 9.15532 5.84453V4.4075C9.15532 3.21703 8.19026 2.25197 6.99979 2.25197C5.80932 2.25197 4.84425 3.21703 4.84425 4.4075V5.84453C4.84425 6.24135 4.52256 6.56304 4.12574 6.56304C3.72892 6.56304 3.40723 6.24135 3.40723 5.84453V4.4075Z"
-                          fill="#F2DFCE" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <section class="testimonials-sec padding-bottom">
       <div class="container">
         <div class="main-title">
@@ -1707,14 +1087,14 @@
         <div class="main-blog">
           <div class="blog-card">
             <div class="blog-card-image">
-              <a href="article.html">
+              <a href="/article">
                 <img src="assets/images/blog-card1.png" class="default-img">
               </a>
             </div>
             <div class="blog-card-content">
               <span>ARTICLES</span>
               <h3>
-                <a href="article.html">
+                <a href="/article">
                   Best bracelet and necklaces
                 </a>
               </h3>
@@ -1723,7 +1103,7 @@
                 Ipsum has been the industry's standard dummy.
               </p>
               <div class="blog-card-bottom">
-                <a href="article.html" class=" btn">
+                <a href="/article" class=" btn">
                   Read More
                 </a>
                 <span class="date">
@@ -1737,14 +1117,14 @@
           </div>
           <div class="blog-card">
             <div class="blog-card-image">
-              <a href="article.html">
+              <a href="/article">
                 <img src="assets/images/blog-card2.png" class="default-img">
               </a>
             </div>
             <div class="blog-card-content">
               <span>ARTICLES</span>
               <h3>
-                <a href="article.html">
+                <a href="/article">
                   Best bracelet and necklaces
                 </a>
               </h3>
@@ -1753,7 +1133,7 @@
                 Ipsum has been the industry's standard dummy.
               </p>
               <div class="blog-card-bottom">
-                <a href="article.html" class=" btn">
+                <a href="/article" class=" btn">
                   Read More
                 </a>
                 <span class="date">
@@ -1767,14 +1147,14 @@
           </div>
           <div class="blog-card">
             <div class="blog-card-image">
-              <a href="article.html">
+              <a href="/article">
                 <img src="assets/images/blog-card3.png" class="default-img">
               </a>
             </div>
             <div class="blog-card-content">
               <span>ARTICLES</span>
               <h3>
-                <a href="article.html">
+                <a href="/article">
                   Best bracelet and necklaces
                 </a>
               </h3>
@@ -1783,7 +1163,7 @@
                 Ipsum has been the industry's standard dummy.
               </p>
               <div class="blog-card-bottom">
-                <a href="article.html" class=" btn">
+                <a href="/article" class=" btn">
                   Read More
                 </a>
                 <span class="date">
@@ -1797,14 +1177,14 @@
           </div>
           <div class="blog-card">
             <div class="blog-card-image">
-              <a href="article.html">
+              <a href="/article">
                 <img src="assets/images/blog-card1.png" class="default-img">
               </a>
             </div>
             <div class="blog-card-content">
               <span>ARTICLES</span>
               <h3>
-                <a href="article.html">
+                <a href="/article">
                   Best bracelet and necklaces
                 </a>
               </h3>
@@ -1813,7 +1193,7 @@
                 Ipsum has been the industry's standard dummy.
               </p>
               <div class="blog-card-bottom">
-                <a href="article.html" class=" btn">
+                <a href="/article" class=" btn">
                   Read More
                 </a>
                 <span class="date">
@@ -1827,14 +1207,14 @@
           </div>
           <div class="blog-card">
             <div class="blog-card-image">
-              <a href="article.html">
+              <a href="/article">
                 <img src="assets/images/blog-card1.png" class="default-img">
               </a>
             </div>
             <div class="blog-card-content">
               <span>ARTICLES</span>
               <h3>
-                <a href="article.html">
+                <a href="/article">
                   Best bracelet and necklaces
                 </a>
               </h3>
@@ -1843,7 +1223,7 @@
                 Ipsum has been the industry's standard dummy.
               </p>
               <div class="blog-card-bottom">
-                <a href="article.html" class=" btn">
+                <a href="/article" class=" btn">
                   Read More
                 </a>
                 <span class="date">
