@@ -40,15 +40,11 @@
               <tr *ngFor = "let item of lisProductsCart">
                 <td data-label="Product">
                   <a href="/product?id={{item.id_jewelry}}">
-                    <img src="assets/images/cart1.png" />
+                    <img src="{{item.image_url}}" />
                   </a>
                 </td>
                 <td data-label="Name">
-                  <a href="/product?id={{item.id_jewelry}}">best jewellery collections</a>
-                  <div class="product-option">
-                    <dt>Size:</dt>
-                    <dd>S</dd>
-                  </div>
+                  <a href="/product?id={{item.id_jewelry}}">{{item.jewelry_title}}</a>
                 </td>
                 <td data-label="date">11/08/22</td>
                 <td data-label="quantity">

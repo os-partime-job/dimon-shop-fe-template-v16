@@ -14,16 +14,16 @@
     <div class="mini-cart-body" *ngIf="lisProductsCart != null">
       <div class="mini-cart-item" *ngFor = "let item of lisProductsCart">
         <div class="mini-cart-image">
-          <a href="#" title="SPACE BAG">
-            <img src="assets/images/cart1.png" alt="img" />
+          <a href="/product?id={{item.id_jewelry}}" title="SPACE BAG">
+            <img src="{{item.image_url}}" alt="img" />
           </a>
         </div>
         <div class="mini-cart-details">
-          <p class="mini-cart-title"><a href="#">Classic Ring</a></p>
-          <div class="cart-variable">
-            <p><strong>Color:</strong> Purple</p>
-            <p><strong>Size:</strong> S</p>
-          </div>
+          <p class="mini-cart-title"><a href="/product?id={{item.id_jewelry}}">{{item.jewelry_title}}</a></p>
+<!--          <div class="cart-variable">-->
+<!--            <p><strong>Color:</strong> Purple</p>-->
+<!--            <p><strong>Size:</strong> S</p>-->
+<!--          </div>-->
           <div class="qty-spinner">
             <button type="button" class="quantity-decrement" (click)="addProductCart(item,-1)">
               <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
           </div>
           <div class="pvarprice d-flex align-items-center justify-content-between">
             <div class="price">
-              <ins>69 <span class="currency-type">USD</span></ins><del>$89</del>
+              <ins>{{convertNumber(item.price_items)}} <span class="currency-type">VND</span></ins><del>{{convertNumber(item.price_items)}}</del>
             </div>
             <a class="remove_item" title="Remove item" (click)="deleteProductCart(item)">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
