@@ -25,10 +25,12 @@
             <div class="custom-control custom-radio">
               <input class="custom-control-input" value="vnpay" type="radio" id="customRadio1" name="customRadio" (change)="selectedPayment = 'vnpay'">
               <label for="customRadio1" class="custom-control-label">Payment with Vnpay</label>
+<!--              <img src="assets/images/logo-vnpay.jpg" style="width: 40px;height: 40px;" alt="img" />-->
             </div>
             <div class="custom-control custom-radio">
-              <input class="custom-control-input" type="radio" value="strip" id="customRadio2" name="customRadio" (change)="selectedPayment = 'strip'" checked>
-              <label for="customRadio2" class="custom-control-label">Payment with Strip &nbsp;&nbsp;</label>
+              <input class="custom-control-input" type="radio" value="stripe" id="customRadio2" name="customRadio" (change)="selectedPayment = 'stripe'" checked>
+              <label for="customRadio2" class="custom-control-label">Payment with Stripe</label>
+<!--              <img src="assets/images/logo-strip.png" style="width: 40px;height: 40px;" alt="img" />-->
             </div>
           </div>
         </div>

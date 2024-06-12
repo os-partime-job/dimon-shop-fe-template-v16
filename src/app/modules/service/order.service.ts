@@ -42,6 +42,6 @@ export class OrderService{
     return this.http.post<any>(`${environment.apiPayment}/v1/payment/vnp/create`,request,this.httpOptions2);
   }
   getCallPaymentStrip(request: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiPayment}/v1/payment/strip/create`,request,this.httpOptions2);
+    return this.http.post<any>(`${environment.apiPayment}/v1/payment/stripe/create`,request,this.httpOptions2);
   }
 }
