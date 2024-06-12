@@ -51,7 +51,7 @@ export class BillResultComponent {
       metaData:'',
       payType:'BANK'
     }
-    this.orderService.getCallPayment(request).subscribe((res) =>{
+    this.orderService.getCallPaymentVnPay(request).subscribe((res) =>{
       window.open(res.data.paymentUrl);
 
     }, error => {

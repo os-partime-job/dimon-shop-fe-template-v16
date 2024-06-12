@@ -38,7 +38,10 @@ export class OrderService{
   getAllOrder(request: any):Observable<any> {
     return this.http.post<any[]>(`${environment.apiUrl}/order/list`,request,this.httpOptions);
   }
-  getCallPayment(request: any): Observable<any> {
+  getCallPaymentVnPay(request: any): Observable<any> {
     return this.http.post<any>(`${environment.apiPayment}/v1/payment/vnp/create`,request,this.httpOptions2);
+  }
+  getCallPaymentStrip(request: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiPayment}/v1/payment/strip/create`,request,this.httpOptions2);
   }
 }
