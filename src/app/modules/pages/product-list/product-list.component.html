@@ -39,28 +39,28 @@
             </div>
           </div>
         </div>
-        <div class="product-heading-right-column col-lg-9 col-md-8 col-11">
-          <div class="product-sorting-row d-flex align-items-center justify-content-between">
-            <ul class="produdt-filter-cat d-flex align-items-center">
-              <li><a href="#">Categories</a></li>
-              <li><a href="#">Fashion</a></li>
-              <li><a href="#">Jewellery</a></li>
-            </ul>
-            <div class="filter-select-box d-flex align-items-center justify-content-end">
-              <span class="sort-lbl">Sort by:</span>
-              <select>
-                <option value="manual">Featured</option>
-                <option value="best-selling" selected="selected">Best selling</option>
-                <option value="title-ascending">Alphabetically, A-Z</option>
-                <option value="title-descending">Alphabetically, Z-A</option>
-                <option value="price-ascending">Price, low to high</option>
-                <option value="price-descending">Price, high to low</option>
-                <option value="created-ascending">Date, old to new</option>
-                <option value="created-descending">Date, new to old</option>
-              </select>
-            </div>
-          </div>
-        </div>
+<!--        <div class="product-heading-right-column col-lg-9 col-md-8 col-11">-->
+<!--          <div class="product-sorting-row d-flex align-items-center justify-content-between">-->
+<!--            <ul class="produdt-filter-cat d-flex align-items-center">-->
+<!--              <li><a href="#">Categories</a></li>-->
+<!--              <li><a href="#">Fashion</a></li>-->
+<!--              <li><a href="#">Jewellery</a></li>-->
+<!--            </ul>-->
+<!--            <div class="filter-select-box d-flex align-items-center justify-content-end">-->
+<!--              <span class="sort-lbl">Sort by:</span>-->
+<!--              <select>-->
+<!--                <option value="manual">Featured</option>-->
+<!--                <option value="best-selling" selected="selected">Best selling</option>-->
+<!--                <option value="title-ascending">Alphabetically, A-Z</option>-->
+<!--                <option value="title-descending">Alphabetically, Z-A</option>-->
+<!--                <option value="price-ascending">Price, low to high</option>-->
+<!--                <option value="price-descending">Price, high to low</option>-->
+<!--                <option value="created-ascending">Date, old to new</option>-->
+<!--                <option value="created-descending">Date, new to old</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <div class="product-list-row row no-gutters">
         <div class="product-filter-column col-lg-3 col-md-4 col-12">
@@ -154,20 +154,31 @@
             <div class="product-widget product-price-widget">
               <div class="pro-itm has-children">
                 <a href="javascript:;" class="acnav-label">
-                  price
+                  Price
                 </a>
                 <div class="pro-itm-inner acnav-list">
-                  <div class="price-select d-flex">
-                    <div class="select-col">
-                      <p>price:</p>
-<!--                      <select style="width: auto;" id="price" [(ngModel)]="selectOptionPrice">-->
-<!--                        <option value="" selected="selected">By Price</option>-->
-<!--                        <option *ngFor="let item of optionSelectPrices" [value]="item.id">{{item.name}}</option>-->
+                  <div class="">
+                    <div class="">
+                      <p>Price:</p>
+<!--                      <select *ngIf="selectPrices.length > 0" style="width: auto;" [(ngModel)]="selectTypePrice">-->
+<!--                        <option value="" selected="selected">By Type</option>-->
+<!--                        <option *ngFor="let price of selectPrices" [value]="price.id">{{ price?.name }} {{ price?.id }}</option>-->
 <!--                      </select>-->
-                      <select  *ngIf="optionSelectPrices.length > 0" style="width: auto;" id="category" [(ngModel)]="selectTypePrice">
-                        <option value="" selected="selected">By Price</option>
-                        <option *ngFor="let type of optionSelectPrices" [value]="type.id">{{ type?.name }} {{type.id}}</option>
-                      </select>
+                      <div style="margin-left: 4%">
+                        <label class="row">
+                          <input  type="radio" name="color" value="red" (change)="selectedTypePrice = 'budget1'"> Price 0->50 millions VND
+                        </label>
+                        <label class="row">
+                          <input  type="radio" name="color" value="blue" (change)="selectedTypePrice = 'budget2'"> Price 50->100 millions VND
+                        </label>
+                        <label class="row">
+                          <input  type="radio" name="color" value="green" (change)="selectedTypePrice = 'budget3'"> Price upper 100 millions VND
+                        </label>
+                        <label class="row">
+                          <input  type="radio" name="color" value="green" (change)="selectedTypePrice = 'Nothing'"> Nothing
+                        </label>
+                        <p>You selected: {{ selectedTypePrice }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -182,9 +193,9 @@
                   <div class="price-select d-flex">
                     <div class="select-col">
                       <p>Type Product:</p>
-                      <select  *ngIf="jewelryTypes.length > 0" style="width: auto;" id="category" [(ngModel)]="selectOptionType">
+                      <select  *ngIf="jewelryTypes.length > 0" style="width: auto;" [(ngModel)]="selectOptionType">
                         <option value="" selected="selected">By Type</option>
-                        <option *ngFor="let type of jewelryTypes" [value]="type.id">{{ type?.jewelryTypeName }}</option>
+                        <option *ngFor="let type of jewelryTypes" [value]="type.id">{{ type?.jewelryTypeName }} {{ type?.id }}</option>
                       </select>
 
                     </div>

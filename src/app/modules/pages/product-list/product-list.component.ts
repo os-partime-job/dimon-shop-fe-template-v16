@@ -6,7 +6,7 @@ import {NumberService} from "../../service/number.service";
 import {AccountService} from "../../auth/services/account.service";
 import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 import {CartService} from "../../service/cart.service";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +19,9 @@ export class ProductListComponent implements OnInit{
   searchProduct: string = '';
   products: any[];
   isLoginUser:boolean = false;
-  optionSelectPrices = [
+  formSearch!:FormGroup;
+  selectedTypePrice: string='Nothing';
+  selectPrices = [
     {
       name:"Price 0->50 millions VND",
       id:1
@@ -43,9 +45,11 @@ export class ProductListComponent implements OnInit{
               private accountServie: AccountService,
               private googleService :AuthGoogleService,
               private cartService: CartService,
-              private ProductService: ProductService,) {
+              private ProductService: ProductService,
+              private formBuilder: FormBuilder,) {
   }
   ngOnInit(): void {
+    this.formSearch = this.formBuilder.group({typePrice: ['']});
     this.isLoginUser = localStorage.getItem("user") != null;
     this.getJewelryTypes();
     this.getProducts();
@@ -57,8 +61,8 @@ export class ProductListComponent implements OnInit{
   }
 
   removeFilterPrice() {
-    this.selectTypePrice = "";
-    console.log(this.selectTypePrice);
+    // this.selectTypePrice = "";
+    // console.log(this.selectTypePrice);
   }
   getProducts(){
     let request = {
@@ -67,6 +71,13 @@ export class ProductListComponent implements OnInit{
       limit:1000,
       offset:0,
       requestId:''
+    } as any;
+    if(this.selectedTypePrice =="budget1"){
+      request.budget1 = true;
+    }else if (this.selectedTypePrice =="budget2"){
+      request.budget2 = true;
+    }else if(this.selectedTypePrice =="budget3"){
+      request.budget3 = true;
     }
 
     this.productService.getProducts(request).subscribe((res) => {
@@ -80,12 +91,15 @@ export class ProductListComponent implements OnInit{
   }
 
   search() {
+    console.log(this.formSearch.controls['typePrice'].value)
     console.log("selectTypePrice: ",this.selectTypePrice, "selectOptionType", this.selectOptionType, "searchProduct", this.searchProduct)
 
   }
   private getJewelryTypes() {
     this.ProductService.getJewelryType().subscribe((res) =>{
       this.jewelryTypes = [...res.data];
+      console.log(this.jewelryTypes);
+      console.log(this.selectPrices);
     },error => {
       this.toastrService.error("Error get Type")
     })
