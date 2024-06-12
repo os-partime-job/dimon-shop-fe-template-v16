@@ -117,6 +117,8 @@ export class CartComponent implements OnInit{
     console.log(idsCart);
     this.orderService.addOrder(request).subscribe((res) =>{
       this.toastrService.success("Create Order success");
+      const returnUrl = this.route.snapshot.queryParams['/order-list'] || '/order-list';
+      this.router.navigateByUrl(returnUrl).then(r =>{});
     }, error => {
       this.toastrService.error("Create order fail !!!");
     })
