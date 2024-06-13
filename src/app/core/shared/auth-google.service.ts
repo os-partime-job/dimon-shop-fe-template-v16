@@ -21,7 +21,7 @@ export class AuthGoogleService {
 
     this.oauthService.configure(config);
     this.oauthService.setupAutomaticSilentRefresh();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(r => { console.log("initLogin:",r);});
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(r => {});
   }
 
   login() {

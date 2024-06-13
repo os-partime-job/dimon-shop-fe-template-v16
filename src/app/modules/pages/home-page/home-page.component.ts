@@ -30,8 +30,6 @@ export class HomePageComponent {
   }
 
   ngOnInit(): void {
-    console.log("googleService: ",this.googleService.getIdToken());
-    console.log("loginWithGoogle: ", localStorage.getItem("loginWithGoogle"));
     if(this.googleService.getIdToken() || localStorage.getItem("loginWithGoogle")){
       if(localStorage.getItem("loginWithGoogle")){
         localStorage.removeItem("loginWithGoogle");
@@ -39,7 +37,6 @@ export class HomePageComponent {
       }
       const body = {token:this.googleService.getIdToken()}
       this.accountServie.loginWithGoogle(body).subscribe((res) =>{
-        console.log(res);
         this.accountServie.userSubject.next(res);
         localStorage.setItem("user",JSON.stringify(res))
         this.isLoginUser = true;
@@ -50,7 +47,6 @@ export class HomePageComponent {
       this.isLoginUser = localStorage.getItem("user") != null;
     }
     this.getProducts();
-    console.log(localStorage.getItem("user"),this.isLoginUser);
   }
 
   redirectLogin() {
@@ -67,7 +63,6 @@ export class HomePageComponent {
     return this.numberFormat.convertNumber(number);
   }
   goToProductDetail(id:number) {
-    console.log(id);
     const returnUrl = this.route.snapshot.queryParams[`/ecommerce?id=${id}`] || `/ecommerce?id=${id}`;
     this.router.navigateByUrl(returnUrl);
   }
