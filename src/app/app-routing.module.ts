@@ -34,6 +34,7 @@ import {ResetPasswordComponent} from "./modules/pages/reset-password/reset-passw
 import {ForgetPasswordComponent} from "./modules/pages/forget-password/forget-password.component";
 import {OrderListComponent} from "./modules/pages/order-list/order-list.component";
 import {BillResultComponent} from "./modules/pages/bill-result/bill-result.component";
+import {LoginSuccessComponent} from "./modules/pages/login-success/login-success.component";
 
 const routes: Routes = [
   {
@@ -426,7 +427,14 @@ const routes: Routes = [
       title: 'Bill result Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {
+    path: 'login-success',
+    component: LoginSuccessComponent,
+    data: {
+      title: 'Login success Page'
+    }
+  },
+  {path: '**', redirectTo: 'home-page'}
 ];
 
 @NgModule({

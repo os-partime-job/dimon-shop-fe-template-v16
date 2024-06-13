@@ -18,12 +18,12 @@ export class HeaderComponent implements OnInit{
   }
 
   redirectLogin() {
-    const returnUrl = this.route.snapshot.queryParams['/login-v3'] || '/login-v3';
+    const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
     this.router.navigateByUrl(returnUrl);
 
   }
   redirectProfile() {
-    const returnUrl = this.route.snapshot.queryParams['/user-profile'] || '/user-profile';
+    const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
     this.router.navigateByUrl(returnUrl);
 
   }

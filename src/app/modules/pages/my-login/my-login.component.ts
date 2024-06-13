@@ -78,6 +78,8 @@ export class MyLoginComponent {
       });
   }
   signInWithGoogle(): void {
+    this.accountService.changeLoginWithGoogle(true);
+    localStorage.setItem("loginWithGoogle","true");
     this.authGoogleService.login();
     this.toastrService.success("login sucescss");
   }

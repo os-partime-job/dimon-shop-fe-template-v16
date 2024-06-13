@@ -53,6 +53,7 @@ import {FormsModule} from "@angular/forms";
 import { OrderInfoComponent } from './modules/pages/order-info/order-info.component';
 import { OrderListComponent } from './modules/pages/order-list/order-list.component';
 import { BillResultComponent } from './modules/pages/bill-result/bill-result.component';
+import {LoginSuccessComponent} from "./modules/pages/login-success/login-success.component";
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { BillResultComponent } from './modules/pages/bill-result/bill-result.com
     OrderInfoComponent,
     OrderListComponent,
     BillResultComponent,
+    LoginSuccessComponent
   ],
   imports: [
     BrowserModule,

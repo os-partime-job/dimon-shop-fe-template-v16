@@ -11,9 +11,11 @@ import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User | null>;
-    public user: Observable<User | null>;
+    userSubject: BehaviorSubject<any | null>;
+    public user: Observable<any | null>;
     httpOptions: any;
+
+    public isLoginWithGoogle = false;
 
     constructor(
         private router: Router,
@@ -36,6 +38,9 @@ export class AccountService {
 
     public get userValue() {
         return this.userSubject.value;
+    }
+    public  changeLoginWithGoogle(status:boolean){
+      this.isLoginWithGoogle = status;
     }
 
     login(username: string, password: string) {

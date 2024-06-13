@@ -18,27 +18,37 @@ export class HomePageComponent {
   rings: any[]
   famousRing : any
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private productService: ProductService,
-              private toastrService: ToastrService,
-              private numberFormat: NumberService,
-              private accountServie: AccountService,
-              private googleService :AuthGoogleService,
-              private cartService: CartService) {
-    if(googleService.getIdToken()){
-      const body = {token:googleService.getIdToken()}
-      accountServie.loginWithGoogle(body).subscribe((res) =>{
-        console.log(res);
-        localStorage.setItem("user",JSON.stringify(res))
-      },error => {
-
-      });
-    }
+  constructor(
+    private googleService: AuthGoogleService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private toastrService: ToastrService,
+    private numberFormat: NumberService,
+    private accountServie: AccountService,
+    private cartService: CartService) {
   }
 
   ngOnInit(): void {
-    this.isLoginUser = localStorage.getItem("user") != null;
+    console.log("googleService: ",this.googleService.getIdToken());
+    console.log("loginWithGoogle: ", localStorage.getItem("loginWithGoogle"));
+    if(this.googleService.getIdToken() || localStorage.getItem("loginWithGoogle")){
+      if(localStorage.getItem("loginWithGoogle")){
+        localStorage.removeItem("loginWithGoogle");
+        location.reload();
+      }
+      const body = {token:this.googleService.getIdToken()}
+      this.accountServie.loginWithGoogle(body).subscribe((res) =>{
+        console.log(res);
+        this.accountServie.userSubject.next(res);
+        localStorage.setItem("user",JSON.stringify(res))
+        this.isLoginUser = true;
+      },error => {
+
+      });
+    } else {
+      this.isLoginUser = localStorage.getItem("user") != null;
+    }
     this.getProducts();
     console.log(localStorage.getItem("user"),this.isLoginUser);
   }

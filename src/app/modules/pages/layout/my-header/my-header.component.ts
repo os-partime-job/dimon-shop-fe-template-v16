@@ -12,6 +12,8 @@ import {NumberService} from "../../../service/number.service";
 export class MyHeaderComponent implements OnInit,OnDestroy {
   subscription: Subscription;
   subscription2: Subscription;
+  subscription3: Subscription;
+
   isLoginUser: boolean = false
   totalProduct: any;
   totalPriceProduct: any;
@@ -24,6 +26,7 @@ export class MyHeaderComponent implements OnInit,OnDestroy {
     this.isLoginUser = localStorage.getItem("user") != null;
     this.subscription = this.cartService.totalProductInCart$.subscribe(data=>this.totalProduct = data);
     this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
+    this.subscription3 = this.accountService.userSubject.subscribe(data =>{if(data) this.isLoginUser = true; console.log("check call login my header")});
   }
   logOut() {
     this.accountService.logout();
