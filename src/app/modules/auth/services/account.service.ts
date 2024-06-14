@@ -84,7 +84,7 @@ export class AccountService {
     register(user: any) {
         return this.http.post(`${environment.apiUrl}/shop/auth/signup`, user,this.httpOptions);
     }
-  loginWithGoogle(user: any) {
+  loginWithGoogle(user: any):Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/social/google`, user,this.httpOptions);
   }
 

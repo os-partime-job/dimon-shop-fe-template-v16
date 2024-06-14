@@ -39,6 +39,7 @@ export class HomePageComponent {
       this.accountServie.loginWithGoogle(body).subscribe((res) =>{
         this.accountServie.userSubject.next(res);
         localStorage.setItem("user",JSON.stringify(res))
+        this.getProductCartV2(res.accessToken);
         this.isLoginUser = true;
       },error => {
 
@@ -102,6 +103,18 @@ export class HomePageComponent {
       customer_id : 1
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
+      this.cartService.cartItems.next(res?.data);
+      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+    }, error => {
+
+    })
+  }
+  getProductCartV2(token:any) {
+    const request = {
+      customer_id : 1
+    }
+    this.cartService.getProductInCartV2(request,token).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
       this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));

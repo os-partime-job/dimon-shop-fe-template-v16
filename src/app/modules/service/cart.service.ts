@@ -91,6 +91,18 @@ export class CartService {
   getProductInCart(request:any): Observable<any>{
     return this.http.post<any[]>(`${environment.apiUrl}/cart/list`,request,this.httpOptions);
   }
+  getProductInCartV2(request:any,token:any): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      }),
+      "Access-Control-Allow-Origin": `${environment.apiUrl}`,
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+
+    };
+    return this.http.post<any[]>(`${environment.apiUrl}/cart/list`,request,httpOptions);
+  }
   updateProductToCard(request:any): Observable<any>{
     return this.http.post(`${environment.apiUrl}/cart/update`,request,this.httpOptions);
   }
