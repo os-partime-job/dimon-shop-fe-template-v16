@@ -6,12 +6,14 @@ import {AuthGoogleService} from "../../../core/shared/auth-google.service";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  selector: 'app-forget-password',
+  templateUrl: './forget-password.component.html',
+  styleUrls: ['./forget-password.component.css']
 })
-export class ResetPasswordComponent {
+export class ForgetPasswordComponent {
   form!: FormGroup;
+  formForget!: FormGroup;
+
   user : any;
   otpConfig = {
     length: 6,
@@ -26,6 +28,8 @@ export class ResetPasswordComponent {
     }
   };
   isDisableButton:boolean = false;
+  isDisableForgetButton:boolean = false;
+  isShowFormReset: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -33,7 +37,6 @@ export class ResetPasswordComponent {
               private accountService: AccountService,
               private authGoogleService: AuthGoogleService,
               private toastrService: ToastrService) {
-    this.callUserDetail();
   }
 
   ngOnInit(): void {
@@ -41,41 +44,38 @@ export class ResetPasswordComponent {
       password: ['', Validators.required],
       rePassword: ['', Validators.required],
       otp:[''],
-
+    });
+    this.formForget = this.formBuilder.group({
+      email: ['', Validators.required]
     });
   }
 
   get f() {
     return this.form.controls;
   }
-
-  onResetPassWord() {
-    if (this.form.invalid) {
+  onForgetPassWord() {
+    if (this.formForget.invalid) {
       this.toastrService.error("Xem lại thông tin vừa nhập");
       return;
     }
-    if (this.form.controls['password'].value !== this.form.controls['rePassword'].value) {
-      this.toastrService.error("Mật khẩu nhập không khớp");
-      return;
-    }
-    this.isDisableButton = true;
-    this.accountService.getOtpFogetPassWord(this.user?.email).subscribe((res) => {
-      console.log("checkkkk");
-      this.toastrService.success(`Gửi mã Otp đến ${this.user?.email} thành công`)
+    this.isDisableForgetButton = true;
+    this.accountService.getOtpFogetPassWord(this.formForget.controls['email'].value).subscribe((res) => {
+      this.toastrService.success(`Gửi mã Otp đến ${this.formForget.controls['email'].value} thành công`)
       this.onOpenModal("otp");
     }, error => {
       this.toastrService.error("Không gửi được mã OTP")
       this.isDisableButton = false;
     });
-
+  }
+  callReset() {
+    this.isShowFormReset = true;
   }
 
-  callReset() {
+  callForgetPassWord() {
     const user = {
-      email : this.user?.email,
-      password: this.form.controls['password'].value, //this.form['']
+      email:this.formForget.controls['email'].value,
+      password: this.form.controls['password'].value,
       otp: this.form.controls['otp'].value,
-
     };
     this.accountService.changePassWord(user).subscribe((res) => {
         this.toastrService.success("Reset mật khẩu thành công");
@@ -100,20 +100,9 @@ export class ResetPasswordComponent {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'otp') {
-      button.setAttribute('data-target', '#otpModal2');
+      button.setAttribute('data-target', '#otpModal');
     }
     container.appendChild(button);
     button.click();
   }
-  callUserDetail() {
-    this.accountService.getUser().subscribe((res) => {
-         this.user = res?.data;
-      },
-      error => {
-        this.toastrService.error("lỗi lấy thông tin user");
-        console.log(error);
-      });
-
-  }
-
 }
