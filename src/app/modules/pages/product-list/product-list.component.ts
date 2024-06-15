@@ -21,6 +21,11 @@ export class ProductListComponent implements OnInit{
   isLoginUser:boolean = false;
   formSearch!:FormGroup;
   selectedTypePrice: string='Nothing';
+  page = 1;
+  count = 0;
+  pageSize = 9;
+  pageSizes = [3, 6, 9];
+  total = 0;
   selectPrices = [
     {
       name:"Price 0->50 millions VND",
@@ -64,12 +69,22 @@ export class ProductListComponent implements OnInit{
     // this.selectTypePrice = "";
     // console.log(this.selectTypePrice);
   }
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getProducts();
+  }
+
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getProducts();
+  }
   getProducts(){
     let request = {
       jewelry_type_id:this.selectOptionType,
       title:this.searchProduct,
-      limit:1000,
-      offset:0,
+      limit:this.pageSize,
+      offset:(this.page-1)*this.pageSize,
       requestId:''
     } as any;
     if(this.selectedTypePrice =="budget1"){
@@ -82,6 +97,7 @@ export class ProductListComponent implements OnInit{
 
     this.productService.getProducts(request).subscribe((res) => {
       this.products = res.data;
+      this.count = res?.meta?.total;
     }, error => {
       this.toastrService.error("Error get famous products");
     });
@@ -91,9 +107,8 @@ export class ProductListComponent implements OnInit{
   }
 
   search() {
-    console.log(this.formSearch.controls['typePrice'].value)
-    console.log("selectTypePrice: ",this.selectTypePrice, "selectOptionType", this.selectOptionType, "searchProduct", this.searchProduct)
-
+    this.page = 1;
+    this.getProducts();
   }
   private getJewelryTypes() {
     this.ProductService.getJewelryType().subscribe((res) =>{

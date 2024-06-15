@@ -20,6 +20,10 @@ export class OrderListComponent {
   totalPriceProduct: any;
   isLoginUser:boolean = false;
   selectedPayment:string = 'stripe';
+  page = 1;
+  count = 0;
+  pageSize = 9;
+  pageSizes = [3, 6, 9];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -35,14 +39,27 @@ export class OrderListComponent {
   }
   getAllOrder() {
     const request = {
-      customer_id : 1
+      customer_id : 1,
+      limit:this.pageSize,
+      offset:(this.page-1)*this.pageSize,
     }
     this.orderService.getAllOrder(request).subscribe((res) =>{
       this.orders = res.data;
+      this.count = res?.meta?.total;
     }, error => {
       this.toastrService.error("Error get list order")
 
     })
+  }
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getAllOrder();
+  }
+
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getAllOrder();
   }
   callPayment(order: any) {
     const request = {

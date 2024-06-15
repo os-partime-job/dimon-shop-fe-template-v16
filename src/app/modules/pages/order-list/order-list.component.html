@@ -50,7 +50,11 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor = "let item of orders">
+              <tr *ngFor = "let item of orders| paginate: {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+            }">
                 <td data-label="ID">{{item.id}} </td>
                 <td data-label="date">{{item.orderDate}}</td>
                 <td data-label="quantity">
@@ -68,6 +72,13 @@
               </tr>
               </tbody>
             </table>
+            <div class="d-flex justify-content-right">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="handlePageChange($event)">
+              </pagination-controls>
+            </div>
           </div>
         </div>
 <!--        <div class="col-lg-3 col-12">-->

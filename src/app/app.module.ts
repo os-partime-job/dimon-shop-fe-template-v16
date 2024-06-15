@@ -54,6 +54,7 @@ import { OrderInfoComponent } from './modules/pages/order-info/order-info.compon
 import { OrderListComponent } from './modules/pages/order-list/order-list.component';
 import { BillResultComponent } from './modules/pages/bill-result/bill-result.component';
 import {LoginSuccessComponent} from "./modules/auth/login-success/login-success.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import {LoginSuccessComponent} from "./modules/auth/login-success/login-success.
       closeButton: true,
       progressBar: true,
     }),
-    NgOtpInputModule
+    NgOtpInputModule,
+    NgxPaginationModule
 
 
   ],
