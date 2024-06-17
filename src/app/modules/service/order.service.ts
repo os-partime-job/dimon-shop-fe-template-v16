@@ -44,4 +44,7 @@ export class OrderService{
   getCallPaymentStrip(request: any): Observable<any> {
     return this.http.post<any>(`${environment.apiPayment}/v1/payment/stripe/create`,request,this.httpOptions2);
   }
+  getDetailOrder(request): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/order/detail`,request,this.httpOptions);
+  }
 }

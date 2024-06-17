@@ -18,23 +18,23 @@
         </a>
         <h2>Shopping Order List<span></span></h2>
       </div>
-      <div class="row form-group">
-        <div class=" row col-lg-9 col-12">
-          <div class="col-8" style="text-align: right"> <h5>Type of Payment</h5></div>
-          <div class="col-4" style="text-align: right">
-            <div class="custom-control custom-radio">
-              <input class="custom-control-input" value="vnpay" type="radio" id="customRadio1" name="customRadio" (change)="selectedPayment = 'vnpay'">
-              <label for="customRadio1" class="custom-control-label">Payment with Vnpay</label>
-<!--              <img src="assets/images/logo-vnpay.jpg" style="width: 40px;height: 40px;" alt="img" />-->
-            </div>
-            <div class="custom-control custom-radio">
-              <input class="custom-control-input" type="radio" value="stripe" id="customRadio2" name="customRadio" (change)="selectedPayment = 'stripe'" checked>
-              <label for="customRadio2" class="custom-control-label">Payment with Stripe</label>
-<!--              <img src="assets/images/logo-strip.png" style="width: 40px;height: 40px;" alt="img" />-->
-            </div>
-          </div>
-        </div>
-      </div>
+<!--      <div class="row form-group">-->
+<!--        <div class=" row col-lg-9 col-12">-->
+<!--          <div class="col-8" style="text-align: right"> <h5>Type of Payment</h5></div>-->
+<!--          <div class="col-4" style="text-align: right">-->
+<!--            <div class="custom-control custom-radio">-->
+<!--              <input class="custom-control-input" value="vnpay" type="radio" id="customRadio1" name="customRadio" (change)="selectedPayment = 'vnpay'">-->
+<!--              <label for="customRadio1" class="custom-control-label">Payment with Vnpay</label>-->
+<!--&lt;!&ndash;              <img src="assets/images/logo-vnpay.jpg" style="width: 40px;height: 40px;" alt="img" />&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="custom-control custom-radio">-->
+<!--              <input class="custom-control-input" type="radio" value="stripe" id="customRadio2" name="customRadio" (change)="selectedPayment = 'stripe'" checked>-->
+<!--              <label for="customRadio2" class="custom-control-label">Payment with Stripe</label>-->
+<!--&lt;!&ndash;              <img src="assets/images/logo-strip.png" style="width: 40px;height: 40px;" alt="img" />&ndash;&gt;-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="row">
         <div class="col-lg-9 col-12">
           <div class="order-historycontent">
@@ -56,7 +56,7 @@
               totalItems: count
             }">
                 <td data-label="ID">{{item.id}} </td>
-                <td data-label="date">{{item.orderDate}}</td>
+                <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
                 <td data-label="quantity">
                   {{item.quantityNumber}}
                 </td>

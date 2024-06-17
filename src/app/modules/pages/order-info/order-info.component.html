@@ -16,7 +16,7 @@
                   </span>
           Back to category
         </a>
-        <h2>Shopping cart<span>(125)</span></h2>
+        <h2>Order Information:<span></span></h2>
       </div>
       <div class="row">
         <div class="col-lg-9 col-12">
@@ -50,7 +50,7 @@
                     <dd>S</dd>
                   </div>
                 </td>
-                <td data-label="date">11/08/22</td>
+                <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
                 <td data-label="quantity">
                   <div class="qty-spinner">
                     <button type="button" class="quantity-decrement" (click)="addProductCart(item,-1)">
@@ -115,6 +115,17 @@
               <li>
                 <span class="cart-sum-left">Taxes: </span>
                 <span class="cart-sum-right"> $0.00</span>
+              </li>
+              <li>
+                <span class="cart-sum-left">Type of Payment: </span>
+                <div class = "row" style="margin-left: 15%">
+                  <span class="cart-sum-right"> <input class="custom-control-input" value="vnpay" type="radio" id="customRadio1" name="customRadio" (change)="selectedPayment = 'vnpay'">
+                      <label for="customRadio1" class="custom-control-label">Payment with Vnpay</label></span>
+                  <span class="cart-sum-right" >
+                  <input class="custom-control-input" type="radio" value="stripe" id="customRadio2" name="customRadio" (change)="selectedPayment = 'stripe'" checked>
+                      <label for="customRadio2" class="custom-control-label">Payment with Stripe</label>
+                </span>
+                </div>
               </li>
             </ul>
             <button class="btn checkout-btn">Proceed to checkout</button>
