@@ -7,6 +7,7 @@ import {NumberService} from "../../service/number.service";
 import {AccountService} from "../../auth/services/account.service";
 import {CartService} from "../../service/cart.service";
 import {OrderService} from "../../service/order.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-order-info',
@@ -132,4 +133,19 @@ export class OrderInfoComponent implements OnInit{
 
   }
 
+  onAddProduct(addForm: NgForm) {
+
+  }
+  public onOpenModal(mode: string): void{
+    const container = document.getElementById('main-container')!;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'voucher') {
+      button.setAttribute('data-target', '#addVoucherModal');
+    }
+    container.appendChild(button);
+    button.click();
+  }
 }
