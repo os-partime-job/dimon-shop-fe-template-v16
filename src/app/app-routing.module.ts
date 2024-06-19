@@ -36,6 +36,9 @@ import {OrderListComponent} from "./modules/pages/order-list/order-list.componen
 import {BillResultComponent} from "./modules/pages/bill-result/bill-result.component";
 import {LoginSuccessComponent} from "./modules/auth/login-success/login-success.component";
 import {OrderInfoComponent} from "./modules/pages/order-info/order-info.component";
+import {
+  HuongDanDoSizeNhanComponent
+} from "./modules/default-page/huong-dan-do-size-nhan/huong-dan-do-size-nhan.component";
 
 const routes: Routes = [
   {
@@ -265,6 +268,13 @@ const routes: Routes = [
     component: MeasureJewelrySizeComponent,
     data: {
       title: 'Measure Jewelry Size Page'
+    }
+  },
+  {
+    path: 'huong-dan-do-size-nhan',
+    component: HuongDanDoSizeNhanComponent,
+    data: {
+      title: 'Measure Jewelry Size Ring Page'
     }
   },
     {

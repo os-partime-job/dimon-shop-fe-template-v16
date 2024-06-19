@@ -55,6 +55,7 @@ import { OrderListComponent } from './modules/pages/order-list/order-list.compon
 import { BillResultComponent } from './modules/pages/bill-result/bill-result.component';
 import {LoginSuccessComponent} from "./modules/auth/login-success/login-success.component";
 import {NgxPaginationModule} from "ngx-pagination";
+import { HuongDanDoSizeNhanComponent } from './modules/default-page/huong-dan-do-size-nhan/huong-dan-do-size-nhan.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     OrderInfoComponent,
     OrderListComponent,
     BillResultComponent,
-    LoginSuccessComponent
+    LoginSuccessComponent,
+    HuongDanDoSizeNhanComponent
   ],
   imports: [
     BrowserModule,
