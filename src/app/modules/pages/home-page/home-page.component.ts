@@ -100,7 +100,7 @@ export class HomePageComponent {
       }
   getProductCart() {
     const request = {
-      customer_id : 1
+      customer_id : null
     }
     this.cartService.getProductInCart(request).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
@@ -112,7 +112,7 @@ export class HomePageComponent {
   }
   getProductCartV2(token:any) {
     const request = {
-      customer_id : 1
+      customer_id : null
     }
     this.cartService.getProductInCartV2(request,token).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
@@ -124,7 +124,7 @@ export class HomePageComponent {
   }
   addProductCart(product:any){
     if(!this.isLoginUser) {
-      this.toastrService.error("Bạn phải đăng nhập trước");
+      this.toastrService.error("You are login first");
       return;
     }
     const request = {
@@ -132,10 +132,10 @@ export class HomePageComponent {
       quantity : 1
     }
     this.cartService.addProductToCard(request).subscribe((res) =>{
-      this.toastrService.success("Add sản phầm thành công");
+      this.toastrService.success("Add product to cart success");
       this.getProductCart();
     }, error => {
-      this.toastrService.error("Add sản phầm thất bại");
+      this.toastrService.error("Add product to cart fail");
     });
   }
 

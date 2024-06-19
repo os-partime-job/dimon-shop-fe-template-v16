@@ -3,6 +3,7 @@ import {NumberService} from "../../service/number.service";
 import {ProductService} from "../../service/product.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute} from "@angular/router";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-product',
@@ -11,6 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductComponent {
   @Input() productId = 1;
+  isLoginUser:boolean = false;
   product:any;
   totalProduct =1;
   listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
@@ -18,9 +20,11 @@ export class ProductComponent {
   constructor(private numberFormat: NumberService,
               private productService: ProductService,
               private toastrService: ToastrService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
+    this.isLoginUser = localStorage.getItem("user") != null;
     // this.product = {
     //   "id_jewelry": 3,
     //   "jewelry_title": "Nhẫn nữ đính kim cương sang trọng 18K",
@@ -58,6 +62,46 @@ export class ProductComponent {
     } else {
       this.totalProduct +=number
     }
+  }
+  getProductCart() {
+    const request = {
+      customer_id : null
+    }
+    this.cartService.getProductInCart(request).subscribe((res) =>{
+      this.cartService.cartItems.next(res?.data);
+      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+    }, error => {
+
+    })
+  }
+  getProductCartV2(token:any) {
+    const request = {
+      customer_id : null
+    }
+    this.cartService.getProductInCartV2(request,token).subscribe((res) =>{
+      this.cartService.cartItems.next(res?.data);
+      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+    }, error => {
+
+    })
+  }
+  addProductCart(product:any){
+    if(!this.isLoginUser) {
+      this.toastrService.error("You are login first");
+      return;
+    }
+    const request = {
+      jewelry_id : product?.id_jewelry,
+      quantity : 1
+    }
+    this.cartService.addProductToCard(request).subscribe((res) =>{
+      this.toastrService.success("Add product to cart success");
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Add product to cart fail");
+    });
   }
 
 }
