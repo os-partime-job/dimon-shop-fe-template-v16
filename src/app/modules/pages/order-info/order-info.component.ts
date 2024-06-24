@@ -135,6 +135,9 @@ export class OrderInfoComponent implements OnInit{
       payType:'BANK'
     }
     if(this.selectedPayment == 'vnpay'){
+      if(this.voucher) {
+        this.useVoucher();
+      }
       this.orderService.getCallPaymentVnPay(request).subscribe((res) =>{
         window.open(res.data.paymentUrl,'_self');
 
@@ -144,6 +147,9 @@ export class OrderInfoComponent implements OnInit{
 
       });
     } else if(this.selectedPayment == 'stripe') {
+      if(this.voucher) {
+        this.useVoucher();
+      }
       this.orderService.getCallPaymentStrip(request).subscribe((res) =>{
         window.open(res.data.paymentUrl,'_self');
 
@@ -171,8 +177,11 @@ export class OrderInfoComponent implements OnInit{
     button.click();
   }
   public useVoucher(){
-    const id = 1;
-    this.orderService.useVoucher(id).subscribe((res) =>{
+    const request = {
+      couponCode:this.voucher.couponsCode,
+      orderId:this.order?.uniqueOrderId,
+    };
+    this.orderService.useVoucher(request).subscribe((res) =>{
       this.toastrService.success("Add voucher success");
     }, error => {
       this.toastrService.error("Add voucher error!!!");
@@ -191,7 +200,12 @@ export class OrderInfoComponent implements OnInit{
         console.log(res)
         this.toastrService.success("Check voucher success!!!");
       }, error => {
-        this.toastrService.error("Check voucher error!!!");
+        if (error.error.data) {
+          this.toastrService.error(error.error.data);
+        } else {
+          this.toastrService.error("Check voucher error!!!");
+        }
+
       });
   }
 }
