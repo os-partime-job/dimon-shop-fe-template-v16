@@ -16,7 +16,8 @@ export class ProductComponent {
   product:any;
   totalProduct =1;
   listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
-
+  listDiamond : any[];
+  selectSizeDiamond: string;
   constructor(private numberFormat: NumberService,
               private productService: ProductService,
               private toastrService: ToastrService,
@@ -42,6 +43,7 @@ export class ProductComponent {
     //   "type_enum": null,
     //   "diamond_id": "36000000-0000-0000-0000-000000000000"
     // };
+    this.getDiamondList();
     this.activatedRoute.queryParams.subscribe(params => {
       let id = params['id'];
       this.productService.getProductDetail(id!=null ?id:this.productId).subscribe((data) => {
@@ -94,7 +96,10 @@ export class ProductComponent {
     }
     const request = {
       jewelry_id : product?.id_jewelry,
-      quantity : 1
+      quantity : 1,
+    } as any;
+    if (this.selectSizeDiamond && this.selectSizeDiamond !== '') {
+      request.size = this.selectSizeDiamond;
     }
     this.cartService.addProductToCard(request).subscribe((res) =>{
       this.toastrService.success("Add product to cart success");
@@ -103,5 +108,20 @@ export class ProductComponent {
       this.toastrService.error("Add product to cart fail");
     });
   }
+  getDiamondList() {
+    this.productService.getDiamondList().subscribe((res) =>{
+      this.listDiamond = res;
+    }, error => {
+      this.toastrService.error("Get diamond list fail!!!");
+    })
+  }
 
+  onChange(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectSizeDiamond = selectedValue;
+    const diamond = this.listDiamond.find(({name}) => name === selectedValue);
+    if(diamond) {
+      this.product.price = this.product.price + diamond.price;
+    }
+  }
 }

@@ -16,7 +16,7 @@
                   </span>
           Back to category
         </a>
-        <h2>Shopping cart<span>(125)</span></h2>
+        <h2>Shopping Order History</h2>
       </div>
       <div class="row">
         <div class="col-lg-9 col-12">
@@ -26,7 +26,7 @@
               <tr>
                 <th scope="col">ID </th>
                 <th scope="col">date</th>
-                <th scope="col">quantity</th>
+                <th scope="col">Order Id</th>
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
                 <th scope="col">Option</th>
@@ -35,9 +35,9 @@
               <tbody>
               <tr *ngFor = "let item of orders">
                 <td data-label="ID">{{item.id}} </td>
-                <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}}}</td>
+                <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
                 <td data-label="quantity">
-                  {{item.quantityNumber}}
+                  {{item.uniqueOrderId}}
                 </td>
                 <td data-label="Total">
                   {{convertNumber(item.totalPrice)}} VNĐ

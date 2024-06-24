@@ -195,9 +195,8 @@
                       <p>Type Product:</p>
                       <select  *ngIf="jewelryTypes.length > 0" style="width: auto;" [(ngModel)]="selectOptionType">
                         <option value="" selected="selected">By Type</option>
-                        <option *ngFor="let type of jewelryTypes" [value]="type.id">{{ type?.jewelryTypeName }} {{ type?.id }}</option>
+                        <option *ngFor="let type of jewelryTypes" [value]="type.id">{{ type?.jewelryTypeName }}</option>
                       </select>
-
                     </div>
                   </div>
                 </div>

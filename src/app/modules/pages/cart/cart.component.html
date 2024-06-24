@@ -28,6 +28,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">date</th>
                 <th scope="col">quantity</th>
+                <th scope="col">Size diamond</th>
                 <th scope="col" style="text-align:left;">Price</th>
                 <th scope="col">Total</th>
                 <th scope="col"><div class="custom-control custom-checkbox">
@@ -39,14 +40,14 @@
               <tbody>
               <tr *ngFor = "let item of lisProductsCart">
                 <td data-label="Product">
-                  <a href="/product?id={{item.id_jewelry}}">
+                  <a href="/product?id={{item.jewelry_id}}">
                     <img src="{{item.image_url}}" />
                   </a>
                 </td>
                 <td data-label="Name">
                   <a href="/product?id={{item.id_jewelry}}">{{item.jewelry_title}}</a>
                 </td>
-                <td data-label="date">11/08/22</td>
+                <td data-label="date">{{item.created_at |date:'dd/MM/yyyy'}}</td>
                 <td data-label="quantity">
                   <div class="qty-spinner">
                     <button type="button" class="quantity-decrement" (click)="addProductCart(item,-1)">
@@ -65,9 +66,10 @@
                     </button>
                   </div>
                 </td>
-                <td data-label="Price">{{convertNumber(item.price_items)}} VNĐ</td>
+                <td data-label="Size diamond"> {{item.size}}</td>
+                <td data-label="Price">{{convertNumber(getPriceProductCart(item))}} VNĐ</td>
                 <td data-label="Total">
-                  {{convertNumber(item.price_items*item.quantity_number)}} VNĐ
+                  {{convertNumber(getPriceProductCart(item)*item.quantity_number)}} VNĐ
                 </td>
                 <td><div class="custom-control custom-checkbox" style="text-align: center;">
                   <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">

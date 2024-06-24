@@ -47,4 +47,10 @@ export class OrderService{
   getDetailOrder(request): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/order/detail`,request,this.httpOptions);
   }
+  useVoucher( request: any) : Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/shop/coupon/use`,request,this.httpOptions)
+  }
+  checkVoucher( request: any) : Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/shop/coupon/check?code=${request.id}`,this.httpOptions)
+  }
 }

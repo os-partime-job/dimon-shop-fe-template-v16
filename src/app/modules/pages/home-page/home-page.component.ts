@@ -46,6 +46,9 @@ export class HomePageComponent {
       });
     } else {
       this.isLoginUser = localStorage.getItem("user") != null;
+      if(this.isLoginUser) {
+        this.getProductCart();
+      }
     }
     this.getProducts();
   }
@@ -64,7 +67,7 @@ export class HomePageComponent {
     return this.numberFormat.convertNumber(number);
   }
   goToProductDetail(id:number) {
-    const returnUrl = this.route.snapshot.queryParams[`/ecommerce?id=${id}`] || `/ecommerce?id=${id}`;
+    const returnUrl = this.route.snapshot.queryParams[`/product?id=${id}`] || `/product?id=${id}`;
     this.router.navigateByUrl(returnUrl);
   }
 
@@ -105,7 +108,7 @@ export class HomePageComponent {
     this.cartService.getProductInCart(request).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
-      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+      // this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
     }, error => {
 
     })
@@ -117,7 +120,7 @@ export class HomePageComponent {
     this.cartService.getProductInCartV2(request,token).subscribe((res) =>{
       this.cartService.cartItems.next(res?.data);
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
-      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+      // this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
     }, error => {
 
     })

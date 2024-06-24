@@ -24,7 +24,12 @@ export class OrderInfoComponent implements OnInit{
   totalPriceProduct: any;
   isLoginUser:boolean = false;
   order: any;
+  voucher: any;
   selectedPayment:string = 'stripe';
+  totalItem:number;
+  totalResultPrice:number;
+  totalDiscount:number;
+  totalFinally:number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -44,34 +49,51 @@ export class OrderInfoComponent implements OnInit{
         'customer_id':null
       }
       this.orderService.getDetailOrder(request).subscribe((data) => {
-          this.order = data?.data;
+          this.order = data?.data[0];
+          this.totalItem = this.getTotalItem(this.order.orderDetails);
+          this.totalResultPrice = this.getTotalPriceOrder(this.order.orderDetails);
+          this.totalFinally = this.getTotalPriceOrder(this.order.orderDetails);
         },
         (error) => {
-          console.log(error)
         });
     });
-    this.getProductCart();
   }
-  getProductCart() {
-    const request = {
-      customer_id : 1
-    }
-    this.cartService.getProductInCart(request).subscribe((res) =>{
-      // this.lisProductsCart = res?.data;
-      this.cartService.cartItems.next(res?.data);
-      this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
-      this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
-      this.subscription = this.cartService.totalProductInCart$.subscribe(data=>this.totalProduct = data);
-      this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
-      this.subscription1 = this.cartService.cartItems$.subscribe(data => this.lisProductsCart = data.map(value => {
-        value.isChecked = false;
-        return value;
-      }));
-      console.log(this.lisProductsCart);
-    }, error => {
-
+  getTotalPriceOrder( products:any[]) {
+    let grandTotal = 0;
+    products.map((a:any)=>{
+      grandTotal += a.totalPrice;
     })
+    return grandTotal;
+
   }
+  getTotalItem(products:any[]) {
+    let grandTotal = 0;
+    products.map((a:any)=>{
+      grandTotal += a.quantityNumber;
+    })
+    console.log(grandTotal);
+    return grandTotal;
+  }
+  // getProductCart() {
+  //   const request = {
+  //     customer_id : 1
+  //   }
+  //   this.cartService.getProductInCart(request).subscribe((res) =>{
+  //     // this.lisProductsCart = res?.data;
+  //     this.cartService.cartItems.next(res?.data);
+  //     this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
+  //     // this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
+  //     this.subscription = this.cartService.totalProductInCart$.subscribe(data=>this.totalProduct = data);
+  //     // this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
+  //     this.subscription1 = this.cartService.cartItems$.subscribe(data => this.lisProductsCart = data.map(value => {
+  //       value.isChecked = false;
+  //       return value;
+  //     }));
+  //     console.log(this.lisProductsCart);
+  //   }, error => {
+  //
+  //   })
+  // }
   clickSelectAll() {
     console.log(this.isSelectAll);
     const listCopy = this.lisProductsCart.map( value => {
@@ -95,7 +117,7 @@ export class OrderInfoComponent implements OnInit{
       quantity : quantity
     }
     this.cartService.updateProductToCard(request).subscribe((res) =>{
-      this.getProductCart();
+      // this.getProductCart();
     }, error => {
       this.toastrService.error("Update sản phầm thất bại");
     });
@@ -107,7 +129,7 @@ export class OrderInfoComponent implements OnInit{
     const request = {
       orderId:order.uniqueOrderId,//order.uniqueOrderId
       requestId:order.id, //order.id
-      amount:order.totalPrice/100, // chia bớt đi để dk thanh toán <100 triệu vnd
+      amount:this.totalFinally/100, // chia bớt đi để dk thanh toán <100 triệu vnd
       orderInfo:order.createdAt,
       metaData:'',
       payType:'BANK'
@@ -133,7 +155,7 @@ export class OrderInfoComponent implements OnInit{
 
   }
 
-  onAddProduct(addForm: NgForm) {
+  onAddVoucher(addForm: NgForm) {
 
   }
   public onOpenModal(mode: string): void{
@@ -147,5 +169,29 @@ export class OrderInfoComponent implements OnInit{
     }
     container.appendChild(button);
     button.click();
+  }
+  public useVoucher(){
+    const id = 1;
+    this.orderService.useVoucher(id).subscribe((res) =>{
+      this.toastrService.success("Add voucher success");
+    }, error => {
+      this.toastrService.error("Add voucher error!!!");
+    })
+  }
+
+  checkVoucher(addForm: NgForm) {
+    console.log(addForm.value.code);
+    const request = {
+      id: addForm.value.code
+    }
+      this.orderService.checkVoucher(request).subscribe((res) => {
+        this.voucher = res.data;
+        this.totalDiscount = this.voucher.discountPercent*this.totalResultPrice/100;
+        this.totalFinally = this.totalResultPrice - this.totalDiscount;
+        console.log(res)
+        this.toastrService.success("Check voucher success!!!");
+      }, error => {
+        this.toastrService.error("Check voucher error!!!");
+      });
   }
 }

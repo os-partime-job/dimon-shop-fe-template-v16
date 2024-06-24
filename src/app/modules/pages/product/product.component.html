@@ -15,7 +15,7 @@
 <!--                </div>-->
                 <div class="product-main-item">
                   <div class="product-item-img">
-                    <img src="{{product.url}}" alt="product-img" />
+                    <img style="" src="{{product.url}}" alt="product-img" />
                   </div>
                 </div>
                 <div class="product-main-item">
@@ -107,30 +107,41 @@
             <div class="right-side-content">
               <span class="sub-title">{{product?.jewelry_type}}</span>
               <h2>{{product?.jewelry_title}}</h2>
-              <p>
-                {{product?.description}}
-              </p>
-              <div class="product-size-div">
-                <label> Size: </label>
-                <ul class="product-size">
-                  <li class="size-list">
-                    <input type="radio" checked />
-                    <label for="s">s</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" />
-                    <label for="m111">m</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" />
-                    <label for="x111">x</label>
-                  </li>
-                  <li class="size-list">
-                    <input type="radio" />
-                    <label for="xl111">xl</label>
-                  </li>
-                </ul>
-              </div>
+<!--              <p>-->
+<!--                {{product?.description}}-->
+<!--              </p>-->
+<!--              <div class="product-size-div">-->
+<!--                <label> Size: </label>-->
+<!--                <ul class="product-size">-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" checked />-->
+<!--                    <label for="s">s</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" />-->
+<!--                    <label for="m111">m</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" />-->
+<!--                    <label for="x111">x</label>-->
+<!--                  </li>-->
+<!--                  <li class="size-list">-->
+<!--                    <input type="radio" />-->
+<!--                    <label for="xl111">xl</label>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </div>-->
+<!--              <div class="pro-itm-inner acnav-list">-->
+                <div class="price-select d-flex">
+                  <div class="select-col">
+                    <p>Size diamond:</p>
+                    <select  *ngIf="listDiamond.length > 0" style="width: auto;" [(ngModel)]="selectSizeDiamond" (change)="onChange($event)">
+                      <option value="" selected="selected">By size diamond</option>
+                      <option *ngFor="let diamond of listDiamond" [value]="diamond.name">{{ diamond?.name }} - {{convertNumber(diamond?.price)}}</option>
+                    </select>
+                  </div>
+                </div>
+<!--              </div>-->
               <div>
                 <ul>
                   <li><a href="/huong-dan-do-size-nhan">Instructions for choosing size </a></li>

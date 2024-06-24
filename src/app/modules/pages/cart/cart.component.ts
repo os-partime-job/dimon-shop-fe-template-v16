@@ -21,6 +21,7 @@ export class CartComponent implements OnInit{
   subscription1: Subscription;
   totalProduct: any;
   totalPriceProduct: any;
+  listDiamond : any[];
   isLoginUser:boolean = false;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit{
   }
   ngOnInit(): void {
     this.isLoginUser = localStorage.getItem("user") != null;
-    this.getProductCart();
+    this.getDiamondList();
   }
   getProductCart() {
     const request = {
@@ -45,12 +46,11 @@ export class CartComponent implements OnInit{
       this.cartService.totalProductInCart.next(this.cartService.getTotalProduct(res?.data));
       this.cartService.totalPrice.next(this.cartService.getTotalPriceV2(res?.data));
       this.subscription = this.cartService.totalProductInCart$.subscribe(data=>this.totalProduct = data);
-      this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
+      // this.subscription2 = this.cartService.totalPrice$.subscribe(data => this.totalPriceProduct = data);
       this.subscription1 = this.cartService.cartItems$.subscribe(data => this.lisProductsCart = data.map(value => {
         value.isChecked = false;
         return value;
       }));
-      console.log(this.lisProductsCart);
     }, error => {
 
     })
@@ -65,7 +65,6 @@ export class CartComponent implements OnInit{
       return value;
     });
     this.lisProductsCart = [...listCopy];
-    console.log(this.lisProductsCart);
   }
   addProductCart(product:any, quantity:number){
     if(!this.isLoginUser) {
@@ -73,9 +72,13 @@ export class CartComponent implements OnInit{
       return;
     }
     const request = {
-      jewelry_id : product?.id_jewelry,
+      jewelry_id : product?.jewelry_id,
       quantity : quantity
+    } as any;
+    if(product.size) {
+      request.size = product.size
     }
+
     this.cartService.updateProductToCard(request).subscribe((res) =>{
       this.getProductCart();
     }, error => {
@@ -113,8 +116,6 @@ export class CartComponent implements OnInit{
     const request = {
       cart_ids : idsCart
     }
-    console.log(listSelectCart);
-    console.log(idsCart);
     this.orderService.addOrder(request).subscribe((res) =>{
       this.toastrService.success("Create Order success");
       const returnUrl = this.route.snapshot.queryParams['/order-list'] || '/order-list';
@@ -123,6 +124,25 @@ export class CartComponent implements OnInit{
       this.toastrService.error("Create order fail !!!");
     })
 
+  }
+  getDiamondList() {
+    this.productService.getDiamondList().subscribe((res) =>{
+      this.listDiamond = res;
+      this.getProductCart();
+    }, error => {
+      this.toastrService.error("Get diamond list fail!!!");
+    })
+  }
+  getPriceProductCart(item: any) {
+    if(item.size) {
+      const diamond = this.getDiamond(item.size);
+      return item.price_items + diamond.price;
+    }else {
+      return item.price_items
+    }
+  }
+  getDiamond(name){
+    return  this.listDiamond.find(({name}) => name === name);
   }
 
 }

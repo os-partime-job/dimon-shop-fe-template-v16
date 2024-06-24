@@ -43,7 +43,7 @@
               <tr>
                 <th scope="col">ID </th>
                 <th scope="col">date</th>
-                <th scope="col">quantity</th>
+<!--                <th scope="col">quantity</th>-->
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
                 <th scope="col">Option</th>
@@ -57,9 +57,9 @@
             }">
                 <td data-label="ID">{{item.id}} </td>
                 <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
-                <td data-label="quantity">
-                  {{item.quantityNumber}}
-                </td>
+<!--                <td data-label="quantity">-->
+<!--                  {{item.quantityNumber}}-->
+<!--                </td>-->
                 <td data-label="Total">
                   {{convertNumber(item.totalPrice)}} VNĐ
                 </td>
