@@ -43,7 +43,6 @@ export class MyAccountComponent {
         'ward': new FormControl('', ),
         'extra': new FormControl('', ),
       }
-
     );
   }
   get f(){

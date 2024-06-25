@@ -131,6 +131,10 @@
                 <span class="cart-sum-right"> <a (click)="onOpenModal('voucher')" style="color: #05a">Choose or Enter</a></span>
               </li>
               <li>
+                <span class="cart-sum-left">View information address </span>
+                <span class="cart-sum-right"> <a (click)="onOpenModal('informationCustomerModal')" style="color: #05a">Click here</a></span>
+              </li>
+              <li>
                 <span class="cart-sum-left">Type of Payment: </span>
                 <div class = "row" style="margin-left: 15%">
                   <span class="cart-sum-right"> <input class="custom-control-input" value="vnpay" type="radio" id="customRadio1" name="customRadio" (change)="selectedPayment = 'vnpay'">
@@ -168,6 +172,108 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="informationCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addVoucherModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="informationCustomerModalLabel">Information user</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="form">
+            <div class="form-container">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label>Full Name<sup aria-hidden="true">*</sup>:</label>
+                    <input formControlName="full_name" type="text" class="form-control" placeholder="John" required="">
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label>Phone Number:<sup aria-hidden="true">*</sup>:</label>
+                    <input type="number" formControlName="phone_number" class="form-control" placeholder="09xx" required="">
+                  </div>
+                </div>
+<!--                <div class="col-md-6 col-12">-->
+<!--                  <div class="form-group">-->
+<!--                    <label>Age<sup aria-hidden="true">*</sup>:</label>-->
+<!--                    <input formControlName="age" type="number" class="form-control" placeholder="shop@company.com" required="">-->
+<!--                  </div>-->
+<!--                </div>-->
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label>Date of Birth<sup aria-hidden="true">*</sup>:</label>
+                    <input type="text" formControlName="date_of_birth" class="form-control" placeholder="1234567890" required="">
+                  </div>
+                </div>
+                <div class="row">
+                  <!--                        <div class="col">-->
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input [disabled]="true" formControlName="email" class="form-control" type="text" placeholder="user@example.com">
+                  </div>
+                  <!--                        </div>-->
+                </div>
+                <div class="row"style="width: 100%"><label><h5>Address:</h5></label></div>
+
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Province: </label>
+                      <input class="form-control" type="text" formControlName="province" >
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label>District:</label>
+                      <input class="form-control" type="text" formControlName="district">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Hamlet:</label>
+                      <input class="form-control" type="text" formControlName="ward">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Specific address:</label>
+                      <input class="form-control" type="text" formControlName="extra" placeholder="Số nhà...">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!--            <div class="form-container">-->
+<!--              <div class="d-flex acc-back-btn-wrp align-items-center justify-content-end">-->
+<!--                <button class="btn-secondary back-btn-acc" type="submit">-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="14" viewBox="0 0 35 14" fill="none">-->
+<!--                    <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>-->
+<!--                  </svg>-->
+<!--                  Back-->
+<!--                </button>-->
+<!--                <button class="btn continue-btn" type="submit" (click)="onUpdate()">-->
+<!--                  Save Changes-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="14" viewBox="0 0 35 14" fill="none">-->
+<!--                    <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>-->
+<!--                  </svg>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeInformationCustomerModal" data-dismiss="modal" class="btn btn-secondary">Close</button>
+<!--          <button (click)="validateInformationUser()"> Done</button>-->
         </div>
       </div>
     </div>
