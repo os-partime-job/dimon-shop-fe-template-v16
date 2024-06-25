@@ -18,6 +18,7 @@ export class ProductComponent {
   listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
   listDiamond : any[];
   selectSizeDiamond: string;
+  defaultPrice:number;
   constructor(private numberFormat: NumberService,
               private productService: ProductService,
               private toastrService: ToastrService,
@@ -48,6 +49,7 @@ export class ProductComponent {
       let id = params['id'];
       this.productService.getProductDetail(id!=null ?id:this.productId).subscribe((data) => {
           this.product = data?.data;
+          this.defaultPrice = this.product.price;
         },
         (error) => {
           console.log(error)
@@ -121,7 +123,9 @@ export class ProductComponent {
     this.selectSizeDiamond = selectedValue;
     const diamond = this.listDiamond.find(({name}) => name === selectedValue);
     if(diamond) {
-      this.product.price = this.product.price + diamond.price;
+      this.product.price = this.defaultPrice + diamond.price;
+    } else{
+      this.product.price = this.defaultPrice;
     }
   }
 }
