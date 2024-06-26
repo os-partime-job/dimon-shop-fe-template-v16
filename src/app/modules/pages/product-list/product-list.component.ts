@@ -148,4 +148,8 @@ export class ProductListComponent implements OnInit{
       this.toastrService.error("Add sản phầm thất bại");
     });
   }
+  goToProductDetail(id:number) {
+    const returnUrl = this.route.snapshot.queryParams[`/product?id=${id}`] || `/product?id=${id}`;
+    this.router.navigateByUrl(returnUrl);
+  }
 }
