@@ -19,7 +19,7 @@
         <h2>Order Information:<span></span></h2>
       </div>
       <div class="row">
-        <div class="col-lg-9 col-12">
+        <div class="col-lg-8 col-12">
           <div class="order-historycontent">
             <table class="cart-tble">
               <thead>
@@ -94,8 +94,87 @@
               </tbody>
             </table>
           </div>
+          <h2>Information user: </h2>
+          <form [formGroup]="form">
+            <div class="form-container">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label>Full Name<sup aria-hidden="true">*</sup>:</label>
+                    <input formControlName="full_name" type="text" class="form-control" placeholder="John" required="">
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label>Phone Number:<sup aria-hidden="true">*</sup></label>
+                    <input type="number" formControlName="phone_number" class="form-control" placeholder="09xx" required="">
+                  </div>
+                </div>
+                <!--                <div class="col-md-6 col-12">-->
+                <!--                  <div class="form-group">-->
+                <!--                    <label>Age<sup aria-hidden="true">*</sup>:</label>-->
+                <!--                    <input formControlName="age" type="number" class="form-control" placeholder="shop@company.com" required="">-->
+                <!--                  </div>-->
+                <!--                </div>-->
+<!--                <div class="row">-->
+<!--                  &lt;!&ndash;                        <div class="col">&ndash;&gt;-->
+<!--                  <div class="form-group">-->
+<!--                    <label>Email</label>-->
+<!--                    <input [disabled]="true" formControlName="email" class="form-control" type="text" placeholder="user@example.com">-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--                <div class="row"style="width: 100%"><label><h5>Address:</h5></label></div>-->
+
+<!--                <div class="row" style="width: 100%">-->
+<!--                  <div class="col">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>Province: </label>-->
+<!--                      <input class="form-control" type="text" formControlName="province" >-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="col">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>District:</label>-->
+<!--                      <input class="form-control" type="text" formControlName="district">-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="col">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>Hamlet:</label>-->
+<!--                      <input class="form-control" type="text" formControlName="ward">-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+                <div class="row" style="width: 100%">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>Specific address:</label>
+                      <input class="form-control" type="text" formControlName="extra" placeholder="Số nhà...">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--            <div class="form-container">-->
+            <!--              <div class="d-flex acc-back-btn-wrp align-items-center justify-content-end">-->
+            <!--                <button class="btn-secondary back-btn-acc" type="submit">-->
+            <!--                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="14" viewBox="0 0 35 14" fill="none">-->
+            <!--                    <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>-->
+            <!--                  </svg>-->
+            <!--                  Back-->
+            <!--                </button>-->
+            <!--                <button class="btn continue-btn" type="submit" (click)="onUpdate()">-->
+            <!--                  Save Changes-->
+            <!--                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="14" viewBox="0 0 35 14" fill="none">-->
+            <!--                    <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>-->
+            <!--                  </svg>-->
+            <!--                </button>-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </form>
         </div>
-        <div class="col-lg-3 col-12">
+        <div class="col-lg-4 col-12">
           <div class="cart-summery">
             <ul>
               <li>
