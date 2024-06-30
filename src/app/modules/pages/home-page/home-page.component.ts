@@ -74,7 +74,7 @@ export class HomePageComponent {
   getProducts() {
     let request = {
       jewelry_type_id:1,
-      limit:4,
+      limit:12,
       offset:0,
       requestId:''
     }

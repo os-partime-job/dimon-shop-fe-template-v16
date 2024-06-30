@@ -46,7 +46,7 @@ export class OrderInfoComponent implements OnInit{
       {
         'email': new FormControl({value:'',  disabled: true}, Validators.required),
         'full_name': new FormControl('',Validators.required),
-        'phone_number': new FormControl('',Validators.required),
+        'phone_number': new FormControl('',[Validators.required,Validators.pattern(/^\d{10}$/)]),
         'age': new FormControl('',),
         'date_of_birth': new FormControl('', ),
         'province': new FormControl('', ),
@@ -250,7 +250,11 @@ export class OrderInfoComponent implements OnInit{
         this.toastrService.error("full name not is empty!!!");
         return false;
     }else if(this.formInfo.phone_number.errors){
-      this.toastrService.error("Phone number not is empty!!!");
+      if (this.formInfo.phone_number.errors.pattern) {
+        this.toastrService.error("Phone number length 10 !!!");
+      } else {
+        this.toastrService.error("Phone number not is empty!!!");
+      }
       return false;
     }else if(this.formInfo.extra.errors){
       this.toastrService.error("extra not is empty!!!");

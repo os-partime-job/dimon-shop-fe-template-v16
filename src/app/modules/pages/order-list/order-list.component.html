@@ -2,7 +2,7 @@
 <app-my-header></app-my-header>
 <!--header start here-->
 <!--wrapper start here-->
-<div class="wrapper" style="margin-top: 7%">
+<div class="wrapper" style="margin-top: 7%;margin-bottom: 12%">
   <section class="cart-page-section">
     <div class="container">
       <div class="section-title">
@@ -66,8 +66,8 @@
                 <td data-label="Status">
                   {{item.status}}
                 </td>
-                <td><button (click)="callPayment(item)" *ngIf="item.status == 'watting payment'"><i class="fa fa-shopping-cart" style="color:blue"></i></button>
-                  <button *ngIf="item.status != 'watting payment'" [disabled]="true"><i class="fa fa-shopping-cart" style="color:red"></i></button>
+                <td><button (click)="callPayment(item)" *ngIf="item.status == 'waiting payment'"><i class="fa fa-shopping-cart" style="color:blue"></i></button>
+                  <button *ngIf="item.status != 'waiting payment'" [disabled]="true"><i class="fa fa-shopping-cart" style="color:red"></i></button>
                 </td>
               </tr>
               </tbody>

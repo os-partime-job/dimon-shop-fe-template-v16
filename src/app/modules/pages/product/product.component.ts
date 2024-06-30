@@ -17,7 +17,7 @@ export class ProductComponent {
   totalProduct =1;
   listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
   listDiamond : any[];
-  selectSizeDiamond: string;
+  selectSizeDiamond: string = '';
   defaultPrice:number;
   constructor(private numberFormat: NumberService,
               private productService: ProductService,
