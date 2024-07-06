@@ -137,20 +137,24 @@
               <!--                </ul>-->
               <!--              </div>-->
               <!--              <div class="pro-itm-inner acnav-list">-->
-              <div class="">
-                <p class="col">Size diamond:
+              <div class="row">
+                <p class="col"></p>
+                <p class="col">Size diamond:</p>
+              </div>
+              <div class="row">
+                <div class="col">
                   <a
                     *ngIf="product?.jewelry_type_id ===1 || product?.jewelry_type_id ===2 || product?.jewelry_type_id ===6"
-                    style="margin-left: 40%" href="/huong-dan-do-size-nhan"><i class="fa fa-eye text-primary" aria-hidden="true"> Instructions
-                    for choosing size</i> </a>
+                    href="/huong-dan-do-size-nhan"><img style="width:288px;height:149px" src="assets/images/img-size.jpg">Instructions
+                    for choosing size </a>
+                  <!--                  <i class="text-primary" aria-hidden="true"> Instructions-->
+                  <!--                    for choosing size</i>-->
                   <a
                     *ngIf="product?.jewelry_type_id ===3 || product?.jewelry_type_id ===4 || product?.jewelry_type_id ===5"
-                    style="margin-left: 40%" href="/huong-dan-do-size-trang-suc-day-chuyen"><i class="fa fa-eye text-primary"
-                                                                                               aria-hidden="true"> Instructions
-                    for choosing difference</i></a>
-
-                </p>
-                <div class="select-col">
+                    href="/huong-dan-do-size-trang-suc-day-chuyen"><img style="width:288px;height:149px" src="assets/images/jewerly-size/jewelry-size.jpg"> Instructions
+                    for choosing difference</a>
+                </div>
+                <div class="col select-col">
                   <select *ngIf="listDiamond.length > 0" style="width: auto;" [(ngModel)]="selectSizeDiamond"
                           (change)="onChange($event)">
                     <option value="" selected="selected">By size diamond</option>
