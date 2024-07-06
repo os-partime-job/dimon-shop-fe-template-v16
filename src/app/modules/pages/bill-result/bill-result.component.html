@@ -2,7 +2,7 @@
 <app-my-header></app-my-header>
 <!--header start here-->
 <!--wrapper start here-->
-<div class="wrapper" style="margin-top: 7%;margin-bottom: 7%">
+<div class="wrapper" style="margin-top: 7%;margin-bottom: 7%" id="main-container">
   <section class="cart-page-section">
     <div class="container">
       <div class="section-title">
@@ -35,7 +35,7 @@
               <tbody>
               <tr *ngFor = "let item of orders">
                 <td data-label="ID">{{item.id}} </td>
-                <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
+                <td data-label="date">{{item.orderDate |date:'dd/MM/YYYY hh:mm:ss'}}</td>
                 <td data-label="quantity">
                   {{item.uniqueOrderId}}
                 </td>
@@ -45,8 +45,11 @@
                 <td data-label="Status">
                   {{item.status}}
                 </td>
-                <td><button (click)="callPayment(item)" *ngIf="item.status == 'watting payment'"><i class="fa fa-shopping-cart" style="color:blue"></i></button>
-                  <button *ngIf="item.status != 'watting payment'" [disabled]="true"><i class="fa fa-shopping-cart" style="color:red"></i></button>
+                <td>
+<!--                  <button (click)="callPayment(item)" *ngIf="item.status == 'watting payment'"><i class="fa fa-shopping-cart" style="color:blue"></i></button>-->
+<!--                  <button *ngIf="item.status != 'watting payment'" [disabled]="true"><i class="fa fa-shopping-cart" style="color:red"></i></button>-->
+                  <button title="Open Order detail" (click)="onOpenModal('orderDetail',item)"><i class="fab fa-blogger text-primary"></i></button>
+                  <button title="Open Warranty Card" *ngIf="item.status != 'watting payment'" (click)="onOpenModal('warrantyCard', item)"><i class="fas fa-book text-success"></i></button>
                 </td>
               </tr>
               </tbody>
@@ -83,6 +86,120 @@
       </div>
     </div>
   </section>
+  <div class="modal fade" id="orderDetail" tabindex="-1" role="dialog" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderDetailModalLabel">Information Order:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-8 col-12">
+              <div class="order-historycontent">
+                <table class="cart-tble">
+                  <thead>
+                  <tr>
+                    <th scope="col">Product ID</th>
+                    <!--                <th scope="col">Name</th>-->
+                    <th scope="col">date</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col" style="text-align:left;">Price</th>
+                    <th scope="col">Total</th>
+                    <!--                <th scope="col"><div class="custom-control custom-checkbox">-->
+                    <!--                  <input class="custom-control-input" type="checkbox" id="customCheckbox1" (click)="clickSelectAll()" [(ngModel)] = "isSelectAll">-->
+                    <!--                  <label for="customCheckbox1" class="custom-control-label">Select ALL</label>-->
+                    <!--                </div></th>-->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor = "let item of order?.orderDetails">
+                    <td data-label="Product">
+                      <a href="/product?id={{item.jewelryId}}">
+                        {{item.jewelryId}}
+                      </a>
+                    </td>
+                    <!--                <td data-label="Name">-->
+                    <!--                  <a href="/product?id={{item.jewelryId}}">best jewellery collections</a>-->
+                    <!--                  <div class="product-option">-->
+                    <!--                    <dt>Size:</dt>-->
+                    <!--                    <dd>S</dd>-->
+                    <!--                  </div>-->
+                    <!--                </td>-->
+                    <td data-label="date">{{item.orderDate |date:'dd/MM/yyyy'}}</td>
+                    <td data-label="quantity">
+                      <!--                  <div class="qty-spinner">-->
+                      <!--                    <button type="button" class="quantity-decrement" (click)="addProductCart(item,-1)">-->
+                      <!--                      <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+                      <!--                        <path d="M0 0.251343V1.74871H12V0.251343H0Z" fill="#61AFB3"></path>-->
+                      <!--                      </svg>-->
+                      <!--                    </button>-->
+                      <!--                    <input type="text" class="quantity" data-cke-saved-name="quantity" value="{{item.quantityNumber}}"-->
+                      <!--                           min="01" max="100" />-->
+                      <!--                    <button type="button" class="quantity-increment" (click)="addProductCart(item,1)">-->
+                      <!--                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+                      <!--                        <path-->
+                      <!--                          d="M6.74868 5.25132V0H5.25132V5.25132H0V6.74868H5.25132V12H6.74868V6.74868H12V5.25132H6.74868Z"-->
+                      <!--                          fill="#61AFB3"></path>-->
+                      <!--                      </svg>-->
+                      <!--                    </button>-->
+                      <!--                    </button>-->
+                      <!--                  </div>-->
+                      {{item.quantityNumber}}
+                    </td>
+                    <td data-label="Price">{{convertNumber(item.totalPrice/item.quantityNumber)}} VNĐ</td>
+                    <td data-label="Total">
+                      {{convertNumber(item.totalPrice)}} VNĐ
+                    </td>
+                    <!--                <td><div class="custom-control custom-checkbox" style="text-align: center;">-->
+                    <!--                  <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">-->
+                    <!--                  <label for="{{item.id}}" class="custom-control-label">select</label>-->
+                    <!--                  <a href="javascript:;" class="remove-btn">-->
+                    <!--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"-->
+                    <!--                         focusable="false" role="presentation" class="icon icon-remove">-->
+                    <!--                      <path-->
+                    <!--                        d="M14 3h-3.53a3.07 3.07 0 00-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 005.53 3H2a.5.5 0 000 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 00.5-.5V4H14a.5.5 0 000-1zM6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02zm4.84 11.52h-7.5V4h7.5v9.5z"-->
+                    <!--                        fill="currentColor"></path>-->
+                    <!--                      <path-->
+                    <!--                        d="M6.55 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5zM9.45 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5z"-->
+                    <!--                        fill="currentColor"></path>-->
+                    <!--                    </svg>-->
+                    <!--                  </a>-->
+                    <!--                </div></td>-->
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="warrantyCard" tabindex="-1" role="dialog" aria-labelledby="warrantyCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+<!--      -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="warrantyCardModalLabel">Information Warranty Card:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div [innerHTML]="warrantyCard"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!---wrapper end here-->
 <!--footer start here-->

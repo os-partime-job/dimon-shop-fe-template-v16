@@ -56,4 +56,7 @@ export class OrderService{
   getInfoPostOrder(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/order/post-order`,this.httpOptions)
   }
+  getInvoice(id:string): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/order/get_invoice?orderId=${id}`,this.httpOptions)
+  }
 }

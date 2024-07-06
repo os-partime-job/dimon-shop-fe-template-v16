@@ -18,6 +18,9 @@ export class BillResultComponent {
   totalProduct: any;
   totalPriceProduct: any;
   isLoginUser:boolean = false;
+  order:any;
+  warrantyCard:any;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -61,6 +64,30 @@ export class BillResultComponent {
   }
   convertNumber(number){
     return this.numberFormat.convertNumber(number);
+  }
+  public onOpenModal(mode: string,item:any): void{
+    const container = document.getElementById('main-container')!;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'orderDetail') {
+      this.order = item;
+      button.setAttribute('data-target', '#orderDetail');
+    } else if (mode ==='warrantyCard') {
+      this.getWarrantyCard(item);
+      button.setAttribute('data-target', '#warrantyCard');
+    }
+    container.appendChild(button);
+    button.click();
+  }
+  getWarrantyCard(item: any) {
+    this.orderService.getInvoice(item?.uniqueOrderId).subscribe((res) => {
+      this.warrantyCard = res.data;
+      this.toastrService.success("Get Warranty Card Success!!!");
+    }, error => {
+      this.toastrService.error("Get Warranty Card Fail!!!");
+    });
   }
 
 }
