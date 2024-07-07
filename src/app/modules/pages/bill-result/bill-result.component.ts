@@ -6,6 +6,7 @@ import {NumberService} from "../../service/number.service";
 import {AccountService} from "../../auth/services/account.service";
 import {CartService} from "../../service/cart.service";
 import {OrderService} from "../../service/order.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-bill-result',
@@ -88,6 +89,14 @@ export class BillResultComponent {
     }, error => {
       this.toastrService.error("Get Warranty Card Fail!!!");
     });
+  }
+  openGiaInfo(id:any) {
+    let url = `${environment.pageApi}/gia-info?orderId=${id}`;
+    window.open(url,"_blank");
+  }
+  openInvoiceInfo(id:any) {
+    let url = `${environment.pageApi}/invoice-info?orderId=${id}`;
+    window.open(url,"_blank");
   }
 
 }

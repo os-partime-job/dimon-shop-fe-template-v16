@@ -49,7 +49,8 @@
 <!--                  <button (click)="callPayment(item)" *ngIf="item.status == 'watting payment'"><i class="fa fa-shopping-cart" style="color:blue"></i></button>-->
 <!--                  <button *ngIf="item.status != 'watting payment'" [disabled]="true"><i class="fa fa-shopping-cart" style="color:red"></i></button>-->
                   <button title="Open Order detail" (click)="onOpenModal('orderDetail',item)"><i class="fab fa-blogger text-primary"></i></button>
-                  <button title="Open Warranty Card" *ngIf="item.status != 'watting payment'" (click)="onOpenModal('warrantyCard', item)"><i class="fas fa-book text-success"></i></button>
+                  <button title="Open Warranty Card" *ngIf="item.status != 'waiting payment'" (click)="openInvoiceInfo(item?.uniqueOrderId)"><i class="fas fa-book text-success"></i></button>
+                  <button title="Open GIA Info" *ngIf="item.status != 'waiting payment'" (click)="openGiaInfo(item?.uniqueOrderId)"><i class="fab fa-artstation text-gray"></i></button>
                 </td>
               </tr>
               </tbody>

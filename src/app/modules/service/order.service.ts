@@ -59,4 +59,11 @@ export class OrderService{
   getInvoice(id:string): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/order/get_invoice?orderId=${id}`,this.httpOptions)
   }
+  getInvoiceDetail(request:any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/order/invoice_detail`,request,this.httpOptions)
+  }
+  getGIAInfo(request:any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/order/gia_info`,request,this.httpOptions)
+  }
+
 }
