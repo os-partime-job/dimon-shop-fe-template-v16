@@ -117,6 +117,9 @@ export class ProductComponent {
       this.toastrService.error("Get diamond list fail!!!");
     })
   }
+  addProductFail(){
+    this.toastrService.error('Product not have quantity to add')
+  }
 
   onChange(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;

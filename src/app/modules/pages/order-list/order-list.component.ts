@@ -38,6 +38,7 @@ export class OrderListComponent implements OnInit{
       customer_id : 1,
       limit:this.pageSize,
       offset:(this.page-1)*this.pageSize,
+      status:'waiting payment'
     }
     this.orderService.getAllOrder(request).subscribe((res) =>{
       this.orders = res.data;
