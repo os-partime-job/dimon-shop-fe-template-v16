@@ -19,13 +19,14 @@
         <h2>Shopping Order History</h2>
       </div>
       <div class="row">
-        <div class="col-lg-9 col-12">
+        <div class="col">
           <div class="order-historycontent">
             <table class="cart-tble">
               <thead>
               <tr>
                 <th scope="col">ID </th>
                 <th scope="col">date</th>
+                <th scope="col">Estimate Date</th>
                 <th scope="col">Order Id</th>
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
@@ -36,6 +37,7 @@
               <tr *ngFor = "let item of orders">
                 <td data-label="ID">{{item.id}} </td>
                 <td data-label="date">{{item.orderDate |date:'dd/MM/YYYY hh:mm:ss'}}</td>
+                <td data-label="estimate-date">{{item?.deliveryInfo?.endDateEstimated |date:'dd/MM/YYYY hh:mm:ss'}}</td>
                 <td data-label="quantity">
                   {{item.uniqueOrderId}}
                 </td>
