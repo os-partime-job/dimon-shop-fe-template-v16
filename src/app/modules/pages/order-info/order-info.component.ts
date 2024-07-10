@@ -31,6 +31,7 @@ export class OrderInfoComponent implements OnInit{
   totalDiscount:number;
   totalFinally:number;
   form :FormGroup;
+  private listDiamond: any[];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -57,12 +58,13 @@ export class OrderInfoComponent implements OnInit{
       }
     );
     this.isLoginUser = localStorage.getItem("user") != null;
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(async params => {
       let id = params['id'];
       let request = {
-        'order_id' : id,
-        'customer_id':null
+        'order_id': id,
+        'customer_id': null
       }
+      await this.getDiamondList();
       this.orderService.getDetailOrder(request).subscribe((data) => {
           this.order = data?.data[0];
           this.totalItem = this.getTotalItem(this.order.orderDetails);
@@ -78,6 +80,10 @@ export class OrderInfoComponent implements OnInit{
     let grandTotal = 0;
     products.map((a:any)=>{
       grandTotal += a.totalPrice;
+      if(a.size) {
+        const diamond = this.getDiamond(a.size);
+        grandTotal += diamond.price*a.quantityNumber;
+      }
     })
     return grandTotal;
 
@@ -262,5 +268,24 @@ export class OrderInfoComponent implements OnInit{
     } else {
       return true;
     }
+  }
+  calculateToTalProduct(item : any) {
+    let total = 0;
+    total += item.totalPrice;
+    if(item.size) {
+      const diamond = this.getDiamond(item.size);
+      total += diamond.price*item.quantityNumber;
+    }
+    return total;
+  }
+  async getDiamondList() {
+    this.productService.getDiamondList().subscribe((res) =>{
+      this.listDiamond = res;
+    }, error => {
+      this.toastrService.error("Get diamond list fail!!!");
+    })
+  }
+  getDiamond(name){
+    return  this.listDiamond.find(({name}) => name === name);
   }
 }

@@ -21,6 +21,7 @@ export class BillResultComponent {
   isLoginUser:boolean = false;
   order:any;
   warrantyCard:any;
+  listDiamond:any[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -33,17 +34,18 @@ export class BillResultComponent {
   }
   ngOnInit(): void {
     this.isLoginUser = localStorage.getItem("user") != null;
-    this.getAllOrder();
+    this.getDiamondList();
   }
   getAllOrder() {
     const request = {
-      customer_id : 1
+      customer_id : null
     }
     this.orderService.getAllOrder(request).subscribe((res) =>{
-      this.orders = res.data;
+      this.orders = res.data.filter((item) =>{
+        return item.status != 'waiting payment';
+      });
     }, error => {
       this.toastrService.error("Error get list order")
-
     })
   }
   callPayment(order: any) {
@@ -97,6 +99,28 @@ export class BillResultComponent {
   openInvoiceInfo(id:any) {
     let url = `${environment.pageApi}/invoice-info?orderId=${id}`;
     window.open(url,"_blank");
+  }
+  calculateToTalProduct(item : any) {
+    let total = 0;
+    item.orderDetails.map((a:any)=>{
+      total += a.totalPrice;
+      if(a.size) {
+        const diamond = this.getDiamond(item.size);
+        total += diamond.price*a.quantityNumber;
+      }
+    })
+    return total;
+  }
+  getDiamondList() {
+    this.productService.getDiamondList().subscribe((res) =>{
+      this.listDiamond = res;
+      this.getAllOrder();
+    }, error => {
+      this.toastrService.error("Get diamond list fail!!!");
+    })
+  }
+  getDiamond(name){
+    return  this.listDiamond.find(({name}) => name === name);
   }
 
 }

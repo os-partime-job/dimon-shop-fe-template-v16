@@ -29,6 +29,7 @@
                 <th scope="col">date</th>
                 <th scope="col">quantity</th>
                 <th scope="col" style="text-align:left;">Price</th>
+                <th scope="col">size</th>
                 <th scope="col">Total</th>
 <!--                <th scope="col"><div class="custom-control custom-checkbox">-->
 <!--                  <input class="custom-control-input" type="checkbox" id="customCheckbox1" (click)="clickSelectAll()" [(ngModel)] = "isSelectAll">-->
@@ -72,8 +73,9 @@
                   {{item.quantityNumber}}
                 </td>
                 <td data-label="Price">{{convertNumber(item.totalPrice/item.quantityNumber)}} VNĐ</td>
+                <td data-label="Size">{{item.size}}</td>
                 <td data-label="Total">
-                  {{convertNumber(item.totalPrice)}} VNĐ
+                  {{convertNumber(calculateToTalProduct(item))}} VNĐ
                 </td>
 <!--                <td><div class="custom-control custom-checkbox" style="text-align: center;">-->
 <!--                  <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">-->
