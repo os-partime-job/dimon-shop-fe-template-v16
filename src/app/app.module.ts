@@ -115,7 +115,7 @@ import { GiaInfoComponent } from './modules/pages/gia-info/gia-info.component';
     FormsModule,
     OAuthModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 150000, // 15 seconds
+      timeOut: 2000, // 15 seconds
       closeButton: true,
       progressBar: true,
     }),
