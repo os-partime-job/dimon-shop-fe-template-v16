@@ -55,7 +55,7 @@ export class ProductService {
   }
   public getProductDetail(ProductId : number): Observable<any>{
     const body = {id_jewelry:ProductId};
-    return  this.http.post<Object>(`${this.apiUrl}/${this.BASIC_JEWELRY_URL}detail`,body, this.httpOptions);
+    return  this.http.post<any>(`${this.apiUrl}/${this.BASIC_JEWELRY_URL}detail`,body, this.httpOptions);
   }
   public getDiamondList():Observable<any> {
     return  this.http.get<any[]>(`${this.apiUrl}/diamond/list`, this.httpOptions);

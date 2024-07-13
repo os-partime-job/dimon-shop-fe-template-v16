@@ -66,7 +66,7 @@ export class MyLoginComponent {
       .subscribe({
         next: () => {
           this.toastrService.success("login sucescss");
-          const returnUrl = this.route.snapshot.queryParams['/home-page'] || '/home-page';
+          const returnUrl = this.route.snapshot.queryParams['/login-success'] || '/login-success';
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {

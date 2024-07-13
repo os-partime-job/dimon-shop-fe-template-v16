@@ -41,6 +41,10 @@ import {
 } from "./modules/default-page/huong-dan-do-size-nhan/huong-dan-do-size-nhan.component";
 import {InvoiceInfoComponent} from "./modules/pages/invoice-info/invoice-info.component";
 import {GiaInfoComponent} from "./modules/pages/gia-info/gia-info.component";
+import {Blog1Component} from "./modules/pages/blogs/blog1/blog1.component";
+import {Blog2Component} from "./modules/pages/blogs/blog2/blog2.component";
+import {Blog3Component} from "./modules/pages/blogs/blog3/blog3.component";
+import {Blog4Component} from "./modules/pages/blogs/blog4/blog4.component";
 
 const routes: Routes = [
   {
@@ -326,6 +330,34 @@ const routes: Routes = [
     component: BlogComponent,
     data: {
       title: 'Blog Page'
+    }
+  },
+  {
+    path: 'blog1',
+    component: Blog1Component,
+    data: {
+      title: 'Blog1 Page'
+    }
+  },
+  {
+    path: 'blog2',
+    component: Blog2Component,
+    data: {
+      title: 'Blog2 Page'
+    }
+  },
+  {
+    path: 'blog3',
+    component: Blog3Component,
+    data: {
+      title: 'Blog3 Page'
+    }
+  },
+  {
+    path: 'blog4',
+    component: Blog4Component,
+    data: {
+      title: 'Blog4 Page'
     }
   },
   {

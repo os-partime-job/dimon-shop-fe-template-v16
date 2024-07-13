@@ -29,28 +29,30 @@ export class HomePageComponent {
     private cartService: CartService) {
   }
 
-  ngOnInit(): void {
-    if(this.googleService.getIdToken() || localStorage.getItem("loginWithGoogle")){
-      if(localStorage.getItem("loginWithGoogle")){
+  async ngOnInit(): Promise<void> {
+    if (this.googleService.getIdToken() || localStorage.getItem("loginWithGoogle")) {
+      if (localStorage.getItem("loginWithGoogle")) {
         localStorage.removeItem("loginWithGoogle");
         location.reload();
       }
-      const body = {token:this.googleService.getIdToken()}
-      this.accountServie.loginWithGoogle(body).subscribe((res) =>{
+      const body = {token: this.googleService.getIdToken()}
+      this.accountServie.loginWithGoogle(body).subscribe((res) => {
         this.accountServie.userSubject.next(res);
-        localStorage.setItem("user",JSON.stringify(res))
+        localStorage.setItem("user", JSON.stringify(res))
         this.getProductCartV2(res.accessToken);
         this.isLoginUser = true;
-      },error => {
+      }, error => {
 
       });
     } else {
       this.isLoginUser = localStorage.getItem("user") != null;
-      if(this.isLoginUser) {
+      if (this.isLoginUser) {
         this.getProductCart();
       }
     }
-    this.getProducts();
+    await this.getProducts().then(r => {
+
+    });
   }
 
   redirectLogin() {
@@ -71,7 +73,7 @@ export class HomePageComponent {
     this.router.navigateByUrl(returnUrl);
   }
 
-  getProducts() {
+  async getProducts() {
     let request = {
       jewelry_type_id:1,
       limit:12,
