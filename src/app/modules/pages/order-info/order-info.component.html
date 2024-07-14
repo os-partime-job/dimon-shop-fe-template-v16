@@ -245,13 +245,23 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="onAddVoucher(addForm)">
-            <div class="form-group">
-              <label for="code">Enter Voucher Code: </label>
-              <input type="text" ngModel name="code" class="form-control" id="code" placeholder="code" required>
+          <div class="price-select d-flex">
+            <div class="select-col">
+              <p>Select Voucher Code:</p>
+              <select  *ngIf="coupons.length > 0" style="width: auto;"  [(ngModel)]="selectedCoupon">
+                <option value="" selected="selected">By</option>
+                <option *ngFor="let coupon of coupons" [value]="coupon.couponsCode">{{ coupon?.couponsCode }} -discount: {{coupon?.discountPercent}} %</option>
+              </select>
             </div>
-            <button (click)="checkVoucher(addForm)">Check</button>
-          </form>
+          </div>
+          <button style="margin-top: 2%" class="btn btn-success float-left" (click)="checkVoucher()">Check</button>
+<!--          <form #addForm="ngForm" (ngSubmit)="onAddVoucher(addForm)">-->
+<!--&lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;              <label for="code">Enter Voucher Code: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;              <input type="text" ngModel name="code" class="form-control" id="code" placeholder="code" required>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <button (click)="checkVoucher(addForm)">Check</button>-->
+<!--          </form>-->
         </div>
         <div class="modal-footer">
           <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>

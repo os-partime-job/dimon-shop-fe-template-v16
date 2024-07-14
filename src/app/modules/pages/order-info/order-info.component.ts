@@ -31,7 +31,9 @@ export class OrderInfoComponent implements OnInit{
   totalDiscount:number;
   totalFinally:number;
   form :FormGroup;
+  selectedCoupon : string = '';
   private listDiamond: any[];
+  coupons:any[] = [];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
@@ -75,6 +77,7 @@ export class OrderInfoComponent implements OnInit{
         });
     });
     this.getInfoPostOrder();
+    this.getAllCoupon();
   }
   getTotalPriceOrder( products:any[]) {
     let grandTotal = 0;
@@ -93,7 +96,6 @@ export class OrderInfoComponent implements OnInit{
     products.map((a:any)=>{
       grandTotal += a.quantityNumber;
     })
-    console.log(grandTotal);
     return grandTotal;
   }
   // getProductCart() {
@@ -188,10 +190,13 @@ export class OrderInfoComponent implements OnInit{
     })
   }
 
-  checkVoucher(addForm: NgForm) {
-    console.log(addForm.value.code);
+  checkVoucher() {
+    console.log(this.selectedCoupon);
+    if(!this.selectedCoupon){
+      this.toastrService.error("Please choose Coupon!!!");
+    }
     const request = {
-      id: addForm.value.code
+      id: this.selectedCoupon
     }
       this.orderService.checkVoucher(request).subscribe((res) => {
         this.voucher = res.data;
@@ -287,5 +292,12 @@ export class OrderInfoComponent implements OnInit{
   }
   getDiamond(name){
     return  this.listDiamond.find(({name}) => name === name);
+  }
+  getAllCoupon() {
+    this.orderService.getAllCouponList().subscribe((res) =>{
+      this.coupons = res.data;
+    }, error => {
+      this.toastrService.error("Get list Coupon fail!!!");
+    });
   }
 }

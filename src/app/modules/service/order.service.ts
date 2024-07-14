@@ -65,5 +65,8 @@ export class OrderService{
   getGIAInfo(request:any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/order/gia_info`,request,this.httpOptions)
   }
+  getAllCouponList(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/shop/coupon/usable`,this.httpOptions)
+  }
 
 }
