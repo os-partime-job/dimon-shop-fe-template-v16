@@ -142,11 +142,11 @@ ul.left-icon.hotline {
 }
 
 
-.float-icon-hotline ul li .fa-zalo {
-  background: url(https://netweb.vn/img/hotline/zalo.png) center center no-repeat;
+.float-icon-hotline ul li .fa-chat {
+  background: url(src/assets/images/chat-icon.svg) center center no-repeat;
 }
-.float-icon-hotline ul li .fa-zalo:hover {
-  background: #ef0303 url(https://netweb.vn/img/hotline/zalo.png) center center no-repeat;opacity:.5;
+.float-icon-hotline ul li .fa-chat:hover {
+  background: #ef0303 url(src/assets/images/chat-icon.svg) center center no-repeat;opacity:.5;
 }
 .float-icon-hotline ul li .fa-messenger {
   background:  url(https://netweb.vn/img/hotline/fb.png) center center no-repeat;
