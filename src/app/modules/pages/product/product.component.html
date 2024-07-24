@@ -139,7 +139,7 @@
               <!--              <div class="pro-itm-inner acnav-list">-->
               <div class="row">
                 <p class="col"></p>
-                <p class="col">Size diamond:</p>
+                <p class="col">Size:</p>
               </div>
               <div class="row">
                 <div class="col">
@@ -155,11 +155,16 @@
                     for choosing difference</a>
                 </div>
                 <div class="col select-col">
-                  <select *ngIf="listDiamond.length > 0" style="width: auto;" [(ngModel)]="selectSizeDiamond"
-                          (change)="onChange($event)">
-                    <option value="" selected="selected">By size diamond</option>
-                    <option *ngFor="let diamond of listDiamond" [value]="diamond.name">{{ diamond?.name }}
-                      - {{convertNumber(diamond?.price)}}</option>
+<!--                  <select *ngIf="listDiamond.length > 0" style="width: auto;" [(ngModel)]="selectSizeDiamond"-->
+<!--                          (change)="onChange($event)">-->
+<!--                    <option value="" selected="selected">By size diamond</option>-->
+<!--                    <option *ngFor="let diamond of listDiamond" [value]="diamond.name">{{ diamond?.name }}-->
+<!--                      - {{convertNumber(diamond?.price)}}</option>-->
+<!--                  </select>-->
+                  <select *ngIf="listSize.length > 0" style="width: auto;" [(ngModel)]="selectedSize">
+                    <option value="" selected="selected">By size</option>
+                    <option *ngFor="let size of listSize" [value]="size.value">{{ size?.key }}
+                      - {{size.value}}</option>
                   </select>
                 </div>
               </div>
@@ -219,6 +224,60 @@
             <p>
               {{product.description}}
             </p>
+            <table class="table table-striped">
+              <tr>
+                <td>Type</td>
+                <td>{{product.jewelry_type}}</td>
+              </tr>
+              <tr>
+                <td>Price Product</td>
+                <td>{{product.price}}</td>
+              </tr>
+              <tr>
+                <td>Price Diamond</td>
+                <td>{{product.price_diamond}}</td>
+              </tr>
+              <tr>
+                <td>Total Price</td>
+                <td>{{product.total_price}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td><h5>Infomartion Diamond:</h5></td>
+<!--                <td>{{diamond}}</td>-->
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Name:</td>
+                <td>{{diamond.name}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Carat:</td>
+                <td>{{diamond.carat}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Clarity:</td>
+                <td>{{diamond.clarityId}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Cut:</td>
+                <td>{{diamond.cutId}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Polish:</td>
+                <td>{{diamond.polishId}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Color:</td>
+                <td>{{diamond.colorId}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Shape:</td>
+                <td>{{diamond.shapeId}}</td>
+              </tr>
+              <tr *ngIf ="diamond">
+                <td>Origin:</td>
+                <td>{{diamond.originId}}</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div class="col-md-6 col-12">

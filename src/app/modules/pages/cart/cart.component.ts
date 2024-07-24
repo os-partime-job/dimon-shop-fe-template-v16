@@ -134,12 +134,12 @@ export class CartComponent implements OnInit{
     })
   }
   getPriceProductCart(item: any) {
-    if(item.size) {
-      const diamond = this.getDiamond(item.size);
-      return item.price_items + diamond.price;
-    }else {
+    // if(item.size) {
+    //   const diamond = this.getDiamond(item.size);
+    //   return item.price_items + diamond.price;
+    // }else {
       return item.price_items
-    }
+    // }
   }
   getDiamond(name){
     return  this.listDiamond.find(({name}) => name === name);

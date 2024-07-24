@@ -28,7 +28,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">date</th>
                 <th scope="col">quantity</th>
-                <th scope="col">Size diamond</th>
+                <th scope="col">Size</th>
                 <th scope="col" style="text-align:left;">Price</th>
                 <th scope="col">Total</th>
                 <th scope="col"><div class="custom-control custom-checkbox">
@@ -66,7 +66,7 @@
                     </button>
                   </div>
                 </td>
-                <td data-label="Size diamond"> {{item.size}}</td>
+                <td data-label="Size"> {{item.size}}</td>
                 <td data-label="Price">{{convertNumber(getPriceProductCart(item))}} VNĐ</td>
                 <td data-label="Total">
                   {{convertNumber(getPriceProductCart(item)*item.quantity_number)}} VNĐ

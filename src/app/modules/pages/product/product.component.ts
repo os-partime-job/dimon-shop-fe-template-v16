@@ -4,6 +4,7 @@ import {ProductService} from "../../service/product.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute} from "@angular/router";
 import {CartService} from "../../service/cart.service";
+import {sizeAll, sizeRing} from "./size";
 
 @Component({
   selector: 'app-product',
@@ -17,15 +18,18 @@ export class ProductComponent {
   totalProduct =1;
   listImgUrl = ['assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png','assets/images/ring-slider2.png']
   listDiamond : any[];
-  selectSizeDiamond: string = '';
+  // selectSizeDiamond: string = '';
+  selectedSize: string = '';
+  listSize :any [];
   defaultPrice:number;
+  diamond:any;
   constructor(private numberFormat: NumberService,
               private productService: ProductService,
               private toastrService: ToastrService,
               private activatedRoute: ActivatedRoute,
               private cartService: CartService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.isLoginUser = localStorage.getItem("user") != null;
     // this.product = {
     //   "id_jewelry": 3,
@@ -44,12 +48,20 @@ export class ProductComponent {
     //   "type_enum": null,
     //   "diamond_id": "36000000-0000-0000-0000-000000000000"
     // };
-    this.getDiamondList();
+    await this.getDiamondList();
     this.activatedRoute.queryParams.subscribe(params => {
       let id = params['id'];
-      this.productService.getProductDetail(id!=null ?id:this.productId).subscribe((data) => {
+      this.productService.getProductDetail(id != null ? id : this.productId).subscribe((data) => {
           this.product = data?.data;
           this.defaultPrice = this.product.price;
+          if (this.product?.jewelry_type_id === 1 || this.product?.jewelry_type_id === 2 || this.product?.jewelry_type_id === 6) {
+            this.listSize = sizeRing;
+          } else if (this.product?.jewelry_type_id === 3 || this.product?.jewelry_type_id === 4 || this.product?.jewelry_type_id === 5) {
+            this.listSize = sizeAll;
+          }
+          if (this.product.diamond_id) {
+            this.diamond = this.getDiamond(this.product.diamond_id);
+          }
         },
         (error) => {
           console.log(error)
@@ -100,8 +112,11 @@ export class ProductComponent {
       jewelry_id : product?.id_jewelry,
       quantity : 1,
     } as any;
-    if (this.selectSizeDiamond && this.selectSizeDiamond !== '') {
-      request.size = this.selectSizeDiamond;
+    // if (this.selectSizeDiamond && this.selectSizeDiamond !== '') {
+    //   request.size = this.selectSizeDiamond;
+    // }
+    if (this.selectedSize && this.selectedSize !== '') {
+      request.size = this.selectedSize;
     }
     this.cartService.addProductToCard(request).subscribe((res) =>{
       this.toastrService.success("Add product to cart success");
@@ -110,25 +125,28 @@ export class ProductComponent {
       this.toastrService.error("Add product to cart fail");
     });
   }
-  getDiamondList() {
+  async getDiamondList() {
     this.productService.getDiamondList().subscribe((res) =>{
       this.listDiamond = res;
     }, error => {
       this.toastrService.error("Get diamond list fail!!!");
     })
   }
+  getDiamond(id){
+    return  this.listDiamond.find(({id}) => id === id);
+  }
   addProductFail(){
     this.toastrService.error('Product not have quantity to add')
   }
 
-  onChange(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    this.selectSizeDiamond = selectedValue;
-    const diamond = this.listDiamond.find(({name}) => name === selectedValue);
-    if(diamond) {
-      this.product.price = this.defaultPrice + diamond.price;
-    } else{
-      this.product.price = this.defaultPrice;
-    }
-  }
+  // onChange(event: Event) {
+  //   const selectedValue = (event.target as HTMLSelectElement).value;
+  //   this.selectSizeDiamond = selectedValue;
+  //   const diamond = this.listDiamond.find(({name}) => name === selectedValue);
+  //   if(diamond) {
+  //     this.product.price = this.defaultPrice + diamond.price;
+  //   } else{
+  //     this.product.price = this.defaultPrice;
+  //   }
+  // }
 }
