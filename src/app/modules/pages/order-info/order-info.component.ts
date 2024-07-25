@@ -70,8 +70,8 @@ export class OrderInfoComponent implements OnInit{
       this.orderService.getDetailOrder(request).subscribe((data) => {
           this.order = data?.data[0];
           this.totalItem = this.getTotalItem(this.order.orderDetails);
-          this.totalResultPrice = this.getTotalPriceOrder(this.order.orderDetails);
-          this.totalFinally = this.getTotalPriceOrder(this.order.orderDetails);
+          this.totalResultPrice = this.order.totalPrice;
+          this.totalFinally = this.order.totalPrice;
         },
         (error) => {
         });
@@ -83,10 +83,10 @@ export class OrderInfoComponent implements OnInit{
     let grandTotal = 0;
     products.map((a:any)=>{
       grandTotal += a.totalPrice;
-      if(a.size) {
-        const diamond = this.getDiamond(a.size);
-        grandTotal += diamond.price*a.quantityNumber;
-      }
+      // if(a.size) {
+      //   const diamond = this.getDiamond(a.size);
+      //   grandTotal += diamond.price*a.quantityNumber;
+      // }
     })
     return grandTotal;
 
@@ -274,15 +274,15 @@ export class OrderInfoComponent implements OnInit{
       return true;
     }
   }
-  calculateToTalProduct(item : any) {
-    let total = 0;
-    total += item.totalPrice;
-    if(item.size) {
-      const diamond = this.getDiamond(item.size);
-      total += diamond.price*item.quantityNumber;
-    }
-    return total;
-  }
+  // calculateToTalProduct(item : any) {
+  //   let total = 0;
+  //   total += item.totalPrice;
+  //   if(item.size) {
+  //     const diamond = this.getDiamond(item.size);
+  //     total += diamond.price*item.quantityNumber;
+  //   }
+  //   return total;
+  // }
   async getDiamondList() {
     this.productService.getDiamondList().subscribe((res) =>{
       this.listDiamond = res;

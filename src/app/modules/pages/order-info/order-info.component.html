@@ -75,7 +75,7 @@
                 <td data-label="Price">{{convertNumber(item.totalPrice/item.quantityNumber)}} VNĐ</td>
                 <td data-label="Size">{{item.size}}</td>
                 <td data-label="Total">
-                  {{convertNumber(calculateToTalProduct(item))}} VNĐ
+                  {{convertNumber(item.totalPrice)}} VNĐ
                 </td>
 <!--                <td><div class="custom-control custom-checkbox" style="text-align: center;">-->
 <!--                  <input class="custom-control-input" type="checkbox" id="{{item.id}}" [(ngModel)]="item.isChecked">-->

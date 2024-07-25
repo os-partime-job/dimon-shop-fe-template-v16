@@ -69,10 +69,10 @@ export class OrderListComponent implements OnInit{
     let total = 0;
       item.orderDetails.map((a:any)=>{
       total += a.totalPrice;
-      if(a.size) {
-        const diamond = this.getDiamond(item.size);
-        total += diamond.price*a.quantityNumber;
-      }
+      // if(a.size) {
+      //   const diamond = this.getDiamond(item.size);
+      //   total += diamond.price*a.quantityNumber;
+      // }
     })
     return total;
   }

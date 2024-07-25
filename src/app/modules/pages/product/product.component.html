@@ -177,7 +177,7 @@
                 </ul>
               </div>
               <div class="price">
-                <ins>{{convertNumber(product.price)}} <span class="currency-type">VNĐ</span></ins>
+                <ins>{{convertNumber(product.total_price)}} <span class="currency-type">VNĐ</span></ins>
               </div>
               <div class="d-flex align-items-center">
                 <a disabled *ngIf="product.quantity == 0"  (click)="addProductFail(product)" class="btn text-danger">
